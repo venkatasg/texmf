@@ -1,0 +1,65 @@
+%% start of file `moderncvstylemb.sty'.
+%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com).
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License version 1.3c,
+% available at http://www.latex-project.org/lppl/.
+
+
+%-------------------------------------------------------------------------------
+%                identification
+%-------------------------------------------------------------------------------
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{moderncvstylemb}[2015/07/28 v2.0.0 modern curriculum vitae and letter style scheme: banking]
+
+% body rules type options: "fullrules", "shortrules", "mixedrules" (default) or "norules"
+\@initializecommand{\moderncvstylebodyoptions}{}
+\DeclareOption{fullrules}    {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,fullrules}}
+\DeclareOption{shortrules}   {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,shortrules}}
+\DeclareOption{mixedrules}   {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,mixedrules}}
+\DeclareOption{norules}      {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,norules}}
+
+% body section alignment options: "left" (default), "center" or "right"
+\DeclareOption{left}         {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,left}}
+\DeclareOption{center}       {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,center}}
+\DeclareOption{right}        {\edef\moderncvstylebodyoptions{\moderncvstylebodyoptions,right}}
+
+\DeclareOption*{}% avoid choking on unknown options
+\ExecuteOptions{mixedrules,left}
+\ProcessOptions*\relax% \ProcessOptions* processes the options in the order provided (i.e., with the later ones possibly overriding the former ones), while \ProcessOptions processes them in the order of the package
+
+
+%-------------------------------------------------------------------------------
+%                fonts & icons
+%-------------------------------------------------------------------------------
+% Fonts
+\RequirePackage{unicode-math}
+\setmainfont{Equity Text A}
+\setsansfont{Concourse T3}
+\newfontfamily{\sansc}{Concourse C3}[Letters=UppercaseSmallCaps]
+\newfontfamily{\rmsc}{Equity Caps A}[Letters=UppercaseSmallCaps]
+\newfontfamily{\sancs}{Concourse C3}
+\newfontfamily{\rmcs}{Equity Caps A}
+\newfontfamily{\nfwc}{Concourse T3 Index}
+\newfontfamily{\nfws}{Concourse T3 Index}[StylisticSet = 1]
+\newfontfamily{\nfbc}{Concourse T3 Index}[StylisticSet = 2]
+\newfontfamily{\nfbs}{Concourse T3 Index}[StylisticSet = 3]
+\setmonofont{Monaco}[Scale=MatchLowercase]
+\setmathfont{Asana Math}[Scale=MatchLowercase]
+\linespread{1.1}
+
+% symbols
+\moderncvicons{awesome}
+
+
+%-------------------------------------------------------------------------------
+%                header, body & footer
+%-------------------------------------------------------------------------------
+\moderncvhead{7}
+\moderncvbody[\moderncvstylebodyoptions]{7}
+
+
+\endinput
+
+
+%% end of file `moderncvstylemb.sty'.
