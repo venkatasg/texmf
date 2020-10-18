@@ -78,8 +78,16 @@
 \setmathfont{Asana Math}[Scale=MatchLowercase]
 
 
-%Now choose between dark and light modes, dark themes need a very thin font for
-% contrast between regular text and bold font, but not so for the light theme
+%Now choose between dark and light themes, dark themes need a very thin font for contrast between regular text and bold font, but not so for the light theme
+
+\DeclareOption{light} {
+    \colorlet{fgcolor}{darkgrey}
+    \colorlet{bgcolor}{palegreybg}
+    \colorlet{bluelinkcolor}{GitHubDBlue}
+    \setsansfont{Concourse T3}
+    \newfontfamily{\headersansc}{Concourse C3}
+    }
+
 \DeclareOption{white} {
     \colorlet{fgcolor}{darkgrey}
     \colorlet{bgcolor}{whitestwhite}
@@ -88,10 +96,9 @@
     \newfontfamily{\headersansc}{Concourse C3}
     }
 
-
-\DeclareOption{light} {
-    \colorlet{fgcolor}{darkgrey}
-    \colorlet{bgcolor}{palegreybg}
+\DeclareOption{maxcontrastwhite} {
+    \colorlet{fgcolor}{blackestblack}
+    \colorlet{bgcolor}{whitestwhite}
     \colorlet{bluelinkcolor}{GitHubDBlue}
     \setsansfont{Concourse T3}
     \newfontfamily{\headersansc}{Concourse C3}
@@ -109,6 +116,14 @@
     \colorlet{fgcolor}{palegrey}
     \colorlet{bgcolor}{blackestblack}
     \colorlet{bluelinkcolor}{GitHubBlue}
+    \setsansfont{Concourse T2}
+    \newfontfamily{\headersansc}{Concourse C2}
+    }
+
+\DeclareOption{maxcontrastblack} {
+    \colorlet{bgcolor}{blackestblack}
+    \colorlet{fgcolor}{whitestwhite}
+    \colorlet{bluelinkcolor}{GitHubDBlue}
     \setsansfont{Concourse T2}
     \newfontfamily{\headersansc}{Concourse C2}
     }
@@ -150,6 +165,9 @@
 
 %Bold and alert Text
 \newcommand\alertb[1]{\textcolor{mLightBrown}{\textbf{#1}}}
+
+%PGF grid style
+\pgfplotsset{grid style={dashed,fgcolor}}
 %=====================================================================
 %=========================== bibliography ============================
 % Citation stuff here
