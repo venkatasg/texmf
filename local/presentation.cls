@@ -37,6 +37,7 @@
 \definecolor{palegreybg}{HTML}{ededed}
 \definecolor{darkgrey}{HTML}{404040}
 \definecolor{blackestblack}{HTML}{000000}
+\definecolor{whitestwhite}{HTML}{ffffff}
 
 % These are the default colors for Metropolis from Tol Colors
 \definecolor{mDarkBrown}{HTML}{604c38}
@@ -79,28 +80,37 @@
 
 %Now choose between dark and light modes, dark themes need a very thin font for
 % contrast between regular text and bold font, but not so for the light theme
+\DeclareOption{white} {
+    \colorlet{fgcolor}{darkgrey}
+    \colorlet{bgcolor}{whitestwhite}
+    \colorlet{bluelinkcolor}{GitHubDBlue}
+    \setsansfont{Concourse T3}
+    \newfontfamily{\headersansc}{Concourse C3}
+    }
+
+
 \DeclareOption{light} {
     \colorlet{fgcolor}{darkgrey}
     \colorlet{bgcolor}{palegreybg}
     \colorlet{bluelinkcolor}{GitHubDBlue}
-    \setsansfont{Concourse T4}
-    \newfontfamily{\headersansc}{Concourse C4}
+    \setsansfont{Concourse T3}
+    \newfontfamily{\headersansc}{Concourse C3}
     }
 
 \DeclareOption{dark} {
     \colorlet{fgcolor}{palegrey}
     \colorlet{bgcolor}{mDarkTeal}
     \colorlet{bluelinkcolor}{GitHubBlue}
-    \setsansfont{Concourse T3}
-    \newfontfamily{\headersansc}{Concourse C3}
+    \setsansfont{Concourse T2}
+    \newfontfamily{\headersansc}{Concourse C2}
     }
 
 \DeclareOption{black} {
     \colorlet{fgcolor}{palegrey}
     \colorlet{bgcolor}{blackestblack}
     \colorlet{bluelinkcolor}{GitHubBlue}
-    \setsansfont{Concourse T3}
-    \newfontfamily{\headersansc}{Concourse C3}
+    \setsansfont{Concourse T2}
+    \newfontfamily{\headersansc}{Concourse C2}
     }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
