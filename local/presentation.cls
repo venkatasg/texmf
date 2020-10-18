@@ -34,7 +34,7 @@
 
 % Define custom colors
 \definecolor{palegrey}{HTML}{e0e0e0}
-\definecolor{palegreybg}{HTML}{ededed}
+\definecolor{palegreybg}{HTML}{efefef}
 \definecolor{darkgrey}{HTML}{404040}
 \definecolor{blackestblack}{HTML}{000000}
 \definecolor{whitestwhite}{HTML}{ffffff}
