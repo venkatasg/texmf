@@ -219,3 +219,17 @@
 \setcounter{savedExNo}{\value{ExNo}}
 \def\tmp@ref{#1}
 \ex.}
+
+%=====================================================================
+%============================= metadata ==============================
+
+\def\@pdfauthor{\relax}
+\newcommand{\pdfauthor}[1]{\gdef\@pdfauthor{#1}}
+\def\@pdftitle{\relax}
+\newcommand{\pdftitle}[1]{\gdef\@pdftitle{#1}}
+\def\@pdfkeywords{\relax}
+\newcommand{\pdfkeywords}[1]{\gdef\@pdfkeywords{#1}}
+
+\hypersetup{pdfauthor=\@pdfauthor,
+            pdftitle=\@pdftitle,
+            pdfkeywords=\@pdfkeywords}
