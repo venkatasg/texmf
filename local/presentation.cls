@@ -5,6 +5,8 @@
 
 %=====================================================================
 %========================= required packages =========================
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
+\ProcessOptions\relax
 \LoadClass[10pt]{beamer}
 \RequirePackage[english]{babel}
 \RequirePackage{booktabs}
