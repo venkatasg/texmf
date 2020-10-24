@@ -110,7 +110,7 @@
 \RequirePackage[colorlinks,breaklinks,
                 linkcolor=black,
                 urlcolor=bluelinkcolor,
-                citecolor=graylinkcolor,
+                citecolor=bluelinkcolor,
                 filecolor=graylinkcolor,
                 plainpages=false,
                 pdfpagelabels,
