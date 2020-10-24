@@ -22,9 +22,7 @@
 % Beamer setup
 \usetheme[progressbar=frametitle,
           sectionpage=progressbar,
-          block=transparent,
           numbering=counter,
-          background=dark,
           titleformat=allsmallcaps,
           titleformat title=regular,
           titleformat subtitle=allsmallcaps,
@@ -133,7 +131,7 @@
 
 \setbeamerfont{title}{series=\sffamily, size=\Large}
 \setbeamerfont{subtitle}{series=\headersansc, size=\large}
-\setbeamerfont{frametitle}{series=\headersansc, size=\large}
+\setbeamerfont{frametitle}{series=\headersansc, size=\Large}
 \setbeamerfont{section title}{series=\headersansc, size=\LARGE}
 
 % Dark mode
