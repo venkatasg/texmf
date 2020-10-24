@@ -220,6 +220,10 @@
 \def\tmp@ref{#1}
 \ex.}
 
+% Change the numbering font for linguex examples
+\renewcommand{\ExLBr}{\nfwc}
+\renewcommand{\ExRBr}{\nfwc}
+
 %=====================================================================
 %============================= metadata ==============================
 
