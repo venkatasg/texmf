@@ -85,7 +85,7 @@
     \colorlet{bgcolor}{palegreybg}
     \colorlet{bluelinkcolor}{GitHubDBlue}
     \setsansfont{Concourse T3}
-    \newfontfamily{\headersansc}{Concourse C3}
+    \newfontfamily{\headersansc}{Concourse C3}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption{white} {
@@ -93,7 +93,7 @@
     \colorlet{bgcolor}{whitestwhite}
     \colorlet{bluelinkcolor}{GitHubDBlue}
     \setsansfont{Concourse T3}
-    \newfontfamily{\headersansc}{Concourse C3}
+    \newfontfamily{\headersansc}{Concourse C3}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption{maxcontrastwhite} {
@@ -101,7 +101,7 @@
     \colorlet{bgcolor}{whitestwhite}
     \colorlet{bluelinkcolor}{GitHubDBlue}
     \setsansfont{Concourse T3}
-    \newfontfamily{\headersansc}{Concourse C3}
+    \newfontfamily{\headersansc}{Concourse C3}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption{dark} {
@@ -109,7 +109,7 @@
     \colorlet{bgcolor}{mDarkTeal}
     \colorlet{bluelinkcolor}{GitHubBlue}
     \setsansfont{Concourse T2}
-    \newfontfamily{\headersansc}{Concourse C2}
+    \newfontfamily{\headersansc}{Concourse C2}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption{black} {
@@ -117,7 +117,7 @@
     \colorlet{bgcolor}{blackestblack}
     \colorlet{bluelinkcolor}{GitHubBlue}
     \setsansfont{Concourse T2}
-    \newfontfamily{\headersansc}{Concourse C2}
+    \newfontfamily{\headersansc}{Concourse C2}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption{maxcontrastblack} {
@@ -125,7 +125,7 @@
     \colorlet{fgcolor}{whitestwhite}
     \colorlet{bluelinkcolor}{GitHubDBlue}
     \setsansfont{Concourse T2}
-    \newfontfamily{\headersansc}{Concourse C2}
+    \newfontfamily{\headersansc}{Concourse C2}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
