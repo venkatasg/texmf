@@ -30,15 +30,15 @@
 %                overall head definition
 %-------------------------------------------------------------------------------
 % fonts
-\renewcommand*{\namefont}{\huge\sancs}
-\renewcommand*{\titlefont}{\large\sancs}
-\renewcommand*{\addressfont}{\footnotesize\sancs}
+\renewcommand*{\namefont}{\Huge\sansc}
+\renewcommand*{\titlefont}{\large\sansc}
+\renewcommand*{\addressfont}{\small\sansc}
 \renewcommand*{\quotefont}{\large\itshape}
 
 % styles
-\renewcommand*{\namestyle}[1]{{\namefont\textcolor{color4}{#1}}}
-\renewcommand*{\titlestyle}[1]{{\titlefont\textcolor{color2}{#1}}}
-\renewcommand*{\addressstyle}[1]{{\addressfont\textcolor{color2}{#1}}}
+\renewcommand*{\namestyle}[1]{{\namefont\textcolor{color1}{#1}}}
+\renewcommand*{\titlestyle}[1]{{\titlefont\textcolor{color0}{#1}}}
+\renewcommand*{\addressstyle}[1]{{\addressfont\textcolor{color0}{#1}}}
 \renewcommand*{\quotestyle}[1]{{\quotefont\textcolor{color0}{#1}}}
 
 % commands
@@ -84,11 +84,11 @@
     \ifthenelse{\equal{\@title}{}}{}{\titlestyle{~|~\@title}}\\% \isundefined doesn't work on \@title, as LaTeX itself defines \@title (before it possibly gets redefined by \title)
     % optional detailed information
     \if@details{%
-      \addressfont\color{color2}%
+      \addressfont\color{color4}%
       \ifthenelse{\isundefined{\@addressstreet}}{}{\addtomakeheaddetails{\addresssymbol\@addressstreet}%
-        \ifthenelse{\equal{\@addresscity}{}}{}{\addtomakeheaddetails[~--~]{\@addresscity}}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
-        \ifthenelse{\equal{\@addresscountry}{}}{}{\addtomakeheaddetails[~--~]{\@addresscountry}}%
-        \flushmakeheaddetails\@firstmakeheaddetailselementtrue\\\null}%
+        \ifthenelse{\equal{\@addresscity}{}}{}{\addtomakeheaddetails[~|~]{\@addresscity}}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty
+        \ifthenelse{\equal{\@addresscountry}{}}{}{\addtomakeheaddetails[~|~]{\@addresscountry}} %
+        \flushmakeheaddetails\@firstmakeheaddetailselementtrue\\}%
       \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
         \addtomakeheaddetails{\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
       \ifthenelse{\isundefined{\@email}}{}{\addtomakeheaddetails{\emailsymbol\emaillink{\@email}}}%
@@ -96,7 +96,7 @@
       \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
         \addtomakeheaddetails{\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
       \ifthenelse{\isundefined{\@extrainfo}}{}{\addtomakeheaddetails{\@extrainfo}}%
-    \flushmakeheaddetails}\fi}\\[2.5em]
+    \flushmakeheaddetails}\fi}\\[2em]
     \vspace{-10mm}
     }% need to force a \par after this to avoid weird spacing bug at the first section if no blank line is left after \makehead
 
