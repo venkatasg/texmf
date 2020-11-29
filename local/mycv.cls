@@ -675,7 +675,7 @@
 
 \RequirePackage[style=my-style,
                 backend=biber,
-                sorting=ydnt,
+                sorting=none,
                 maxbibnames=6,
                 minbibnames=4,
                 uniquename=false,
