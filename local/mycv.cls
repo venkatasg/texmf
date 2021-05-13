@@ -285,8 +285,18 @@
 \newcommand*{\emailsymbol}         {}
 \newcommand*{\homepagesymbol}      {}
 \newcommand*{\linkedinsocialsymbol}{}
+\newcommand*{\xingsocialsymbol}    {}
 \newcommand*{\twittersocialsymbol} {}
 \newcommand*{\githubsocialsymbol}  {}
+\newcommand*{\gitlabsocialsymbol}  {}
+\newcommand*{\skypesocialsymbol}   {}
+\newcommand*{\stackoverflowsocialsymbol}   {}
+\newcommand*{\bitbucketsocialsymbol}   {}
+\newcommand*{\orcidsocialsymbol}   {}
+\newcommand*{\researchgatesocialsymbol}   {}
+\newcommand*{\researchidsocialsymbol}   {}
+\newcommand*{\telegramsocialsymbol}   {}
+\newcommand*{\googlescholarsocialsymbol}   {}
 
 % other
 %------
