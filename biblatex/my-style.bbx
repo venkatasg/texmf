@@ -382,7 +382,8 @@
 %\DeclareFieldFormat[article]{title}{\usebibmacro{string+doi}{#1}}
 
 % Just like book titles, thesis titles are in italics
-%\DeclareFieldFormat[thesis]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[thesis]{title}{\mkbibemph{\usebibmacro{string+link}{#1}}}
+\DeclareFieldFormat[book]{title}{\mkbibemph{\usebibmacro{string+link}{#1}}}
 
 \DeclareFieldFormat{pages}{#1}     % no pp. prefix, took \mkpageprefix out [kvf]
 \DeclareFieldFormat{doi}{%
