@@ -107,6 +107,7 @@
 \RequirePackage[usenames,dvipsnames,table]{xcolor}
 \definecolor{bluelinkcolor}{HTML}{0366D6}
 \definecolor{graylinkcolor}{HTML}{404040}
+\definecolor{redalertcolor}{RGB}{215,58,73}
 \RequirePackage[colorlinks,breaklinks,
                 linkcolor=black,
                 urlcolor=bluelinkcolor,
@@ -119,7 +120,6 @@
 \newcommand{\doi}[1]{\url{https://doi.org/#1}}
 \RequirePackage{graphicx}
 \RequirePackage{float}
-\RequirePackage[hang,FIGBOTCAP,loose]{subfigure}
 \RequirePackage{booktabs}
 
 %=====================================================================
