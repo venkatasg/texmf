@@ -155,7 +155,7 @@
 \oddsidemargin=0.5in  % 1.5in due to LaTeX's calculations
 \evensidemargin=0.5in % 1.5in due to LaTeX's calculations
 \raggedbottom % constant spacing in the text; cost is a ragged bottom
-\parindent=0.25in
+\parindent=0in
 \leftmargini=0.5in
 \@ifundefined{mathindent}{}{\mathindent=0.5in\relax}%
 
@@ -358,8 +358,8 @@
 % sp float style; uses the sp caption style
 \newcommand\fs@sp{
   \def\@fs@cfont{\bfseries\rmsc}\let\@fs@capt\floatc@sp
-  \def\@fs@pre{\hrule\kern5pt}%
-  \def\@fs@post{\kern5pt\hrule\relax}%
+  \def\@fs@pre{\kern5pt}%
+  \def\@fs@post{\kern5pt\relax}%
   \def\@fs@mid{\kern10pt}
   \let\@fs@iftopcapt\iffalse}
 
