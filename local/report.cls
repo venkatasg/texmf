@@ -55,18 +55,18 @@
 
 % Load custom fonts
 \RequirePackage{unicode-math}
-\setmainfont{Equity Text A}
-\setsansfont{Concourse T3}
-\newfontfamily{\sansc}{Concourse C3}[Letters=UppercaseSmallCaps]
-\newfontfamily{\rmsc}{Equity Caps A}[Letters=UppercaseSmallCaps]
-\newfontfamily{\sancs}{Concourse C3}
-\newfontfamily{\rmcs}{Equity Caps A}
+\setmainfont{Equity A}
+\setsansfont{Concourse 3}
+\newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
+\newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps]
+\newfontfamily{\sancs}{Concourse 3 Caps}
+\newfontfamily{\rmcs}{Equity A Caps}
 \newfontfamily{\nfwc}{Concourse T3 Index}
 \newfontfamily{\nfws}{Concourse T3 Index}[StylisticSet = 1]
 \newfontfamily{\nfbc}{Concourse T3 Index}[StylisticSet = 2]
 \newfontfamily{\nfbs}{Concourse T3 Index}[StylisticSet = 3]
 \newfontfamily{\ipa}{Charis SIL}
-\setmonofont{Monaco}[Scale=MatchLowercase]
+\setmonofont{Source Code Pro}[Scale=MatchLowercase]
 \setmathfont{Asana Math}[Scale=MatchLowercase]
 
 \linespread{1.2}

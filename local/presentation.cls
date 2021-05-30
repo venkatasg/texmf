@@ -65,16 +65,16 @@
 
 % Font setup
 \RequirePackage{unicode-math}
-\setmainfont{Equity Text A}
-\newfontfamily{\sansc}{Concourse C3}[Letters=UppercaseSmallCaps]
-\newfontfamily{\rmsc}{Equity Caps A}[Letters=UppercaseSmallCaps]
-\newfontfamily{\sancs}{Concourse C3}
-\newfontfamily{\rmcs}{Equity Caps A}
+\setmainfont{Equity A}
+\newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
+\newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps]
+\newfontfamily{\sancs}{Concourse 3 Caps}
+\newfontfamily{\rmcs}{Equity A Caps}
 \newfontfamily{\nfwc}{Concourse T3 Index}
 \newfontfamily{\nfws}{Concourse T3 Index}[StylisticSet = 1]
 \newfontfamily{\nfbc}{Concourse T3 Index}[StylisticSet = 2]
 \newfontfamily{\nfbs}{Concourse T3 Index}[StylisticSet = 3]
-\setmonofont{Monaco}[Scale=MatchLowercase]
+\setmonofont{Source Code Pro}[Scale=MatchLowercase]
 \setmathfont{Asana Math}[Scale=MatchLowercase]
 
 
@@ -84,48 +84,48 @@
     \colorlet{fgcolor}{darkgrey}
     \colorlet{bgcolor}{palegreybg}
     \colorlet{bluelinkcolor}{GitHubDBlue}
-    \setsansfont{Concourse T3}
-    \newfontfamily{\headersansc}{Concourse C3}[Letters=UppercaseSmallCaps]
+    \setsansfont{Concourse 3}
+    \newfontfamily{\headersansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption{white} {
     \colorlet{fgcolor}{darkgrey}
     \colorlet{bgcolor}{whitestwhite}
     \colorlet{bluelinkcolor}{GitHubDBlue}
-    \setsansfont{Concourse T3}
-    \newfontfamily{\headersansc}{Concourse C3}[Letters=UppercaseSmallCaps]
+    \setsansfont{Concourse 3}
+    \newfontfamily{\headersansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption{maxcontrastwhite} {
     \colorlet{fgcolor}{blackestblack}
     \colorlet{bgcolor}{whitestwhite}
     \colorlet{bluelinkcolor}{GitHubDBlue}
-    \setsansfont{Concourse T3}
-    \newfontfamily{\headersansc}{Concourse C3}[Letters=UppercaseSmallCaps]
+    \setsansfont{Concourse 3}
+    \newfontfamily{\headersansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption{dark} {
     \colorlet{fgcolor}{palegrey}
     \colorlet{bgcolor}{mDarkTeal}
     \colorlet{bluelinkcolor}{GitHubBlue}
-    \setsansfont{Concourse T2}
-    \newfontfamily{\headersansc}{Concourse C2}[Letters=UppercaseSmallCaps]
+    \setsansfont{Concourse 2}
+    \newfontfamily{\headersansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption{black} {
     \colorlet{fgcolor}{palegrey}
     \colorlet{bgcolor}{blackestblack}
     \colorlet{bluelinkcolor}{GitHubBlue}
-    \setsansfont{Concourse T2}
-    \newfontfamily{\headersansc}{Concourse C2}[Letters=UppercaseSmallCaps]
+    \setsansfont{Concourse 2}
+    \newfontfamily{\headersansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption{maxcontrastblack} {
     \colorlet{bgcolor}{blackestblack}
     \colorlet{fgcolor}{whitestwhite}
     \colorlet{bluelinkcolor}{GitHubDBlue}
-    \setsansfont{Concourse T2}
-    \newfontfamily{\headersansc}{Concourse C2}[Letters=UppercaseSmallCaps]
+    \setsansfont{Concourse 2}
+    \newfontfamily{\headersansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
     }
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
