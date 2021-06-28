@@ -65,17 +65,18 @@
 
 % Font setup
 \RequirePackage{unicode-math}
-\setmainfont{Equity A}
-\newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
-\newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps]
-\newfontfamily{\sancs}{Concourse 3 Caps}
-\newfontfamily{\rmcs}{Equity A Caps}
+
+% Fancy Numbering fonts
 \newfontfamily{\nfwc}{Concourse T3 Index}
 \newfontfamily{\nfws}{Concourse T3 Index}[StylisticSet = 1]
 \newfontfamily{\nfbc}{Concourse T3 Index}[StylisticSet = 2]
 \newfontfamily{\nfbs}{Concourse T3 Index}[StylisticSet = 3]
-\setmonofont{Source Code Pro}[Scale=MatchLowercase]
+
+% IPA, monospace and math fonts
+\newfontfamily{\ipa}{Charis SIL}
+\setmonofont{Triplicate A Code}[Scale=MatchLowercase]
 \setmathfont{Asana Math}[Scale=MatchLowercase]
+
 
 
 %Now choose between dark and light themes, dark themes need a very thin font for contrast between regular text and bold font, but not so for the light theme
@@ -84,7 +85,10 @@
     \colorlet{fgcolor}{darkgrey}
     \colorlet{bgcolor}{palegreybg}
     \colorlet{bluelinkcolor}{GitHubDBlue}
+    \setmainfont{Concourse 3}
     \setsansfont{Concourse 3}
+    \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
+    \newfontfamily{\sancs}{Concourse 3 Caps}
     \newfontfamily{\headersansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
     }
 
@@ -92,7 +96,10 @@
     \colorlet{fgcolor}{darkgrey}
     \colorlet{bgcolor}{whitestwhite}
     \colorlet{bluelinkcolor}{GitHubDBlue}
+    \setmainfont{Concourse 3}
     \setsansfont{Concourse 3}
+    \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
+    \newfontfamily{\sancs}{Concourse 3 Caps}
     \newfontfamily{\headersansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
     }
 
@@ -100,7 +107,10 @@
     \colorlet{fgcolor}{blackestblack}
     \colorlet{bgcolor}{whitestwhite}
     \colorlet{bluelinkcolor}{GitHubDBlue}
+    \setmainfont{Concourse 3}
     \setsansfont{Concourse 3}
+    \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
+    \newfontfamily{\sancs}{Concourse 3 Caps}
     \newfontfamily{\headersansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
     }
 
@@ -108,7 +118,10 @@
     \colorlet{fgcolor}{palegrey}
     \colorlet{bgcolor}{mDarkTeal}
     \colorlet{bluelinkcolor}{GitHubBlue}
+    \setmainfont{Concourse 2}
     \setsansfont{Concourse 2}
+    \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
+    \newfontfamily{\sancs}{Concourse 2 Caps}
     \newfontfamily{\headersansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
     }
 
@@ -116,7 +129,10 @@
     \colorlet{fgcolor}{palegrey}
     \colorlet{bgcolor}{blackestblack}
     \colorlet{bluelinkcolor}{GitHubBlue}
+    \setmainfont{Concourse 2}
     \setsansfont{Concourse 2}
+    \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
+    \newfontfamily{\sancs}{Concourse 2 Caps}
     \newfontfamily{\headersansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
     }
 
@@ -124,7 +140,10 @@
     \colorlet{bgcolor}{blackestblack}
     \colorlet{fgcolor}{whitestwhite}
     \colorlet{bluelinkcolor}{GitHubDBlue}
+    \setmainfont{Concourse 2}
     \setsansfont{Concourse 2}
+    \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
+    \newfontfamily{\sancs}{Concourse 2 Caps}
     \newfontfamily{\headersansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
     }
 
