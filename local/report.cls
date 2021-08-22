@@ -53,20 +53,32 @@
 % amsmath must be loaded before unicode-math; might as well load it here
 \RequirePackage[leqno,tbtags]{amsmath}
 
-% Load custom fonts
+% Set main serif fonts
 \RequirePackage{unicode-math}
-\setmainfont{Equity A}
+\setmainfont{Valkyrie A}
+\newfontfamily{\rmsc}{Valkyrie A Caps}[Letters=UppercaseSmallCaps]
+\newfontfamily{\rmcs}{Valkyrie A Caps}
+
+% Set main sans-serif fonts
 \setsansfont{Concourse 3}
 \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
-\newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps]
 \newfontfamily{\sancs}{Concourse 3 Caps}
-\newfontfamily{\rmcs}{Equity A Caps}
+
+% Set main heading fonts
+\newfontfamily{\hsfamily}{Advocate Slab 35 Narr Med}
+\newfontfamily{\hrmsc}{Advocate Slab 35 Narr Med}[Letters=UppercaseSmallCaps]
+\newfontfamily{\hrmcs}{Advocate Slab 35 Narr Med}
+
+
+% Fancy Numbering fonts
 \newfontfamily{\nfwc}{Concourse T3 Index}
 \newfontfamily{\nfws}{Concourse T3 Index}[StylisticSet = 1]
 \newfontfamily{\nfbc}{Concourse T3 Index}[StylisticSet = 2]
 \newfontfamily{\nfbs}{Concourse T3 Index}[StylisticSet = 3]
+
+% IPA, monospace and math fonts
 \newfontfamily{\ipa}{Charis SIL}
-\setmonofont{Source Code Pro}[Scale=MatchLowercase]
+\setmonofont{Triplicate A Code}[Scale=MatchLowercase]
 \setmathfont{Asana Math}[Scale=MatchLowercase]
 
 \linespread{1.2}
@@ -201,10 +213,10 @@
         \linewidth\hsize
         \raggedright
         \vskip\onelineskip
-        \Large\rmfamily\textbf{\@title}\@@par
+        \Large\textbf{\@title}\@@par
         \normalsize
         \let\par\@empty
-        \@author
+        \rmfamily\@author
         \lineskiplimit\onelineskip
         \lineskip\onelineskip
         \@@par
@@ -282,7 +294,7 @@
 \renewcommand{\section}{\@startsection{section}{1}{\z@}%
   {-3.5ex plus -1ex minus -.2ex}%
   {1.8ex plus.2ex}%
-  {\noindent\large\bfseries\rmsc}}
+  {\noindent\Large\bfseries\rmsc}}
 
 \renewcommand{\subsection}{\@startsection{subsection}{2}{\z@}%
   {-3.5ex plus -1ex minus -.2ex}%
@@ -305,7 +317,7 @@
   {\noindent\normalsize\it}}
 
 % General formatting --- for punctuating section headings.
-\renewcommand{\@seccntformat}[1]{\small \rmsc \@nameuse{the#1}\hspace{1em}}
+\renewcommand{\@seccntformat}[1]{ \rmsc \@nameuse{the#1}\hspace{1em}}
 
 %=====================================================================
 %============================ footnotes ==============================
