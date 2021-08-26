@@ -53,22 +53,19 @@
 % amsmath must be loaded before unicode-math; might as well load it here
 \RequirePackage[leqno,tbtags]{amsmath}
 
+% For quotes
+\RequirePackage{csquotes}
+
 % Set main serif fonts
 \RequirePackage{unicode-math}
-\setmainfont{Valkyrie A}
-\newfontfamily{\rmsc}{Valkyrie A Caps}[Letters=UppercaseSmallCaps]
-\newfontfamily{\rmcs}{Valkyrie A Caps}
+\setmainfont{Equity A}
+\newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps]
+\newfontfamily{\rmcs}{Equity A Caps}
 
 % Set main sans-serif fonts
 \setsansfont{Concourse 3}
 \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
 \newfontfamily{\sancs}{Concourse 3 Caps}
-
-% Set main heading fonts
-\newfontfamily{\hsfamily}{Advocate Slab 35 Narr Med}
-\newfontfamily{\hrmsc}{Advocate Slab 35 Narr Med}[Letters=UppercaseSmallCaps]
-\newfontfamily{\hrmcs}{Advocate Slab 35 Narr Med}
-
 
 % Fancy Numbering fonts
 \newfontfamily{\nfwc}{Concourse T3 Index}
@@ -76,7 +73,7 @@
 \newfontfamily{\nfbc}{Concourse T3 Index}[StylisticSet = 2]
 \newfontfamily{\nfbs}{Concourse T3 Index}[StylisticSet = 3]
 
-% IPA, monospace and math fonts
+% IPA, monospace, emoji and math fonts
 \newfontfamily{\ipa}{Charis SIL}
 \setmonofont{Triplicate A Code}[Scale=MatchLowercase]
 \setmathfont{Asana Math}[Scale=MatchLowercase]
