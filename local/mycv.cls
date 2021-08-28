@@ -76,6 +76,9 @@
 %\let\document@original\document
 %\def\document{\endgroup\@endpreamblehook\begingroup\document@original}
 
+% Last page package
+\RequirePackage{lastpage}
+
 % if... then... else... constructs
 \RequirePackage{ifthen}
 % TODO: move to xifthen and \isempty{<arg>} instead of \equal{<arg>}{}
