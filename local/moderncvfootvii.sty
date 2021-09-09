@@ -79,7 +79,7 @@
     \fancyfoot[c]{%
       \parbox[b]{\footwidth}{%
         \centering%
-        \color{color2}\addressfont%
+        \color{color1}\addressfont%
         \vspace{\baselineskip}% forces a white line to ensure space between main text and footer (as footer height can't be known in advance)
         \ifthenelse{\isundefined{\@addressstreet}}{}{\addtofoot[]{\addresssymbol\@addressstreet}%
           \ifthenelse{\equal{\@addresscity}{}}{}{\addtofoot[~--~]{\@addresscity}}% if \addresstreet is defined, \addresscity and \addresscountry will always be defined but could be empty

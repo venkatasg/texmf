@@ -65,10 +65,10 @@
 \renewcommand*{\subsectionstyle}[1]{{%
   \if@center\centering\else%
   \if@right\raggedleft\fi\fi%
-  \subsectionfont\textcolor{color0}{#1}%
+  \subsectionfont{#1}%
   \if@shortrules\else\if@mixedrules\else%
     \par\fi\fi}}
-\renewcommand*{\hintstyle}[1]{{\hintfont\textcolor{color0}{#1}}}
+\renewcommand*{\hintstyle}[1]{{\hintfont\textcolor{color1}{#1}}}
 
 
 %-------------------------------------------------------------------------------
@@ -100,18 +100,11 @@
   \setlength{\parskip}{0\p@}}
 
 \RenewDocumentCommand{\section}{sm}{%
-  \par\addvspace{2ex}%
+  \par\addvspace{2.5ex}%
   \phantomsection{}% reset the anchor for hyperrefs
   \addcontentsline{toc}{section}{#2}%
-  \if@left\else\if@fullrules\else\if@mixedrules\else%
-    \sectionrule\fi\fi\fi%
+  \sectionrule\\
   \strut\sectionstyle{#2}%
-  \if@fullrules%
-    \sectionrule%
-  \else\if@mixedrules%
-    \sectionrule%
-  \else\if@right\else%
-    \sectionrule\fi\fi\fi%
   \par\nobreak\addvspace{1ex}\@afterheading}
 
 \RenewDocumentCommand{\subsection}{sm}{%
@@ -129,18 +122,9 @@
 
 \newcommand*{\sectionrule}{}
 \newcommand*{\subsectionrule}{}
-\if@fullrules%
-  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
-  \renewcommand*{\subsectionrule}{\par\nobreak\vspace*{-.7\baselineskip}}\fi% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}
-\if@shortrules%
-  \renewcommand*{\sectionrule}{\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
-  \renewcommand*{\subsectionrule}{}\fi% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}}
-\if@mixedrules%
-  \renewcommand*{\sectionrule}{\par\nobreak\vspace*{-.7\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
-  \renewcommand*{\subsectionrule}{}\fi% different subsectionrules will not be perfectly aligned, but remaining space at the end of the fill will be distributed evenly between leaders, so it will be barely visible}}
-\if@norules%
-  \renewcommand*{\sectionrule}{}
-  \renewcommand*{\subsectionrule}{}\fi
+
+\renewcommand*{\sectionrule}{\par\nobreak\vspace*{-0.55\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+\renewcommand*{\subsectionrule}{}
 
 \renewcommand*{\cvitem}[3][.25em]{%
   \ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }{#3}%
@@ -163,7 +147,7 @@
     {}%
     {\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#3\end{minipage}}}}
 
-\renewcommand*{\cventry}[7][0.85em]{
+\renewcommand*{\cventry}[7][0.75em]{
   \addvspace{#1}
   \begin{tabular*}{\maincolumnwidth}{l@{\extracolsep{\fill}}r}%
     {\large #4} & {\large #5}\\[0.15em]%
