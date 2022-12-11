@@ -7,7 +7,7 @@
 %========================= required packages =========================
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
 \ProcessOptions\relax
-\LoadClass[10pt]{beamer}
+\LoadClass[11pt]{beamer}
 \RequirePackage[english]{babel}
 \RequirePackage{booktabs}
 \RequirePackage{pgfplots}
@@ -33,8 +33,8 @@
           block=fill]{metropolis}
 
 % Define custom colors
-\definecolor{palegrey}{HTML}{e0e0e0}
-\definecolor{palegreybg}{HTML}{efefef}
+\definecolor{palegrey}{HTML}{e9e9e9}
+\definecolor{palegreybg}{HTML}{fcfcfc}
 \definecolor{darkgrey}{HTML}{404040}
 \definecolor{blackestblack}{HTML}{000000}
 \definecolor{whitestwhite}{HTML}{ffffff}
@@ -46,18 +46,17 @@
 \definecolor{mLightGreen}{HTML}{14B03D}
 
 % Tol colors
-\definecolor{TolDarkPurple}{HTML}{332288}
-\definecolor{TolDarkBlue}{HTML}{6699CC}
-\definecolor{TolLightBlue}{HTML}{88CCEE}
-\definecolor{TolLightGreen}{HTML}{44AA99}
-\definecolor{TolDarkGreen}{HTML}{117733}
-\definecolor{TolDarkBrown}{HTML}{999933}
-\definecolor{TolLightBrown}{HTML}{DDCC77}
-\definecolor{TolDarkRed}{HTML}{661100}
-\definecolor{TolLightRed}{HTML}{CC6677}
-\definecolor{TolLightPink}{HTML}{AA4466}
-\definecolor{TolDarkPink}{HTML}{882255}
-\definecolor{TolLightPurple}{HTML}{AA4499}
+\definecolor{TolIndigo}{HTML}{332288}
+\definecolor{TolCyan}{HTML}{88CCEE}
+\definecolor{TolTeal}{HTML}{44AA99}
+\definecolor{TolGreen}{HTML}{117733}
+\definecolor{TolOlive}{HTML}{999933}
+\definecolor{TolSand}{HTML}{DDCC77}
+\definecolor{TolRose}{HTML}{CC6677}
+\definecolor{TolWine}{HTML}{882255}
+\definecolor{TolPurple}{HTML}{AA4499}
+\definecolor{TolPaleGrey}{HTML}{DDDDDD}
+
 
 % venkatasg.me colors
 \definecolor{GitHubBlue}{HTML}{79B8FF}
@@ -184,6 +183,8 @@
 
 %Bold and alert Text
 \newcommand\alertb[1]{\textcolor{mLightBrown}{\textbf{#1}}}
+\newcommand\tealalert[1]{\textcolor{TolTeal}{#1}}
+\newcommand\redalert[1]{\textcolor{TolWine}{#1}}
 
 %PGF grid style
 \pgfplotsset{grid style={dashed,fgcolor}}
@@ -195,8 +196,8 @@
                 natbib,
                 maxcitenames=1,
                 maxbibnames=99]{biblatex}
-\renewcommand*{\citesetup}{\tiny}
-\renewcommand*{\bibfont}{\scriptsize}
+%\renewcommand*{\citesetup}{\tiny}
+%\renewcommand*{\bibfont}{\scriptsize}
 \setbeamertemplate{bibliography item}{}
 
 
