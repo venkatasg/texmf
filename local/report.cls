@@ -39,6 +39,9 @@
 % production settings
 \newif\if@biblatex
 
+% Left justified
+%\newif\if@ragged2e
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 
 % example-numbering packages
@@ -47,11 +50,19 @@
 % production settings
 \DeclareOption{biblatex}{\@biblatextrue}
 
+%\DeclareOption{ragged2e}{\@ragged2etrue}
+
+
 \ProcessOptions\relax
 \LoadClass[11pt,twoside]{article}
 
 % amsmath must be loaded before unicode-math; might as well load it here
 \RequirePackage[leqno,tbtags]{amsmath}
+
+% Left alignment
+%\if@ragged2e
+%    \RequirePackage[document]{ragged2e}
+%\fi
 
 % For quotes
 \RequirePackage{csquotes}
@@ -114,6 +125,19 @@
 \fi
 
 \RequirePackage[usenames,dvipsnames,table]{xcolor}
+
+% Tol colors
+\definecolor{TolIndigo}{HTML}{332288}
+\definecolor{TolCyan}{HTML}{88CCEE}
+\definecolor{TolTeal}{HTML}{44AA99}
+\definecolor{TolGreen}{HTML}{117733}
+\definecolor{TolOlive}{HTML}{999933}
+\definecolor{TolSand}{HTML}{DDCC77}
+\definecolor{TolRose}{HTML}{CC6677}
+\definecolor{TolWine}{HTML}{882255}
+\definecolor{TolPurple}{HTML}{AA4499}
+\definecolor{TolPaleGrey}{HTML}{DDDDDD}
+
 \definecolor{bluelinkcolor}{HTML}{0366D6}
 \definecolor{graylinkcolor}{HTML}{404040}
 \definecolor{redalertcolor}{RGB}{215,58,73}
@@ -321,7 +345,7 @@
 
 \renewcommand{\@makefntext}[1]{%
   \parindent=0.25in
-  \noindent \hbox to \z@{\hss{\@thefnmark} \hfil}#1}
+  \noindent \hbox to \z@{\hss{\textsuperscript{\@thefnmark}} \hfil}#1}
 
 %=====================================================================
 %============================ backmatter =============================
@@ -373,9 +397,9 @@
   \let\@fs@iftopcapt\iffalse}
 
 % users can override these commands using float.sty's functionality
-\floatstyle{sp}
-\restylefloat{figure}
-\restylefloat{table}
+%\floatstyle{sp}
+%\restylefloat{figure}
+%\restylefloat{table}
 
 %=====================================================================
 %=========================== useful macros ===========================
