@@ -8,17 +8,27 @@
 \@setplength{sigindent}{0mm}
 \setlength{\parindent}{0mm}
 \@setplength{refvpos}{2.5in}
+%\setlength{\textwidth}{11cm}
 
 
 \renewcommand*{\raggedsignature}{\raggedright}
 
 \KOMAoptions{%
-  fromrule=false
+  fromalign=right,
+  foldmarks=false,
+  fromemail=true,
+  fromphone=true,
+  enlargefirstpage,
+  backaddress=false,
+  firstfoot=false
 }
 
-\RequirePackage{xcolor}
-\definecolor{color1}{RGB}{215,58,73}% github red background color for headings
-\definecolor{color2}{HTML}{0366D6} % Github Blue
+% Main stuff
+\setkomavar{fromname}[]{\large Venkata S Govindarajan}
+\setkomavar{fromemail}[\faEnvelopeO~\hphantom{1}]{gvenkata1994@gmail.com}
+\setkomavar{fromphone}[\faPhone~\hphantom{1}]{+1(512)-568-8775}
+\setkomavar{fromaddress}[]{Dept. of Linguistics, The University of Texas at Austin}
+
 
 % Define some new variable
 \newkomavar[Company]{company}
@@ -30,31 +40,23 @@
 
 % Set some variable, which are always the same
 \setkomavar{company}{}
-\setkomavar{department}{}
-\setkomavar{uni}{}
+\setkomavar{department}{Dept. of Linguistics}
+\setkomavar{uni}{The University of Texas at Austin}
 \setkomavar{postal}{%\\
-  Apt 242\\
-  600 E 53rd Street\\
-  Austin TX 78751
+ 600 E 53rd Street, 242\\
+ Austin TX 78751
 }
-\setkomavar{backaddressseparator}{~\textbar~}
-\setlength{\textwidth}{10cm}
-
-\date{}
-
-% Start personal modification here
-\setkomavar{sender}{Venkata S Govindarajan}
-\setkomavar{fromemail}{venkat@venkatasg.net}
-\setkomavar{fromphone}{+1(512)-568-8775}
-\setkomavar{fromaddress}{}
 \setkomavar{myref}{}
+\setkomavar{backaddressseparator}{~\textbar~}
+
 
 
 %-------------------------------------------------------------------------------
-%                fonts & icons
+%                fonts & icons & colors
 %-------------------------------------------------------------------------------
 % Fonts
 \RequirePackage{unicode-math}
+\RequirePackage{fontawesome}
 \setmainfont{Equity A}
 \setsansfont{Concourse 3}
 \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
@@ -69,40 +71,21 @@
 \setmathfont{Asana Math}[Scale=MatchLowercase]
 \linespread{1.2}
 
+\RequirePackage{xcolor}
+\definecolor{color1}{RGB}{215,58,73}% github red background color for headings
+\definecolor{color2}{HTML}{0366D6} % Github Blue
+
+%\RequiePackage{hyperref}
 
 % Define new letter header
-\firsthead{
+\firsthead {
+    \flushright
+    \color{black!60}%
+    \sansc%
+    \small
 
-\vspace*{0.85in}
- \hfill
-  \parbox[t]{0.25\textwidth}{%
-    \raggedright
-    \color{color1!75}%
-    {\sansc%
-%      \small
+    \textbf{\usekomavar*{fromname}\usekomavar{fromname}}\\
+    \usekomavar*{fromaddress}\usekomavar{fromaddress}\\
+    \usekomavar*{fromemail}\usekomavar{fromemail} | \usekomavar*{fromphone}\usekomavar{fromphone}\\
 
-%      \vspace*{1.5cm}
-      \textbf{\usekomavar{sender}}
-      
-      \vspace*{1cm}
-%      \usekomavar{department}\\
-%      \vspace*{0.2cm}
-%      \usekomavar{uni}\\
-%     \vspace*{0.2cm}
-%   \textbf{\usekomavar*{fromemail}}\\
-     \usekomavar{fromemail}\\
-    
-%    \vspace*{1cm}
-%    \textbf{\usekomavar*{fromphone}}\\
-    \usekomavar{fromphone}\\
-      
-
-      \vspace*{0.75cm}
-     \textbf{\usekomavar*{postal}:}\\
-      \usekomavar{postal}
-
-      
-
-      }\vspace*{0.5cm}
-    }%
-  }%
+ }

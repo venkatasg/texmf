@@ -1,9 +1,9 @@
-% My style file for reports and papers by Venkat based on:
+% My style file for one column reports and papers by Venkat based on:
 % Semantics & Pragmatics style file.
 % Kai von Fintel, Christopher Potts, and Chung-chieh Shan
 
 \NeedsTeXFormat{LaTeX2e}[1994/06/01]
-\ProvidesClass{report}[2020/07/24 v.1.0]
+\ProvidesClass{simple-report}[2020/07/24 v.1.0]
 
 %====================================================================
 %===================== release notes ================================
@@ -89,7 +89,9 @@
 \setmonofont{Triplicate A Code}[Scale=MatchLowercase]
 \setmathfont{Asana Math}[Scale=MatchLowercase]
 
-\linespread{1.2}
+% Set linespacing to 1.2 times the point size
+\RequirePackage{setspace}
+\setstretch{1.2}
 
 % Strong widow and orphan control
 
@@ -119,7 +121,7 @@
     {\RequirePackage[backend=biber,
                     style=my-style,
                     natbib,
-                    maxcitenames=3,
+                    maxcitenames=1,
                     maxbibnames=99]{biblatex}}
     {}
 \fi
@@ -396,10 +398,6 @@
   \def\@fs@mid{\kern10pt}
   \let\@fs@iftopcapt\iffalse}
 
-% users can override these commands using float.sty's functionality
-%\floatstyle{sp}
-%\restylefloat{figure}
-%\restylefloat{table}
 
 %=====================================================================
 %=========================== useful macros ===========================

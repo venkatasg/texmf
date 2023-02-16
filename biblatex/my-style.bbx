@@ -371,26 +371,32 @@
 
 
 % basically everything is in sentence case, other than journals and book series (recurring titles)
-% \DeclareFieldFormat[article,book,collection,incollection,inproceedings,thesis,unpublished]{titlecase}{\MakeSentenceCase*{#1}}%
+% \DeclareFieldFormat[article,book,collection,incollection,inproceedings,thesis,talk]{titlecase}{\MakeSentenceCase*{#1}}%
 
 % inline links
 \newbibmacro{string+link}[1]{%
- \iffieldundef{doi}{\href{\thefield{url}}{#1}}{\href{http://dx.doi.org/\thefield{doi}}{#1}}
+ \iffieldundef{doi}{
+    \href{\thefield{url}}{#1}
+    }
+    {
+    \href{http://dx.doi.org/\thefield{doi}}{#1}
+    }
  }
 % No quotes around titles
-\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,misc,unpublished, book]{title}{\usebibmacro{string+link}{#1}}
-%\DeclareFieldFormat[article]{title}{\usebibmacro{string+doi}{#1}}
+\DeclareFieldFormat[article,inbook,incollection,toappinproceedings, inproceedings,patent,thesis,misc,talk, book]{title}{\usebibmacro{string+link}{#1}}
 
 % Just like book titles, thesis titles are in italics
 \DeclareFieldFormat[thesis]{title}{\mkbibemph{\usebibmacro{string+link}{#1}}}
 \DeclareFieldFormat[book]{title}{\mkbibemph{\usebibmacro{string+link}{#1}}}
 
 \DeclareFieldFormat{pages}{#1}     % no pp. prefix, took \mkpageprefix out [kvf]
-\DeclareFieldFormat{doi}{%
-%  \ifhyperref
-%    {\ttfamily doi:~\href{https://doi.org/#1}{\nolinkurl{#1}}}
-%    {\ttfamily \nolinkurl{https://doi.org/#1}}
+\DeclareFieldFormat{doi}{}
+
+% Bib macro for handling papers accepted and that will be presented in the future
+\newbibmacro{toappear:} {
+    To appear in
 }
+
 
 
 \NewBibliographyString{at}
@@ -400,7 +406,7 @@
    presentation = {presentation},
 }
 
-\DeclareFieldFormat[unpublished]{eventtitle}{%
+\DeclareFieldFormat[talk]{eventtitle}{%
   \iffieldequalstr{type}{presentation}
     {\bibstring{at}\addcolon\space}
     {}%
@@ -557,6 +563,90 @@
 % \usebibmacro{journal+issuetitle} and except that \usebibmacro{byeditor+others}
 % has been removed so as to ensure that the editors are not listed even if they
 % are present in the database.
+
+\DeclareBibliographyDriver{toappinproceedings}{%
+ \usebibmacro{bibindex}%
+ \usebibmacro{begentry}%
+ \iffieldundef{issn}
+   {\usebibmacro{author/translator+others}%
+    \setunit{\labelnamepunct}\newblock
+    \usebibmacro{title}%
+    \newunit
+    \printlist{language}%
+    \newunit\newblock
+    \usebibmacro{byauthor}%
+    \newunit\newblock
+    \usebibmacro{toappear:}%
+    \ifnameundef{editor}
+      {\setunit{\addspace}}
+      {\usebibmacro{byeditor+others}\setunit{\addcomma\space}}
+    \usebibmacro{maintitle+booktitle}%
+    \setunit{\addcomma\space}
+    \printfield{edition}%
+    \setunit{\addcomma\space}
+    \iffieldundef{maintitle}
+      {\printfield{volume}%
+       \printfield{part}}
+      {}%
+    \setunit{\addcomma\space}
+    \printfield{volumes}%
+    \setunit{\addspace}%
+    \usebibmacro{series+number}%
+    \setunit{\addcomma\space}
+    \usebibmacro{chapter+pages}%
+    \newunit\newblock
+    \printfield{note}%
+    \newunit\newblock
+    \usebibmacro{publisher+location+date}%
+    \newunit\newblock
+    \iftoggle{bbx:isbn}
+      {\printfield{isbn}}
+      {}%
+    \newunit\newblock
+    \usebibmacro{doi+eprint+url}%
+    \newunit\newblock
+    \usebibmacro{addendum+pubstate}%
+    \setunit{\bibpagerefpunct}\newblock
+    \usebibmacro{pageref}%
+    \newunit\newblock
+    \iftoggle{bbx:related}
+      {\usebibmacro{related:init}%
+       \usebibmacro{related}}
+      {}}
+   {\usebibmacro{author/translator+others}%
+    \setunit{\labelnamepunct}\newblock
+    \usebibmacro{title}%
+    \newunit
+    \printlist{language}%
+    \newunit\newblock
+    \usebibmacro{byauthor}%
+    \newunit\newblock
+    \usebibmacro{bytranslator+others}%
+    \newunit\newblock
+    \printfield{version}%
+    \newunit\newblock
+    \usebibmacro{unified:proc-as-article:maintitle+booktitle}%
+    \usebibmacro{unified:proc-as-article:volume+number+eid}
+    \newunit\newblock%                           \newblock ensures period before pages
+    \usebibmacro{note+pages}%
+    \newunit\newblock
+    \iftoggle{bbx:isbn}
+      {\printfield{issn}}
+      {}%
+    \newunit\newblock
+    \usebibmacro{doi+eprint+url}%
+    \newunit\newblock
+    \usebibmacro{addendum+pubstate}%
+    \setunit{\bibpagerefpunct}\newblock
+    \usebibmacro{pageref}%
+    \newunit\newblock
+    \iftoggle{bbx:related}
+      {\usebibmacro{related:init}%
+       \usebibmacro{related}}
+      {}}
+ \usebibmacro{finentry}}
+
+
 \DeclareBibliographyDriver{inproceedings}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
@@ -674,7 +764,7 @@
     {}%
   \usebibmacro{finentry}}
 
-\DeclareBibliographyDriver{unpublished}{%
+\DeclareBibliographyDriver{talk}{%
   \usebibmacro{bibindex}%
   \usebibmacro{begentry}%
   \usebibmacro{author}%
@@ -716,3 +806,8 @@
   \ifitemannotation{highlight}
     {\textbf{#1}}
     {#1}}
+    
+%\defbibenvironment{bibliography}
+%  {\begin{enumerate}}
+%  {\end{enumerate}}
+%  {\item}
