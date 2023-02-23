@@ -1,25 +1,12 @@
-%% start of file `mycv.cls'.
-%% Copyright 2006-2015 Xavier Danaux (xdanaux@gmail.com).
-%
-% This work may be distributed and/or modified under the
-% conditions of the LaTeX Project Public License version 1.3c,
-% available at http://www.latex-project.org/lppl/.
-
-
-%-------------------------------------------------------------------------------
-%                identification
-%-------------------------------------------------------------------------------
+%=====================================================================
+%============================ Definition =============================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{mycv}[2015/07/28 v2.0.0 my curriculum vitae and letter document class]
+\ProvidesClass{mycv}[2023/07/18 v1.0.0 my curriculum vitae and résumé class]
 
 
-%-------------------------------------------------------------------------------
-%                class options
-%
-% (need to be done before the external package loading, for example because
-% we need \paperwidth, \paperheight and \@ptsize to be defined before loading
-% geometry and fancyhdr)
-%-------------------------------------------------------------------------------
+%=====================================================================
+%======================= page setup & options ========================
+
 % paper size option
 \DeclareOption{a4paper}{
   \setlength\paperheight{297mm}
@@ -50,10 +37,6 @@
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
 
-% font type options
-\DeclareOption{sans}{\AtBeginDocument{\renewcommand{\familydefault}{\sfdefault}}}
-\DeclareOption{roman}{\AtBeginDocument{\renewcommand{\familydefault}{\rmdefault}}}
-
 % draft/final option
 \DeclareOption{draft}{\setlength\overfullrule{5pt}}
 \DeclareOption{final}{\setlength\overfullrule{0pt}}
@@ -65,16 +48,15 @@
 \ProcessOptions\relax
 \input{size1\@ptsize.clo}
 
+% Page margins
+\RequirePackage{geometry}
+\geometry{top=1.25in, bottom=1.25in, left=1.25in, right=1.25in}
 
-%-------------------------------------------------------------------------------
-%                required packages
-%-------------------------------------------------------------------------------
+%=====================================================================
+%=========================== base packages ===========================
+
 % \AtEndPreamble hook (loading etoolbox instead of defining the macro, as to avoid incompatibilities with etoolbox (and packages relying on it) defining the macro too)
 \RequirePackage{etoolbox}
-%\let\@endpreamblehook\@empty
-%\def\AtEndPreamble{\g@addto@macro\@endpreamblehook}
-%\let\document@original\document
-%\def\document{\endgroup\@endpreamblehook\begingroup\document@original}
 
 % Last page package
 \RequirePackage{lastpage}
@@ -83,27 +65,11 @@
 \RequirePackage{ifthen}
 % TODO: move to xifthen and \isempty{<arg>} instead of \equal{<arg>}{}
 
-% color
-\RequirePackage[table]{xcolor}
-
-% font loading
-\RequirePackage{ifxetex,ifluatex}
-\newif\ifxetexorluatex
-\ifxetex
-  \xetexorluatextrue
-\else
-  \ifluatex
-    \xetexorluatextrue
-  \else
-    \xetexorluatexfalse
-  \fi
-\fi
-
-
 % hyper links (hyperref is loaded at the end of the preamble to pass options required by loaded packages such as CJK)
 \newcommand*\pdfpagemode{UseNone}% do not show thumbnails or bookmarks on opening (on supporting browsers); set \pdfpagemode to "UseOutlines" to show bookmarks
 \RequirePackage{url}
 \urlstyle{tt}
+
 \AtEndPreamble{
   \pagenumbering{arabic}% has to be issued before loading hyperref, as to set \thepage and hence to avoid hyperref issuing a warning and setting pdfpagelabels=false
   \RequirePackage[unicode]{hyperref}% unicode is required for unicode pdf metadata
@@ -133,22 +99,13 @@
   \renewcommand{\headrulewidth}{0pt}
   \renewcommand{\footrulewidth}{0pt}
   \fancyhf{}}
+
 % page numbers in footer if more than 1 page
-\newif\if@displaypagenumbers\@displaypagenumberstrue
-\newcommand*{\nopagenumbers}{\@displaypagenumbersfalse}
 \AtEndPreamble{%
   \AtBeginDocument{%
-    % fancyhdr length
-    \renewcommand{\headwidth}{\textwidth}
-    \if@displaypagenumbers%
-      \@ifundefined{r@lastpage}{}{%
-        \ifthenelse{\pageref{lastpage}>1}{%
-          \newlength{\pagenumberwidth}%
-          \settowidth{\pagenumberwidth}{\color{color2}\addressfont\itshape\strut\thepage/\pageref{lastpage}}%
-          \fancypagestyle{plain}{%
-            \fancyfoot[r]{\parbox[b]{\pagenumberwidth}{\color{color2}\pagenumberfont\strut\thepage/\pageref{lastpage}}}}% the parbox is required to ensure alignment with a possible center footer (e.g., as in the casual style)
-          \pagestyle{plain}}{}}%
-      \AtEndDocument{\label{lastpage}}\else\fi}}
+        \ifthenelse{\pageref{LastPage}>1}{\cfoot{\sansc page \thepage\ of \pageref{LastPage}}}{}
+      }
+    }
 \pagestyle{plain}
 
 % reduced list spacing
@@ -175,14 +132,39 @@
 % TODO (?): replace all \newcommand by \NewDocumentCommand
 
 % micro-typography (e.g., character protrusion, font expansion, hyphenatable letterspacing)
-\RequirePackage{microtype}
+\RequirePackage[final,protrusion={true,compatibility}, expansion=true]{microtype}
 
 % stack of key-value elements, used to save personal information
 \RequirePackage{moderncvcollection}
 
-% compatibility package with older versions of moderncv
-\RequirePackageWithOptions{moderncvcompatibility}
 
+%=====================================================================
+%============================= typography ============================
+
+\RequirePackage{unicode-math}
+\setmainfont{Equity A}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+\setsansfont{Concourse 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+
+\newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}]
+\newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}]
+\newfontfamily{\sancs}{Concourse 3 Caps}[Numbers={Uppercase,Proportional}]
+\newfontfamily{\rmcs}{Equity A Caps}[Numbers={Uppercase,Proportional}]
+
+% IPA, monospace, and math fonts
+\newfontfamily{\ipa}{Charis SIL}
+\setmonofont[Scale=MatchLowercase]{Triplicate A Code}
+\setmathfont[Path=/Users/venkat/Library/Fonts/, Extension=.otf,Scale=MatchLowercase,Ligatures=TeX, BoldFont=XCharter-Math-Bold]{XCharter-Math}
+
+% Oldstyle tabular numbers inside tabular environment
+\AtBeginEnvironment{tabular}{\addfontfeatures{Numbers={Uppercase, Monospaced}}\small}
+\renewcommand{\theequation}{ {\addfontfeatures{Numbers={Uppercase, Monospaced}}\small\arabic{equation}}}
+
+% Set linespacing to 1.1 times the point size
+\RequirePackage{setspace}
+\setstretch{1.1}
+
+% French Spacing - single spacing between sentences
+\frenchspacing
 
 %-------------------------------------------------------------------------------
 %                class definition
@@ -199,11 +181,6 @@
 \setlength\fboxrule{.4\p@}
 \setlength\arrayrulewidth{.4\p@}
 \setlength\doublerulesep{2\p@}
-
-% not set on purpose
-%\setlength\arraycolsep{5\p@}
-%\setlength\tabcolsep{6\p@}
-%\setlength\tabbingsep{\labelsep}
 
 \raggedbottom
 \onecolumn
@@ -248,22 +225,26 @@
 \NewDocumentCommand{\social}{O{}O{}m}{%
   \ifthenelse{\equal{#2}{}}%
     {%
-      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\httplink[#3]{www.linkedin.com/in/#3}}}{}%
-      \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\httplink[#3]{www.twitter.com/#3}}}    {}%
-      \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\httplink[#3]{www.github.com/#3}}}     {}%
+      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\href{https://linkedin.com/in/#3}{#3}}}{}%
+      \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\href{https://twitter.com/#3}{#3}}}    {}%
+      \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\href{https://github.com/#3}{#3}}}     {}%
     }
-    {\collectionadd[#1]{socials}{\protect\httplink[#3]{#2}}}}
+    {\collectionadd[#1]{socials}{\protect\href{#2}{#2}}}}
 
 % defines additional personal information (optional)
 % usage: \extrainfo{<text>}
 \newcommand*{\extrainfo}[1]{\def\@extrainfo{#1}}
 
-% colors
-%-------
-\definecolor{color0}{rgb}{0,0,0}% main default color, normally left to black
-\definecolor{color1}{rgb}{0,0,0}% primary scheme color
-\definecolor{color2}{rgb}{0,0,0}% secondary scheme color
-\definecolor{color3}{rgb}{0,0,0}% tertiary scheme color
+%=====================================================================
+%============================== colors ===============================
+
+\RequirePackage[table]{xcolor}
+\definecolor{color0}{HTML}{000000} % main default color, normally left to black
+\definecolor{color1}{HTML}{D73A49} % --color-scale-red-5
+\definecolor{color2}{HTML}{0366D6} % --color-scale-blue-5
+
+%=====================================================================
+%=============================== icons ===============================
 
 % symbols
 %--------
@@ -301,48 +282,17 @@
 \newcommand*{\telegramsocialsymbol}   {}
 \newcommand*{\googlescholarsocialsymbol}   {}
 
+% symbols
+\RequirePackage{moderncviconsawesome}
+
 % other
 %------
 % fonts
-\AtBeginDocument{\normalfont\color{color0}}
+
 
 % strings for internationalisation
 \newcommand*{\refname}{Publications}
 \newcommand*{\enclname}{Enclosure}
-
-% makes the footer (normally used both for the resume and the letter)
-% usage: \makefooter
-\newcommand*{\makefooter}{}%
-
-% loads a style variant (a combination of header, body and footer)
-% usage: \moderncvstyle{<style variant name>}
-\newcommand*{\moderncvstyle}[2][]{
-  \RequirePackage[#1]{moderncvstyle#2}}
-
-% loads a header variant
-% usage: \moderncvhead[<optional head option>]{<header variant number>}
-\newcommand*{\moderncvhead}[2][]{
-  \expandafter\RequirePackage\expandafter[\expandafter#1\expandafter]{\expandafter moderncvhead\romannumeral #2}}
-
-% loads a body variant
-% usage: \moderncvbody[<optional body option>]{<body variant number>}
-\newcommand*{\moderncvbody}[2][]{
-  \expandafter\RequirePackage\expandafter[\expandafter#1\expandafter]{\expandafter moderncvbody\romannumeral #2}}
-
-% loads a footer variant
-% usage: \moderncvfoot{<footer variant number>}
-\newcommand*{\moderncvfoot}[1]{
-  \expandafter\RequirePackage\expandafter{\expandafter moderncvfoot\romannumeral #1}}
-
-% loads a color scheme
-% usage: \moderncvcolor{<color scheme name>}
-\newcommand*{\moderncvcolor}[1]{
-  \RequirePackage{moderncvcolor#1}}
-
-% loads an icons set
-% usage: \moderncvicons{<icon set name>}
-\newcommand*{\moderncvicons}[1]{
-  \RequirePackage{moderncvicons#1}}
 
 % recomputes all automatic lengths
 \newcommand*{\recomputeheadlengths}{\recomputecvheadlengths}
@@ -402,12 +352,6 @@
 \newcommand*{\subsectionfont}{}
 \newcommand*{\hintfont}{}
 \newcommand*{\pagenumberfont}{\addressfont\itshape}
-% fake small caps - cfr http://tex.stackexchange.com/questions/55664/fake-small-caps-with-xetex-fontspec
-%\def\fakesc{\bgroup\obeyspaces\fakescaux}
-%\def\fakescaux#1{\fakescauxii #1\relax\relax\egroup}
-%\def\fakescauxii#1{%
-%\ifx\relax#1\else \ifcat#1\@sptoken{} \expandafter\expandafter\expandafter\fakescauxii\else
-%\ifnum`#1=\uccode`#1 {\normalsize #1}\else {\footnotesize \uppercase{#1}}\fi \expandafter\expandafter\expandafter\fakescauxii\expandafter\fi\fi}
 
 % styles
 \newcommand*{\namestyle}[1]{{\namefont#1}}
@@ -478,27 +422,6 @@
 % usage: \cvitemwithcomment[spacing]{header}{text}{comment}
 \newcommand*{\cvitemwithcomment}[4][.25em]{}
 
-% makes a generic hyperlink
-% usage: \link[optional text]{link}
-\newcommand*{\link}[2][]{%
-  \ifthenelse{\equal{#1}{}}%
-    {\href{#2}{#2}}%
-    {\href{#2}{#1}}}
-
-% makes a http hyperlink
-% usage: \httplink[optional text]{link}
-\newcommand*{\httplink}[2][]{%
-  \ifthenelse{\equal{#1}{}}%
-    {\href{http://#2}{#2}}%
-    {\href{http://#2}{#1}}}
-
-% makes an email hyperlink
-% usage: \emaillink[optional text]{link}
-\newcommand*{\emaillink}[2][]{%
-  \ifthenelse{\equal{#1}{}}%
-    {\href{mailto:#2}{#2}}%
-    {\href{mailto:#2}{#1}}}
-
 % cvcolumns environment, where every column is created through \cvcolumn
 % usage: \begin{cvcolumns}
 %          \cvcolumn[width]{head}{content}
@@ -526,11 +449,6 @@
     \ifnum\thecvcolumnscounter>0%
       \setlength{\cvcolumnswidth}{\maincolumnwidth-\value{cvcolumnscounter}\separatorcolumnwidth+\separatorcolumnwidth}%
       \setlength{\cvcolumnautowidth}{\cvcolumnswidth*\ratio{\cvcolumnsautowidth}{\cvcolumnsdummywidth}/\value{cvcolumnsautowidthcounter}}\fi%
-    % pre-aggregate the tabular definition, heading and content (required before creating the tabular, as the tabular environment doesn't like loops --- probably because "&" generates a \endgroup)
-    % - the tabular definition is the aggregation of the different "\cvcolumn<i>@def" (by default "p{\cvcolumnautowidth}"), separated by "@{\hspace*{\separatorcolumnwidth}}"
-    % - the tabular heading is the aggregation of the different "\cvcolumn<i>@head", separated by "&"
-    % - the tabular content is the aggregation of the different "\cvcolumn<i>@content", separated by "&"
-    % to aggregate the different elements, \protected@edef or \g@addto@macro is required to avoid that \cvcolumns@def, -@head and -@content get expanded in subsequent redefinitions, which would cause errors due to the expansions of \hspace, of \subsectionstyle and possibly of user content/argument such as font commands
     \def\cvcolumns@def{}%
     \def\cvcolumns@head{}%
     \def\cvcolumns@content{}%
@@ -645,46 +563,211 @@
   July\or August\or September\or October\or November\or December\fi
   \space\number\day, \number\year}
 
-%\newcommand{\widthofautobox}[1]{%
-%  \widthof{\begin{tabular}{@{}l@{}}#1\end{tabular}}}
+%=====================================================================
+%=============================== header ==============================
 
-%\newcommand{\autobox}[2][b]{%
-%  \parbox[#1]{\widthofautobox{#2}}{#2}}
+% fonts
+\renewcommand*{\namefont}{\Huge\sffamily}
+\renewcommand*{\titlefont}{\large\sansc}
+\renewcommand*{\addressfont}{\small\sffamily}
+\renewcommand*{\quotefont}{\large\itshape}
+
+% styles
+\renewcommand*{\namestyle}[1]{{\namefont\textcolor{color1}{#1}}}
+\renewcommand*{\titlestyle}[1]{{\titlefont{#1}}}
+\renewcommand*{\addressstyle}[1]{{\addressfont{#1}}}
+\renewcommand*{\quotestyle}[1]{{\quotefont{#1}}}
+
+% lengths
+\@initializelength{\quotewidth}
+\@initializelength{\makecvheadnamewidth}% optional makecvheadname width to force a certain width (if set/remains to 0pt, the width is calculated automatically)
+\renewcommand*{\recomputecvheadlengths}{%
+  \setlength{\quotewidth}{0.65\textwidth}}
+
+% commands
+\renewcommand*{\makecvhead}{%
+  % recompute lengths (in case we are switching from letter to resume, or vice versa)
+  \recomputecvlengths%
+  % optional detailed information (pre-rendering)
+  \@initializebox{\makecvheaddetailsbox}%
+    \def\phonesdetails{}%
+    \collectionloop{phones}{% the key holds the phone type (=symbol command prefix), the item holds the number
+      \protected@edef\phonesdetails{\phonesdetails\protect\makenewline\csname\collectionloopkey phonesymbol\endcsname\collectionloopitem}}%
+    \def\socialsdetails{}%
+    \collectionloop{socials}{% the key holds the social type (=symbol command prefix), the item holds the link
+      \protected@edef\socialsdetails{\socialsdetails\protect\makenewline\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}}%
+    \savebox{\makecvheaddetailsbox}{%
+      \addressfont%
+      \begin{tabular}[b]{@{}r@{}}
+        \ifthenelse{\isundefined{\@addressstreet}}{}{\makenewline\addresssymbol\@addressstreet%
+          \ifthenelse{\equal{\@addresscity}{}}{}{\makenewline\@addresscity}% if \addresstreet is defined, \addresscity and addresscountry will always be defined but could be empty
+          \ifthenelse{\equal{\@addresscountry}{}}{}{\makenewline\@addresscountry}}%
+        \ifthenelse{\isundefined{\@born}}{}{\makenewline\bornsymbol\@born}%
+        \phonesdetails% needs to be pre-rendered as loops and tabulars seem to conflict
+        \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\href{mailto:\@email}{\@email}}%
+        \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\href{https://\@homepage}{\@homepage}}%
+        \socialsdetails% needs to be pre-rendered as loops and tabulars seem to conflict
+        \ifthenelse{\isundefined{\@extrainfo}}{}{\makenewline\@extrainfo}%
+      \end{tabular}
+    }
+  % optional photo (pre-rendering)
+  \@initializebox{\makecvheadpicturebox}%
+  \savebox{\makecvheadpicturebox}{%
+    \ifthenelse{\isundefined{\@photo}}%
+      {}%
+      {%
+        \hspace*{\separatorcolumnwidth}
+        \color{color1}%
+        \setlength{\fboxrule}{\@photoframewidth}%
+        \ifdim\@photoframewidth=0pt%
+          \setlength{\fboxsep}{0pt}\fi%
+        \framebox{\includegraphics[width=\@photowidth]{\@photo}}}}%
+  % name and title (pre-rendering)
+  \@initializelength{\makecvheaddetailswidth}\settowidth{\makecvheaddetailswidth}{\usebox{\makecvheaddetailsbox}}%
+  \@initializelength{\makecvheadpicturewidth}\settowidth{\makecvheadpicturewidth}{\usebox{\makecvheadpicturebox}}%
+  \ifthenelse{\lengthtest{\makecvheadnamewidth=0pt}}% check for dummy value (equivalent to \ifdim\makecvheadnamewidth=0pt)
+    {\setlength{\makecvheadnamewidth}{\textwidth-\makecvheaddetailswidth-\makecvheadpicturewidth}}%
+    {}%
+  \@initializebox{\makecvheadnamebox}%
+  \savebox{\makecvheadnamebox}{%
+    \begin{minipage}[b]{\makecvheadnamewidth}%
+      \raggedright
+      \namestyle{\@firstname\ \@lastname}%
+      \ifthenelse{\equal{\@title}{}}{}{\\[0.5\baselineskip]\titlestyle{\@title}}%
+    \end{minipage}}%
+  % rendering
+    \usebox{\makecvheadnamebox}%
+    \hfill%
+    \llap{\usebox{\makecvheaddetailsbox}}% \llap is used to suppress the width of the box, allowing overlap if the value of makecvheadnamewidth is forced
+    \usebox{\makecvheadpicturebox}
+  \\[-1em]%
+  % optional quote
+  \ifthenelse{\isundefined{\@quote}}%
+    {}%
+    {{\centering\begin{minipage}{\quotewidth}\centering\quotestyle{\@quote}\end{minipage}\\[2.5em]}}%
+  \par}% to avoid weird spacing bug at the first section if no blank line is left after \makecvhead
 
 
-%-------------------------------------------------------------------------------
-%                letter design commands definitions
-%-------------------------------------------------------------------------------
-% elements
-\newcommand*{\recipient}[2]{\def\@recipientname{#1}\def\@recipientaddress{#2}}
-\renewcommand*{\date}[1]{\def\@date{#1}}\date{\today}
-\newcommand*{\opening}[1]{\def\@opening{#1}}
-\newcommand*{\closing}[1]{\def\@closing{#1}}
-\newcommand*{\enclosure}[2][]{%
-  % if an optional argument is provided, use it to redefine \enclname
-  \ifthenelse{\equal{#1}{}}{}{\renewcommand*{\enclname}{#1}}%
-  \def\@enclosure{#2}}
+%===============================================================================
+%=============================== body definition ===============================
 
-% recompute all letter lengths
-\newcommand*{\recomputeletterheadlengths}{}
-\newcommand*{\recomputeletterbodylengths}{}
-\newcommand*{\recomputeletterfootlengths}{}
-\newcommand*{\recomputeletterlengths}{%
-  \recomputeletterheadlengths%
-  \recomputeletterbodylengths%
-  \recomputeletterfootlengths}
+% fonts
+\renewcommand*{\sectionfont}{%
+  \large\bfseries\sansc
+}
 
-% makes the letter title
-% usage: \makelettertitle
-\newcommand*{\makelettertitle}{%
-  \makeletterhead%
-  \makeletterfoot}
-\newcommand*{\makeletterhead}{}
-\newcommand*{\makeletterfoot}{}
+\renewcommand*{\subsectionfont}{%
+  \normalsize\itshape
+}
 
-% makes the letter closing
-% usage: \makeletterclosing
-\newcommand*{\makeletterclosing}{}
+\renewcommand*{\hintfont}{\bfseries}
+
+% styles
+\renewcommand*{\sectionstyle}[1]{{
+  \sectionfont\textcolor{color1}{#1}
+}}
+
+\renewcommand*{\subsectionstyle}[1]{{
+  \subsectionfont{#1}
+}}
+
+\renewcommand*{\hintstyle}[1]{{\hintfont\textcolor{color1}{#1}}}
+
+
+% lengths
+%   used by \cvitem (and all children command)
+\@initializelength{\hintscolumnwidth}             \setlength{\hintscolumnwidth}{0.3\textwidth}
+\@initializelength{\separatorcolumnwidth}         \setlength{\separatorcolumnwidth}{0.025\textwidth}
+\@initializelength{\maincolumnwidth}
+%   used by \cvdoubleitem
+\@initializelength{\doubleitemcolumnwidth}
+%   used by \cvlistitem
+\@initializelength{\listitemsymbolwidth}          \settowidth{\listitemsymbolwidth}{\listitemsymbol}
+\@initializelength{\listitemcolumnwidth}
+%   used by \cvlistdoubleitem
+\@initializelength{\listdoubleitemcolumnwidth}
+
+% commands
+\renewcommand*{\recomputecvbodylengths}{%
+  % body lengths
+  \setlength{\maincolumnwidth}{\textwidth-\leftskip-\rightskip}%
+  \setlength{\listitemcolumnwidth}{\maincolumnwidth-\listitemsymbolwidth}%
+  \setlength{\doubleitemcolumnwidth}{\maincolumnwidth-\separatorcolumnwidth}%
+  \setlength{\doubleitemcolumnwidth}{0.5\doubleitemcolumnwidth}%
+  \setlength{\listdoubleitemcolumnwidth}{\maincolumnwidth-\listitemsymbolwidth-\separatorcolumnwidth-\listitemsymbolwidth}%
+  \setlength{\listdoubleitemcolumnwidth}{0.5\listdoubleitemcolumnwidth}%
+  % regular lengths
+  \setlength{\parskip}{0\p@}}
+
+\RenewDocumentCommand{\section}{sm}{%
+  \par\addvspace{\baselineskip}%
+  \phantomsection{}
+  % Ensures that the sectionrule and the heading are on the same page
+  \vbox{
+  \sectionrule\\
+  \sectionstyle{#2}
+  }
+  \par\nobreak\addvspace{1ex}\@afterheading
+}
+
+\RenewDocumentCommand{\subsection}{sm}{%
+  \par\addvspace{1ex}
+  \phantomsection{}
+  \strut\subsectionstyle{#2}
+  \par\nobreak\addvspace{0.5ex}\@afterheading
+}
+
+\newcommand*{\sectionrule}{}
+\newcommand*{\subsectionrule}{}
+
+% Line after section
+\renewcommand*{\sectionrule}{\par\nobreak\vspace*{-0.55\baselineskip}\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+\renewcommand*{\subsectionrule}{}
+
+\renewcommand*{\cvitem}[3][.25em]{%
+  \ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }{#3}%
+  \par\addvspace{#1}}
+
+\renewcommand*{\cvdoubleitem}[5][.25em]{%
+  \begin{minipage}[t]{\doubleitemcolumnwidth}\hintstyle{#2}: #3\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \begin{minipage}[t]{\doubleitemcolumnwidth}\ifthenelse{\equal{#4}{}}{}{\hintstyle{#4}: }#5\end{minipage}%
+  \par\addvspace{#1}}
+
+\renewcommand*{\cvlistitem}[2][.25em]{%
+  \listitemsymbol\begin{minipage}[t]{\listitemcolumnwidth}#2\end{minipage}%
+  \par\addvspace{#1}}
+
+\renewcommand*{\cvlistdoubleitem}[3][.25em]{%
+  \cvitem[#1]{}{\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#2\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \ifthenelse{\equal{#3}{}}%
+    {}%
+    {\listitemsymbol\begin{minipage}[t]{\listdoubleitemcolumnwidth}#3\end{minipage}}}}
+
+\renewcommand*{\cventry}[5][0.75em]{
+  \addvspace{#1}
+  \begin{tabular*}{\maincolumnwidth}{l@{\extracolsep{\fill}}r}%
+    {\large #4} & {\large #5}\\[0.15em]%
+    \rule{0pt}{0.25em}{\itshape #3} & {\footnotesize \rmsc #2}\\[0.15em]%
+  \end{tabular*}%
+  \par}
+
+\@initializebox{\cvitemwithcommentmainbox}
+\@initializelength{\cvitemwithcommentmainlength}
+\@initializelength{\cvitemwithcommentcommentlength}
+\renewcommand*{\cvitemwithcomment}[4][.25em]{%
+  \savebox{\cvitemwithcommentmainbox}{\ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }#3}%
+  \setlength{\cvitemwithcommentmainlength}{\widthof{\usebox{\cvitemwithcommentmainbox}}}%
+  \setlength{\cvitemwithcommentcommentlength}{\maincolumnwidth-\separatorcolumnwidth-\cvitemwithcommentmainlength}%
+  \begin{minipage}[t]{\cvitemwithcommentmainlength}\usebox{\cvitemwithcommentmainbox}\end{minipage}%
+  \hfill% fill of \separatorcolumnwidth
+  \begin{minipage}[t]{\cvitemwithcommentcommentlength}\raggedleft\small\itshape#4\end{minipage}%
+  \par\addvspace{#1}}
+
+
+%=====================================================================
+%=============================== final ===============================
 
 \RequirePackage[style=my-style,
                 backend=biber,
@@ -693,9 +776,19 @@
                 minbibnames=4,
                 uniquename=false,
                 giveninits]{biblatex}
+\setlength\bibitemsep{\itemsep}
+
+\AtEndPreamble{
+    \nocite{*}
+}
+
+% Beginning of document stuff
+\AtBeginDocument{
+    \normalfont\color{color0}
+}
 
 \endinput
 
 
 
-%% end of file `moderncv.cls'.
+%% end of file `practical-cv.cls'.
