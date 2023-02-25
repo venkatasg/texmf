@@ -1,7 +1,7 @@
 %===============================================================================
 %================================= Definition ==================================
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{mycv}[2023/07/18 v1.0.0 my curriculum vitae and résumé class]
+\ProvidesClass{practical-cv}[2023/07/18 v1.0.0 my curriculum vitae and résumé class]
 
 %===============================================================================
 %============================= page setup & options ============================
@@ -115,22 +115,6 @@
     }
 \pagestyle{plain}
 
-% reduced list spacing
-% package providing hooks into lists
-%   originally developped by Jakob Schiøtz (see http://dcwww.camd.dtu.dk/~schiotz/comp/LatexTips/tweaklist.sty)
-%   modified and distributed with moderncv(not available otherwise on ctan)
-\RequirePackage{tweaklist}
-\renewcommand*{\itemhook}{%
-  \@minipagetrue% removes spacing before lists as they use \addvspace, which doesn't add vertical space inside minipages
-  \@noparlisttrue% removes spacing at end of lists, caused by \par
-  \setlength{\topsep}{0pt}% normally not required thanks to \@minipagetrue
-  \setlength{\partopsep}{0pt}% normally not required thanks to \@minipagetrue
-  \setlength{\parsep}{0pt}% not required when \itemsep and \parskip are set to 0pt (?)
-  \setlength{\parskip}{0pt}%
-  \setlength{\itemsep}{0pt}}
-\renewcommand*{\enumhook}{\itemhook{}}
-\renewcommand*{\deschook}{\itemhook{}}
-
 % lengths calculations
 \RequirePackage{calc}
 
@@ -232,14 +216,6 @@
 %=================================== icons =====================================
 
 % symbols
-%--------
-% itemize labels (the struts were added to correct inter-item spacing (works for single line items, until a solution is found for multi-line ones...)
-\newcommand*{\labelitemi}          {\strut\textcolor{color1}{\large\rmfamily\textbullet}}% the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
-\newcommand*{\labelitemii}         {\strut\textcolor{color1}{\large\bfseries-}}
-\newcommand*{\labelitemiii}        {\strut\textcolor{color1}{\rmfamily\textperiodcentered}}% alternative: \textasteriskcentered; the \rmfamily is required to force Latin Modern fonts when using sans serif, as OMS/lmss/m/n is not defined and gets substituted by OMS/cmsy/m/n
-\newcommand*{\labelitemiv}         {\labelitemiii}
-
-% symbols
 \RequirePackage{fontawesome5}
 
 \newcommand*{\fixedphonesymbol}         {{\small\faPhone*}~}
@@ -257,7 +233,6 @@
 \newcommand*{\addressfont}{}
 \newcommand*{\sectionfont}{}
 \newcommand*{\subsectionfont}{}
-\newcommand*{\hintfont}{}
 
 % styles
 \newcommand*{\namestyle}[1]{{\namefont#1}}
@@ -265,7 +240,6 @@
 \newcommand*{\addressstyle}[1]{{\addressfont#1}}
 \newcommand*{\sectionstyle}[1]{{\sectionfont#1}}
 \newcommand*{\subsectionstyle}[1]{{\subsectionfont#1}}
-\newcommand*{\hintstyle}[1]{{\hintfont#1}}
 
 % recompute all resume lengths
 \newcommand*{\recomputecvheadlengths}{}
@@ -295,7 +269,6 @@
 
 % makes a resume section
 % usage: \section{<title>}
-% identical starred and non-starred variants should be defined for compatibility with other packages (e.g. with natbib, that uses \section*{} for the bibliography header)
 \NewDocumentCommand{\section}{sm}{}
 
 % makes a resume subsection
@@ -309,30 +282,6 @@
 % makes a typical resume job / education entry
 % usage: \cventry[spacing]{years}{degree/job title}{institution/employer}{localization}{optionnal: grade/...}{optional: comment/job description}
 \newcommand*{\cventry}[8][.25em]{}
-
-% itemize, enumerate and description environment
-\setlength{\leftmargini}   {1em}
-\leftmargin\leftmargini
-\setlength{\leftmarginii}  {\leftmargini}
-\setlength{\leftmarginiii} {\leftmargini}
-\setlength{\leftmarginiv}  {\leftmargini}
-\setlength{\leftmarginv}   {\leftmargini}
-\setlength{\leftmarginvi}  {\leftmargini}
-\setlength{\labelsep}      {.5em}% this is the distance between the label and the body, but it pushes the label to the left rather than pushing the body to the right (to do the latter, modify \leftmargin(i)
-\setlength{\labelwidth}    {\leftmargini}% unfortunately, \labelwidth is not defined by item level (i.e. no \labeliwidth, \labeliiwidth, etc)
-\addtolength{\labelwidth}  {-\labelsep}
-\@beginparpenalty -\@lowpenalty
-\@endparpenalty   -\@lowpenalty
-\@itempenalty     -\@lowpenalty
-\newcommand\labelenumi{\theenumi.}
-\newcommand\labelenumii{(\theenumii)}
-\newcommand\labelenumiii{\theenumiii.}
-\newcommand\labelenumiv{\theenumiv.}
-\renewcommand\p@enumii{\theenumi}
-\renewcommand\p@enumiii{\p@enumii(\theenumii)}
-\renewcommand\p@enumiv{\p@enumiii\theenumiii}
-% description label
-\newcommand*\descriptionlabel[1]{\hspace\labelsep\normalfont\bfseries#1}
 
 %===============================================================================
 %==================================== header ===================================
@@ -351,7 +300,7 @@
 \@initializelength{\makecvheadnamewidth}% optional makecvheadname width to force a certain width (if set/remains to 0pt, the width is calculated automatically)
 
 % commands
-\renewcommand*{\makecvhead}{%
+\renewcommand*{\makecvhead}{
   % recompute lengths (in case we are switching from letter to resume, or vice versa)
   \recomputecvlengths%
   % optional detailed information (pre-rendering)
@@ -391,7 +340,8 @@
     \llap{\usebox{\makecvheaddetailsbox}}% \llap is used to suppress the width of the box, allowing overlap if the value of makecvheadnamewidth is forced
     \usebox{\makecvheadpicturebox}
   \\[-1em]
-  \par}% to avoid weird spacing bug at the first section if no blank line is left after \makecvhead
+  \par% to avoid weird spacing bug at the first section if no blank line is left after \makecvhead
+}
 
 
 %===============================================================================
@@ -406,8 +356,6 @@
   \normalsize\itshape
 }
 
-\renewcommand*{\hintfont}{\bfseries}
-
 % styles
 \renewcommand*{\sectionstyle}[1]{{
   \sectionfont\textcolor{color1}{#1}
@@ -417,12 +365,9 @@
   \subsectionfont{#1}
 }}
 
-\renewcommand*{\hintstyle}[1]{{\hintfont\textcolor{color1}{#1}}}
-
 
 % lengths
 %   used by \cvitem (and all children command)
-\@initializelength{\hintscolumnwidth}             \setlength{\hintscolumnwidth}{0.3\textwidth}
 \@initializelength{\separatorcolumnwidth}         \setlength{\separatorcolumnwidth}{0.025\textwidth}
 \@initializelength{\maincolumnwidth}
 
@@ -451,23 +396,35 @@
   \par\nobreak\addvspace{0.25\baselineskip}\@afterheading
 }
 
-\newcommand*{\sectionrule}{}
+% Line before section title
+\newcommand*{\sectionrule}{\par\nobreak\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
 
-% Line after section
-\renewcommand*{\sectionrule}{\par\nobreak\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+\renewcommand*{\cvitem}[3][.25em]{
+  \ifthenelse{\equal{#2}{}}{
 
-\renewcommand*{\cvitem}[3][.25em]{%
-  \ifthenelse{\equal{#2}{}}{}{\hintstyle{#2}: }{#3}%
-  \par\addvspace{#1}}
+  }
+  {
+    {\bfseries #2}:
+  }
+  {#3}
+  \par\addvspace{#1}
+}
 
 \renewcommand*{\cventry}[6][1em]{
-  \addvspace{#1}
-  \begin{tabular*}{\maincolumnwidth}{l@{\extracolsep{\fill}}r}
-    {\large #3} & {\large #4}\\[0.2em]
-    {\normalsize\itshape #2} & {\footnotesize #5}\\[0.2em]
-    \multicolumn{2}{p{\textwidth}}{\normalsize #6}\\
-  \end{tabular*}%
-  \par
+    \addvspace{#1}
+    \ifthenelse{\equal{#6}{}}{
+        \begin{tabular*}{\maincolumnwidth}{l@{\extracolsep{\fill}}r}
+            {\large #3} & {\large #4}\\[0.2em]
+            {\normalsize\itshape #2} & {\footnotesize #5}\\
+        \end{tabular*}
+    }
+    {
+        \begin{tabular*}{\maincolumnwidth}{l@{\extracolsep{\fill}}r}
+            {\large #3} & {\large #4}\\[0.2em]
+            {\normalsize\itshape #2} & {\footnotesize #5}\\[0.2em]
+            \multicolumn{2}{p{\textwidth}}{\normalsize #6}\\
+        \end{tabular*}
+    }
 }
 
 %===============================================================================
