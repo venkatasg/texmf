@@ -60,14 +60,18 @@
 % Set textwidth to 2.3 times length of alphabet
 \newlength{\alphabet}
 \settowidth{\alphabet}{\normalfont abcdefghijklmnopqrstuvwxyz}
-\RequirePackage[showframe]{geometry}
+\RequirePackage{geometry}
 \geometry{twoside=false, textwidth=2.3\alphabet, right=0.75in, top=1in, bottom=1in, headheight=0pt, headsep=0pt, footnotesep=0pt, footskip=0pt,marginparwidth=0in, marginparsep=0cm,}
 
 % Set linespacing to 1.1 times the point size
 \RequirePackage{setspace}
 \setstretch{1.1}
 
+% For including signature
 \RequirePackage{graphicx}
+
+% if then macro
+\RequirePackage{ifthen}
 
 %===============================================================================
 %=================================== commands ==================================
@@ -131,6 +135,7 @@
   \space\number\day, \number\year}
 
 \newcommand*\opening[1]{
+    \vspace{-2\baselineskip}
     \pagestyle{empty}
     \@date\par
     \toaddress\par
@@ -141,11 +146,20 @@
 % Closing
 \newcommand\closing[1]{
     \vspace{\baselineskip}
-    \parbox{0.5\textwidth}{
-        \raggedright
-        \ignorespaces #1\\[\baselineskip]
-        \hspace*{-2mm}\includegraphics[width=0.35\textwidth]{\fromsig}\\
-        \fromname\strut
+    \ifthenelse{\equal{\fromsig}{}}{
+        \parbox{0.5\textwidth}{
+            \raggedright
+            \ignorespaces #1\\[3\baselineskip]
+            \fromname\strut
+        }
+    }
+    {
+        \parbox{0.5\textwidth}{
+            \raggedright
+            \ignorespaces #1\\[\baselineskip]
+            \hspace*{-2mm}\includegraphics[width=0.35\textwidth]{\fromsig}\\
+            \fromname\strut
+        }
     }
     \par
 }
@@ -154,12 +168,18 @@
 %================================== recipient ==================================
 
 \RequirePackage{xcolor}
-\definecolor{fromcolor}{HTML}{404040} % gray
+\definecolor{color1}{HTML}{D73A49} % github red
+\RequirePackage[absolute]{textpos}
 
 \newcommand*\senderbox{
-    \fromcolor\rmsc
-    {\bfseries\fromname}\par
-    {\fromaddress}\par
-    {\emailaddr}\par
-    {\phonenum}
+    \begin{textblock*}{47mm}(19mm,22mm) %Placed to have same left margin as right, and a little above top margin to account for the spacing above text in this box I can't seem to remove
+        \sansc\color{color1!80}
+        {\sancs\bfseries\fromname}\par
+        \vspace{\baselineskip}
+        {\fromaddress}\par
+        \vspace{\baselineskip}
+        {\emailaddr}\\
+        {\phonenum}
+    \end{textblock*}
+    \color{black}
 }

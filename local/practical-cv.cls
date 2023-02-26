@@ -199,7 +199,7 @@
 %===============================================================================
 %=================================== colors ====================================
 
-\RequirePackage[table]{xcolor}
+\RequirePackage{xcolor}
 \definecolor{color0}{HTML}{000000} % black color
 \definecolor{color1}{HTML}{D73A49} % github red
 \definecolor{color2}{HTML}{0366D6} % wikipedia blue

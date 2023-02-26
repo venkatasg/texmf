@@ -102,7 +102,7 @@
                 maxcitenames=1,
                 maxbibnames=999]{biblatex}
 
-\RequirePackage[usenames,dvipsnames,table]{xcolor}
+\RequirePackage[table]{xcolor}
 
 % Colors for links
 \definecolor{bluelinkcolor}{HTML}{0366D6}
