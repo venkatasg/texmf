@@ -30,8 +30,6 @@
 \ProcessOptions\relax
 \LoadClass[11pt,oneside]{article}
 
-
-
 %=====================================================================
 %============================= typography ============================
 
@@ -46,7 +44,7 @@
 \setmainfont{Equity A}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
 \newcommand\liningfont{\addfontfeatures{Numbers={Uppercase, Proportional}}}
 \newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps, Numbers={Uppercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
-\newfontfamily{\rmcs}{Equity A Caps}[Numbers={Uppercase,Proportional}]
+\newfontfamily{\rmcs}{Equity A Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
 
 % IPA, monospace, and math fonts
 \newfontfamily{\ipa}{Charis SIL}
@@ -89,6 +87,7 @@
 
 % microtype handles punctuation at the right margin.
 \RequirePackage[final,protrusion={true,compatibility}, expansion=true]{microtype}
+
 %=====================================================================
 %=================== Bibliography, color & links =====================
 
@@ -222,8 +221,8 @@
 
 \providecommand{\sv}[1]{\ensuremath{\llbracket{#1}\rrbracket}}
 
-%=====================================================================
-%============================= list settings =========================
+%===============================================================================
+%================================= list settings ===============================
 
 %% Modify list
 \RequirePackage{enumitem}
@@ -237,6 +236,3 @@
 \RequirePackage{linguex}%
 \renewcommand{\firstrefdash}{}%
 \AtBeginDocument{\settowidth{\Exlabelwidth}{(110)}}
-
-%================================ fin ================================
-%=====================================================================

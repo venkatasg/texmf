@@ -138,6 +138,9 @@
   \else%
     \newsavebox{#1}\fi}
 
+% icons for social sites
+\RequirePackage{fontawesome5}
+
 %===============================================================================
 %================================= typography ==================================
 
@@ -147,8 +150,8 @@
 
 \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}]
 \newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}]
-\newfontfamily{\sancs}{Concourse 3 Caps}[Numbers={Uppercase,Proportional}]
-\newfontfamily{\rmcs}{Equity A Caps}[Numbers={Uppercase,Proportional}]
+\newfontfamily{\sancs}{Concourse 3 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
+\newfontfamily{\rmcs}{Equity A Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
 
 % IPA, monospace, and math fonts
 \newfontfamily{\ipa}{Charis SIL}
@@ -164,8 +167,7 @@
 
 %===============================================================================
 %============================== personal details ===============================
-% elements
-%---------
+
 % defines one's name
 % usage: \name{<firstname>}{<lastname>}
 \newcommand*{\name}[2]{\def\@firstname{#1}\def\@lastname{#2}}
@@ -173,11 +175,6 @@
 % defines one's title (optional)
 % usage: \title{<title>}
 \renewcommand*{\title}[1]{\def\@title{#1}}
-
-% defines one's address (optional)
-% usage: \address{<street>}{<city>}{<country>}
-% where the <city> and <country> arguments can be omitted or provided empty
-\NewDocumentCommand{\address}{mG{}G{}}{\def\@addressstreet{#1}\def\@addresscity{#2}\def\@addresscountry{#3}}
 
 % defines one's email (optional)
 % usage: \email{<email adress>}
@@ -191,18 +188,13 @@
 % usage: \phone{<phone number>}
 \newcommand*{\phone}[1]{\def\@phone{#1}}
 
-% add social media links to one's personal information
-% usage: \social[<optional type>][<optional url>]{<account name>}
-% where <optional type> should be either "linkedin", "twitter" or "github"
-\collectionnew{socials}
-\NewDocumentCommand{\social}{O{}O{}m}{
-  \ifthenelse{\equal{#2}{}}{
-      \ifthenelse{\equal{#1}{linkedin}}{\collectionadd[linkedin]{socials}{\protect\href{https://linkedin.com/in/#3}{#3}}}{}%
-      \ifthenelse{\equal{#1}{twitter}} {\collectionadd[twitter]{socials} {\protect\href{https://twitter.com/#3}{#3}}}    {}%
-      \ifthenelse{\equal{#1}{github}}  {\collectionadd[github]{socials}  {\protect\href{https://github.com/#3}{#3}}}     {}%
-    }
-    {\collectionadd[#1]{socials}{\protect\href{#2}{#2}}}
-}
+% add phone number
+% usage: \phone{<phone number>}
+\newcommand*{\github}[1]{\def\@github{#1}}
+
+% add phone number
+% usage: \phone{<phone number>}
+\newcommand*{\linkedin}[1]{\def\@linkedin{#1}}
 
 %===============================================================================
 %=================================== colors ====================================
@@ -213,31 +205,19 @@
 \definecolor{color2}{HTML}{0366D6} % wikipedia blue
 
 %===============================================================================
-%=================================== icons =====================================
-
-% symbols
-\RequirePackage{fontawesome5}
-
-\newcommand*{\fixedphonesymbol}         {{\small\faPhone*}~}
-\newcommand*{\emailsymbol}              {{\small\faEnvelope[regular]}~}
-\newcommand*{\homepagesymbol}           {{\small\faGlobeAmericas}~}
-\newcommand*{\linkedinsocialsymbol}     {{\small\faLinkedinIn}~}
-\newcommand*{\githubsocialsymbol}       {{\small\faGithub}~}
-
-%===============================================================================
-%================================== commands ===================================
+%================================ new commands =================================
 
 % fonts
 \newcommand*{\namefont}{}
 \newcommand*{\titlefont}{}
-\newcommand*{\addressfont}{}
+\newcommand*{\socialsfont}{}
 \newcommand*{\sectionfont}{}
 \newcommand*{\subsectionfont}{}
 
 % styles
 \newcommand*{\namestyle}[1]{{\namefont#1}}
 \newcommand*{\titlestyle}[1]{{\titlefont#1}}
-\newcommand*{\addressstyle}[1]{{\addressfont#1}}
+\newcommand*{\socialsstyle}[1]{{\socialsfont#1}}
 \newcommand*{\sectionstyle}[1]{{\sectionfont#1}}
 \newcommand*{\subsectionstyle}[1]{{\subsectionfont#1}}
 
@@ -289,58 +269,54 @@
 % fonts
 \renewcommand*{\namefont}{\Huge\sffamily}
 \renewcommand*{\titlefont}{\large\sansc}
-\renewcommand*{\addressfont}{\small\sffamily}
+\renewcommand*{\socialsfont}{\small\sffamily}
 
 % styles
 \renewcommand*{\namestyle}[1]{{\namefont\textcolor{color1}{#1}}}
 \renewcommand*{\titlestyle}[1]{{\titlefont{#1}}}
-\renewcommand*{\addressstyle}[1]{{\addressfont{#1}}}
+\renewcommand*{\socialsstyle}[1]{{\socialsfont{#1}}}
 
 % lengths
 \@initializelength{\makecvheadnamewidth}% optional makecvheadname width to force a certain width (if set/remains to 0pt, the width is calculated automatically)
 
 % commands
 \renewcommand*{\makecvhead}{
-  % recompute lengths (in case we are switching from letter to resume, or vice versa)
-  \recomputecvlengths%
-  % optional detailed information (pre-rendering)
-  \@initializebox{\makecvheaddetailsbox}
-    \def\socialsdetails{}
-    \collectionloop{socials}{
-        % the key holds the social type (=symbol command prefix), the item holds the link
-        \protected@edef\socialsdetails{\socialsdetails\protect\makenewline\csname\collectionloopkey socialsymbol\endcsname\collectionloopitem}
-    }
+    % recompute lengths (in case we are switching from letter to resume, or vice versa)
+    \recomputecvlengths%
+    % optional detailed information (pre-rendering)
+    \@initializebox{\makecvheaddetailsbox}
     \savebox{\makecvheaddetailsbox}{%
-      \addressfont%
-      \begin{tabular}[b]{@{}r@{}}
-        \ifthenelse{\isundefined{\@phone}}{}{\makenewline\fixedphonesymbol\href{tel:\@phone}{\@phone}}
-        \ifthenelse{\isundefined{\@email}}{}{\makenewline\emailsymbol\href{mailto:\@email}{\@email}}
-        \ifthenelse{\isundefined{\@homepage}}{}{\makenewline\homepagesymbol\href{https://\@homepage}{\@homepage}}
-        \socialsdetails% needs to be pre-rendered as loops and tabulars seem to conflict
-      \end{tabular}
+        \socialsfont%
+        \begin{tabular}[b]{@{}r@{}}
+            \ifthenelse{\isundefined{\@phone}}{}{\makenewline{\small\faPhone*}~\href{tel:\@phone}{\@phone}}
+            \ifthenelse{\isundefined{\@email}}{}{\makenewline{\small\faEnvelope[regular]}~\href{mailto:\@email}{\@email}}
+            \ifthenelse{\isundefined{\@homepage}}{}{\makenewline{\small\faGlobe}~\href{https://\@homepage}{\@homepage}}
+            \ifthenelse{\isundefined{\@github}}{}{\makenewline{\small\faGithub}~\href{https://github.com/\@github}{\@github}}
+            \ifthenelse{\isundefined{\@linkedin}}{}{\makenewline{\small\faLinkedinIn}~\href{https://linkedin.com/in/\@linkedin}{\@linkedin}}
+        \end{tabular}
     }
 
-  % name and title (pre-rendering)
-  \@initializebox{\makecvheadpicturebox}
-  \@initializelength{\makecvheaddetailswidth}\settowidth{\makecvheaddetailswidth}{\usebox{\makecvheaddetailsbox}}%
-  \@initializelength{\makecvheadpicturewidth}\settowidth{\makecvheadpicturewidth}{\usebox{\makecvheadpicturebox}}%
-  \ifthenelse{\lengthtest{\makecvheadnamewidth=0pt}}% check for dummy value (equivalent to \ifdim\makecvheadnamewidth=0pt)
+    % name and title (pre-rendering)
+    \@initializebox{\makecvheadpicturebox}
+    \@initializelength{\makecvheaddetailswidth}\settowidth{\makecvheaddetailswidth}{\usebox{\makecvheaddetailsbox}}%
+    \@initializelength{\makecvheadpicturewidth}\settowidth{\makecvheadpicturewidth}{\usebox{\makecvheadpicturebox}}%
+    \ifthenelse{\lengthtest{\makecvheadnamewidth=0pt}}% check for dummy value (equivalent to \ifdim\makecvheadnamewidth=0pt)
     {\setlength{\makecvheadnamewidth}{\textwidth-\makecvheaddetailswidth-\makecvheadpicturewidth}}%
     {}%
-  \@initializebox{\makecvheadnamebox}%
-  \savebox{\makecvheadnamebox}{%
+    \@initializebox{\makecvheadnamebox}%
+    \savebox{\makecvheadnamebox}{%
     \begin{minipage}[b]{\makecvheadnamewidth}%
       \raggedright
       \namestyle{\@firstname\ \@lastname}%
       \ifthenelse{\equal{\@title}{}}{}{\\[0.5\baselineskip]\titlestyle{\@title}}%
     \end{minipage}}%
-  % rendering
+    % rendering
     \usebox{\makecvheadnamebox}%
     \hfill%
     \llap{\usebox{\makecvheaddetailsbox}}% \llap is used to suppress the width of the box, allowing overlap if the value of makecvheadnamewidth is forced
     \usebox{\makecvheadpicturebox}
-  \\[-1em]
-  \par% to avoid weird spacing bug at the first section if no blank line is left after \makecvhead
+    \\[-1em]
+    \par% to avoid weird spacing bug at the first section if no blank line is left after \makecvhead
 }
 
 
@@ -445,14 +421,3 @@
 \AtEndPreamble{
     \nocite{*}
 }
-
-%===============================================================================
-%=================================== final =====================================
-
-% Beginning of document stuff
-\AtBeginDocument{
-    \normalfont\color{color0}
-}
-
-\endinput
-
