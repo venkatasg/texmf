@@ -115,7 +115,7 @@
 
 % Colors for links
 \definecolor{bluelinkcolor}{HTML}{0366D6}
-\definecolor{graylinkcolor}{HTML}{404040}
+\definecolor{graylinkcolor}{HTML}{5A5A5A}
 
 % Hyperref setup
 \RequirePackage{hyperref}
@@ -124,7 +124,7 @@
     breaklinks,
     linkcolor=black,
     urlcolor=bluelinkcolor,
-    citecolor=bluelinkcolor,
+    citecolor=graylinkcolor,
     filecolor=graylinkcolor,
     plainpages=false,
     pdfpagelabels,
