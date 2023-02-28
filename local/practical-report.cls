@@ -31,6 +31,15 @@
 \LoadClass[11pt,oneside]{article}
 
 %=====================================================================
+%========================== page dimensions ==========================
+
+\RequirePackage{geometry}
+% Set textwidth to 2.5 times length of alphabet approx. 77 characters
+\newlength{\alphabet}
+\settowidth{\alphabet}{\normalfont abcdefghijklmnopqrstuvwxyz}
+\geometry{top=1.5in, bottom=1.25in, textwidth=2.5\alphabet}
+
+%=====================================================================
 %============================= typography ============================
 
 % Left alignment
@@ -138,15 +147,6 @@
 \hypersetup{pdfauthor=\@pdfauthor,
             pdftitle=\@pdftitle,
             pdfkeywords=\@pdfkeywords}
-
-%=====================================================================
-%========================== page dimensions ==========================
-
-\RequirePackage{geometry}
-% Set textwidth to 2.5 times length of alphabet approx. 77 characters
-\newlength{\alphabet}
-\settowidth{\alphabet}{\normalfont abcdefghijklmnopqrstuvwxyz}
-\geometry{paper=a4paper, top=1in, bottom=1in, textwidth=2.5\alphabet, includefoot}
 
 %=====================================================================
 %============================== title ================================
