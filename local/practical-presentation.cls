@@ -1,25 +1,39 @@
-% Custom beamer metropolis style file
+% Custom beamer class file
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{presentation}[2020/07/27 Beamer Metropolis custom class]
+\ProvidesClass{practical-presentation}[2023/07/18 Beamer custom class]
 
-%=====================================================================
-%========================= required packages =========================
+
+%===============================================================================
+%======================== option declarations ==================================
+
+% biblatex option
+\newif\if@biblatex
+
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
+
+% define biblatex option
+\DeclareOption{biblatex}{\@biblatextrue}
+
 \ProcessOptions\relax
-\LoadClass[11pt]{beamer}
+\LoadClass{beamer}
+
+%===============================================================================
+%========================= required packages ===================================
+
 \RequirePackage[english]{babel}
 \RequirePackage{booktabs}
-\RequirePackage{pgfplots}
 \RequirePackage{xspace}
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
 \RequirePackage{url}
 \RequirePackage{csquotes}
 \RequirePackage{caption}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=newest}
 
-%=====================================================================
-%========================= beamer metropolis =========================
+%===============================================================================
+%============================= metropolis theme ================================
 
 % Beamer setup
 \usetheme[progressbar=frametitle,
@@ -33,11 +47,10 @@
           block=fill]{metropolis}
 
 % Define custom colors
-\definecolor{palegrey}{HTML}{e9e9e9}
+\definecolor{palegreyfg}{HTML}{e9e9e9}
 \definecolor{palegreybg}{HTML}{fcfcfc}
-\definecolor{darkgrey}{HTML}{404040}
-\definecolor{blackestblack}{HTML}{000000}
-\definecolor{whitestwhite}{HTML}{ffffff}
+\definecolor{darkgreyfg}{HTML}{404040}
+\definecolor{darkgreybg}{HTML}{222222}
 
 % These are the default colors for Metropolis from Tol Colors
 \definecolor{mDarkBrown}{HTML}{604c38}
@@ -59,11 +72,61 @@
 
 
 % venkatasg.me colors
-\definecolor{GitHubBlue}{HTML}{79B8FF}
-\definecolor{GitHubDBlue}{HTML}{0366D6}
+\definecolor{MyLBlue}{HTML}{79B8FF}
+\definecolor{MyDBlue}{HTML}{0366D6}
+\definecolor{MyDRed}{HTML}{D83A49}
+\definecolor{MyLRed}{HTML}{F94354}
 
-% Font setup
+
+% Set width of progress bar and separator
+\setlength{\metropolis@titleseparator@linewidth}{1pt}
+\setlength{\metropolis@progressonsectionpage@linewidth}{1pt}
+\setlength{\metropolis@progressinheadfoot@linewidth}{1pt}
+
+%===============================================================================
+%================================== typography =================================
+
+% Removes indentation at beginning of paragraphs
+\RequirePackage{parskip}
+
+% Left alignment
+\RequirePackage[document]{ragged2e}
+
+% amsmath must be loaded before unicode-math
+\RequirePackage{amsmath}
 \RequirePackage{unicode-math}
+
+%Now choose between dark and light themes, dark themes need a very thin font for contrast between regular text and bold font, but not so for the light theme
+
+\DeclareOption{light} {
+    \colorlet{fgcolor}{darkgreyfg}
+    \colorlet{bgcolor}{palegreybg}
+    \colorlet{bluelinkcolor}{MyDBlue}
+    \setbeamercolor{alerted text}{fg=MyDRed}
+    \setbeamercolor{progress bar}{fg=MyDRed}
+    \setmainfont{Concourse 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \setsansfont{Concourse 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps, Numbers={Uppercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \newfontfamily{\sancs}{Concourse 3 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
+    }
+
+\DeclareOption{dark} {
+    \colorlet{fgcolor}{palegreyfg}
+    \colorlet{bgcolor}{darkgreybg}
+    \colorlet{bluelinkcolor}{MyLBlue}
+    \setbeamercolor{alerted text}{fg=MyLRed}
+    \setbeamercolor{progress bar}{fg=MyLRed}
+    \setmainfont{Concourse 2}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \setsansfont{Concourse 2}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps, Numbers={Uppercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \newfontfamily{\sancs}{Concourse 2 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
+    }
+
+% IPA, monospace, and math fonts
+\newfontfamily{\ipa}{Charis SIL}
+\setmonofont[Scale=MatchLowercase]{Triplicate A Code}
+\setmathfont[Path=/Users/venkat/Library/Fonts/, Extension=.otf,Scale=MatchLowercase,Ligatures=TeX, BoldFont=XCharter-Bold,
+    ItalicFont=XCharter-Italic, Numbers={Uppercase,Monospaced}]{XCharter-Roman}
 
 % Fancy Numbering fonts
 \newfontfamily{\nfwc}{Concourse T3 Index}
@@ -71,138 +134,74 @@
 \newfontfamily{\nfbc}{Concourse T3 Index}[StylisticSet = 2]
 \newfontfamily{\nfbs}{Concourse T3 Index}[StylisticSet = 3]
 
-% IPA, monospace and math fonts
-\newfontfamily{\ipa}{Charis SIL}
-\setmonofont{Triplicate A Code}[Scale=MatchLowercase]
-\setmathfont{Asana Math}[Scale=MatchLowercase]
+% Oldstyle tabular numbers inside tabular environment
+\AtBeginEnvironment{tabular}{\addfontfeatures{Numbers={Uppercase, Monospaced}}}
+\renewcommand{\theequation}{ {\addfontfeatures{Numbers={Uppercase, Monospaced}}\arabic{equation}}}
 
-
-
-%Now choose between dark and light themes, dark themes need a very thin font for contrast between regular text and bold font, but not so for the light theme
-
-\DeclareOption{light} {
-    \colorlet{fgcolor}{darkgrey}
-    \colorlet{bgcolor}{palegreybg}
-    \colorlet{bluelinkcolor}{GitHubDBlue}
-    \setmainfont{Concourse 3}
-    \setsansfont{Concourse 3}
-    \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
-    \newfontfamily{\sancs}{Concourse 3 Caps}
-    \newfontfamily{\headersansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
-    }
-
-\DeclareOption{white} {
-    \colorlet{fgcolor}{darkgrey}
-    \colorlet{bgcolor}{whitestwhite}
-    \colorlet{bluelinkcolor}{GitHubDBlue}
-    \setmainfont{Concourse 3}
-    \setsansfont{Concourse 3}
-    \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
-    \newfontfamily{\sancs}{Concourse 3 Caps}
-    \newfontfamily{\headersansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
-    }
-
-\DeclareOption{maxcontrastwhite} {
-    \colorlet{fgcolor}{blackestblack}
-    \colorlet{bgcolor}{whitestwhite}
-    \colorlet{bluelinkcolor}{GitHubDBlue}
-    \setmainfont{Concourse 3}
-    \setsansfont{Concourse 3}
-    \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
-    \newfontfamily{\sancs}{Concourse 3 Caps}
-    \newfontfamily{\headersansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps]
-    }
-
-\DeclareOption{dark} {
-    \colorlet{fgcolor}{palegrey}
-    \colorlet{bgcolor}{mDarkTeal}
-    \colorlet{bluelinkcolor}{GitHubBlue}
-    \setmainfont{Concourse 2}
-    \setsansfont{Concourse 2}
-    \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
-    \newfontfamily{\sancs}{Concourse 2 Caps}
-    \newfontfamily{\headersansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
-    }
-
-\DeclareOption{black} {
-    \colorlet{fgcolor}{palegrey}
-    \colorlet{bgcolor}{blackestblack}
-    \colorlet{bluelinkcolor}{GitHubBlue}
-    \setmainfont{Concourse 2}
-    \setsansfont{Concourse 2}
-    \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
-    \newfontfamily{\sancs}{Concourse 2 Caps}
-    \newfontfamily{\headersansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
-    }
-
-\DeclareOption{maxcontrastblack} {
-    \colorlet{bgcolor}{blackestblack}
-    \colorlet{fgcolor}{whitestwhite}
-    \colorlet{bluelinkcolor}{GitHubDBlue}
-    \setmainfont{Concourse 2}
-    \setsansfont{Concourse 2}
-    \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
-    \newfontfamily{\sancs}{Concourse 2 Caps}
-    \newfontfamily{\headersansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps]
-    }
+% French Spacing - single spacing between sentences
+\frenchspacing
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
 \ProcessOptions\relax
 
 \setbeamerfont{title}{series=\sffamily, size=\Large}
-\setbeamerfont{subtitle}{series=\headersansc, size=\large}
-\setbeamerfont{frametitle}{series=\headersansc, size=\Large}
-\setbeamerfont{section title}{series=\headersansc, size=\LARGE}
+\setbeamerfont{subtitle}{series=\sansc, size=\large}
+\setbeamerfont{author}{series=\sffamily, size=\normalsize}
+\setbeamerfont{date}{series=\sffamily, size=\normalsize}
+\setbeamerfont{institution}{series=\sffamily, size=\normalsize}
+\setbeamerfont{frametitle}{series=\sansc, size=\large}
+\setbeamerfont{section title}{series=\sansc, size=\Large}
 
 % Dark mode
 \setbeamercolor{normal text}{bg=bgcolor, fg=fgcolor}
 \setbeamercolor{frametitle}{bg=bgcolor, fg=fgcolor}
 
-% Line spacing
-\linespread{1.2}
-
-% Strong widow and orphan control
-
-\clubpenalty10000
-\widowpenalty10000
-
-% French Spacing
-
-\frenchspacing
-
 
 % Link color setup
 \hypersetup{
-    colorlinks,breaklinks,
-                linkcolor=fgcolor,
-                urlcolor=bluelinkcolor,
-                citecolor=fgcolor,
-                filecolor=fgcolor
+            colorlinks,
+            breaklinks,
+            linkcolor=fgcolor,
+            urlcolor=bluelinkcolor,
+            citecolor=fgcolor,
+            filecolor=fgcolor
     }
 \renewcommand*{\UrlFont}{\ttfamily}
 
-%Bold and alert Text
-\newcommand\alertb[1]{\textcolor{mLightBrown}{\textbf{#1}}}
-\newcommand\tealalert[1]{\textcolor{TolTeal}{#1}}
-\newcommand\redalert[1]{\textcolor{TolWine}{#1}}
-
-%PGF grid style
+% PGF grid style
 \pgfplotsset{grid style={dashed,fgcolor}}
+
 %=====================================================================
 %=========================== bibliography ============================
-% Citation stuff here
-\RequirePackage[backend=biber,
-                style=my-style,
-                natbib,
-                maxcitenames=1,
-                maxbibnames=99]{biblatex}
-%\renewcommand*{\citesetup}{\tiny}
-%\renewcommand*{\bibfont}{\scriptsize}
+
+% Bibliography settings
+\if@biblatex
+    \RequirePackage[backend=biber,
+                    style=my-style,
+                    natbib,
+                    maxcitenames=1,
+                    maxbibnames=999]{biblatex}
+\fi
+
+\renewcommand*{\citesetup}{\scriptsize}
 \setbeamertemplate{bibliography item}{}
 
 
-%=====================================================================
-%=========================== useful macros ===========================
+%===============================================================================
+%=================================== footnotes =================================
+
+\setbeamertemplate{footline}{\vspace{6.7pt}}
+\setbeamertemplate{logo}{
+    \usebeamercolor[fg]{footline}
+    \usebeamerfont{page number in head/foot}\vspace{-7pt}
+    \usebeamertemplate*{frame numbering}\hspace{5pt}
+}
+
+\renewcommand\footnotemargin{\parindent}
+
+\renewcommand{\@makefntext}[1]{%
+  \noindent \hbox to \z@{\hss{\textsuperscript{\@thefnmark}} \hfil}#1
+}
 
 % Add footnote without a superscript
 \newcommand\blfootnote[1]{%
@@ -211,6 +210,15 @@
   \addtocounter{footnote}{-1}%
   \endgroup
 }
+%===============================================================================
+%==================================== lists ====================================
+
+% \RequirePackage{enumitem}
+\setbeamerfont{enumerate item}{family = \nfwc}
+
+
+%===============================================================================
+%==================================== linguex ==================================
 
 % Linguex stuff
 \RequirePackage{linguex} % define here to avoid a clash
@@ -241,8 +249,8 @@
 \ex.}
 
 % Change the numbering font for linguex examples
-\renewcommand{\ExLBr}{\nfwc}
-\renewcommand{\ExRBr}{\nfwc}
+\renewcommand{\ExLBr}{\nfws}
+\renewcommand{\ExRBr}{\nfws}
 
 %=====================================================================
 %============================= metadata ==============================
@@ -257,3 +265,10 @@
 \hypersetup{pdfauthor=\@pdfauthor,
             pdftitle=\@pdftitle,
             pdfkeywords=\@pdfkeywords}
+
+%===============================================================================
+%=================================== standout ==================================
+
+
+\setbeamerfont{standout}{size=\Large, series=\upshape}
+

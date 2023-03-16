@@ -22,25 +22,53 @@
 %   footnotes
 %   other environments
 
-%=====================================================================
-%======================== option declarations ========================
+%===============================================================================
+%============================== option declarations ============================
+
+% biblatex option
+\newif\if@biblatex
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+
+% define biblatex option
+\DeclareOption{biblatex}{\@biblatextrue}
 
 \ProcessOptions\relax
 \LoadClass[11pt,oneside]{article}
 
-%=====================================================================
-%========================== page dimensions ==========================
+%===============================================================================
+%=================================== page setup ================================
 
 \RequirePackage{geometry}
 % Set textwidth to 2.5 times length of alphabet approx. 77 characters
 \newlength{\alphabet}
 \settowidth{\alphabet}{\normalfont abcdefghijklmnopqrstuvwxyz}
-\geometry{top=1.5in, bottom=1.25in, textwidth=2.5\alphabet}
+% Set text to lower than it 
+\geometry{top=1.25in, bottom=1.5in, textwidth=2.5\alphabet}
 
-%=====================================================================
-%============================= typography ============================
+%===============================================================================
+%============================== required packages ==============================
+
+% For quotes
+\RequirePackage{csquotes}
+
+% Loading figures
+\RequirePackage{graphicx}
+
+% Align tables and figures
+\RequirePackage{float}
+
+% Pretty tables
+\RequirePackage{booktabs}
+
+% Removes indentation at beginning of paragraphs
+\RequirePackage{parskip}
+
+% microtype handles punctuation at the right margin.
+\RequirePackage[final,protrusion={true,compatibility}, expansion=true]{microtype}
+
+%===============================================================================
+%================================== typography =================================
 
 % Left alignment
 \RequirePackage[document]{ragged2e}
@@ -77,40 +105,24 @@
 \frenchspacing
 
 %=====================================================================
-%========================= required packages =========================
-
-% For quotes
-\RequirePackage{csquotes}
-
-% Loading figures
-\RequirePackage{graphicx}
-
-% Align tables and figures
-\RequirePackage{float}
-
-% Pretty tables
-\RequirePackage{booktabs}
-
-% Removes indentation at beginning of paragraphs
-\RequirePackage{parskip}
-
-% microtype handles punctuation at the right margin.
-\RequirePackage[final,protrusion={true,compatibility}, expansion=true]{microtype}
-
-%=====================================================================
 %=================== Bibliography, color & links =====================
 
 % Handles line breaks within urls
 \RequirePackage[hyphens]{url}
 \def\UrlFont{\tt}
+% DOI command
+\newcommand{\doi}[1]{\url{https://doi.org/#1}}
 
 % Bibliography settings
-\RequirePackage[backend=biber,
-                style=my-style,
-                natbib,
-                maxcitenames=1,
-                maxbibnames=999]{biblatex}
+\if@biblatex
+    \RequirePackage[backend=biber,
+                    style=my-style,
+                    natbib,
+                    maxcitenames=1,
+                    maxbibnames=999]{biblatex}
+\fi
 
+% color
 \RequirePackage[table]{xcolor}
 
 % Colors for links
@@ -132,8 +144,6 @@
     pdfstartview=FitH
 }
 
-\newcommand{\doi}[1]{\url{https://doi.org/#1}}
-
 %=====================================================================
 %============================= metadata ==============================
 
@@ -151,8 +161,8 @@
 %=====================================================================
 %============================== title ================================
 
-\renewcommand*{\title}[2][]{\gdef\@shorttitle{#1}\gdef\@title{#2}}
-\renewcommand*{\author}[2][]{\gdef\@shortauthor{#1}\gdef\@author{#2}}
+\renewcommand*{\title}[2][]{\gdef\@alttitle{#1}\gdef\@title{#2}}
+\renewcommand*{\author}[1]{\gdef\@author{#1}}
 
 \def\@maketitle{%
    \vbox{
@@ -161,9 +171,10 @@
         \raggedright
         {\LARGE\bfseries\@title}
         \vskip\baselineskip
-        \ifdefempty{\@shortauthor}{\@author}{\@author, \@shortauthor}\@@par
-        \@shorttitle\@@par
+        \@author\@@par
+        \@alttitle\@@par
         \@date
+        \vskip\baselineskip
    }
 }
 
@@ -171,10 +182,10 @@
 %============================ sectioning =============================
 
 \RequirePackage[compact]{titlesec}
+
 \titleformat{\section}{\Large\bfseries\liningfont}{\thesection}{1em}{}
 \titleformat{\subsection}{\large\bfseries\liningfont}{\thesubsection}{.8em}{}
 \titleformat{\subsubsection}{\normalsize\bfseries\liningfont}{\thesubsubsection}{.6em}{}{\itshape}
-
 \titleformat{\paragraph}[runin]{\bfseries}{\liningfont\theparagraph}{0.4em}{\liningfont}
 
 \titlespacing*{\section}{0pt}{2\baselineskip}{1\baselineskip}
@@ -194,23 +205,11 @@
 %% Modify caption labels
 \RequirePackage{caption}
 \DeclareCaptionLabelFormat{lc}{\rmsc{#1}~{#2}}
-\captionsetup{font=small, format=plain, labelformat=lc}
-\captionsetup[subfigure]{labelsep=colon, labelfont=sc, labelformat=simple}
+\captionsetup{font=small, format=plain, labelformat=lc, labelsep=quad}
+\captionsetup[subfigure]{font=small, format=plain, labelformat=lc, labelsep=quad}
 
 %=====================================================================
 %=========================== useful macros ===========================
-
-\def\co{\colon\thinspace}
-
-\DeclareRobustCommand\dash{%
-  \unskip\nobreak\thinspace\textemdash\thinspace\ignorespaces}
-\pdfstringdefDisableCommands{\renewcommand{\dash}{ - }}
-
-% based on \url defined in hyperref.sty
-\DeclareRobustCommand*{\http}{\hyper@normalise\http@}
-\def\http@#1{\hyper@linkurl{\Hurl{#1}}{http://#1}}
-
-\newcommand{\email}[1]{\href{mailto:#1}{\ttfamily #1}}
 
 \newcommand\blfootnote[1]{%
   \begingroup
@@ -218,8 +217,6 @@
   \addtocounter{footnote}{-1}%
   \endgroup
 }
-
-\providecommand{\sv}[1]{\ensuremath{\llbracket{#1}\rrbracket}}
 
 %===============================================================================
 %================================= list settings ===============================
@@ -236,3 +233,12 @@
 \RequirePackage{linguex}%
 \renewcommand{\firstrefdash}{}%
 \AtBeginDocument{\settowidth{\Exlabelwidth}{(110)}}
+
+%===============================================================================
+%==================================== TOC ======================================
+
+% Remove skip at beginning of TOC header since title already has baselineskip
+\renewcommand\tableofcontents{
+  \textbf{\Large\contentsname}\par
+  \@starttoc{toc}%
+}
