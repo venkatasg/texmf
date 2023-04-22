@@ -168,7 +168,7 @@
 %================================== recipient ==================================
 
 \RequirePackage{xcolor}
-\definecolor{color1}{HTML}{D73A49} % github red
+\definecolor{color1}{HTML}{D83A49} % my red
 \RequirePackage[absolute]{textpos}
 
 \newcommand*\senderbox{

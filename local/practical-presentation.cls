@@ -26,7 +26,6 @@
 \RequirePackage{xspace}
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
-\RequirePackage{url}
 \RequirePackage{csquotes}
 \RequirePackage{caption}
 \RequirePackage{pgfplots}
@@ -74,8 +73,8 @@
 % venkatasg.me colors
 \definecolor{MyLBlue}{HTML}{79B8FF}
 \definecolor{MyDBlue}{HTML}{0366D6}
-\definecolor{MyDRed}{HTML}{D83A49}
-\definecolor{MyLRed}{HTML}{F94354}
+\definecolor{MokaDark}{HTML}{A52A2A}
+\definecolor{MokaLight}{HTML}{F94354}
 
 
 % Set width of progress bar and separator
@@ -102,11 +101,12 @@
     \colorlet{fgcolor}{darkgreyfg}
     \colorlet{bgcolor}{palegreybg}
     \colorlet{bluelinkcolor}{MyDBlue}
-    \setbeamercolor{alerted text}{fg=MyDRed}
-    \setbeamercolor{progress bar}{fg=MyDRed}
+    \setbeamercolor{alerted text}{fg=MokaDark}
+    \setbeamercolor{progress bar}{fg=MokaDark}
+    \AtBeginEnvironment{frame}{\ifbeamer@plainframe\setbeamercolor{alerted text}{fg=MokaLight}\fi}
     \setmainfont{Concourse 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \setsansfont{Concourse 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
-    \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps, Numbers={Uppercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \newfontfamily{\sancs}{Concourse 3 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
     }
 
@@ -114,8 +114,9 @@
     \colorlet{fgcolor}{palegreyfg}
     \colorlet{bgcolor}{darkgreybg}
     \colorlet{bluelinkcolor}{MyLBlue}
-    \setbeamercolor{alerted text}{fg=MyLRed}
-    \setbeamercolor{progress bar}{fg=MyLRed}
+    \setbeamercolor{alerted text}{fg=MokaLight}
+    \setbeamercolor{progress bar}{fg=MokaLight}
+    \AtBeginEnvironment{frame}{\ifbeamer@plainframe\setbeamercolor{alerted text}{fg=MokaDark}\fi}
     \setmainfont{Concourse 2}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \setsansfont{Concourse 2}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps, Numbers={Uppercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
@@ -144,11 +145,11 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
 \ProcessOptions\relax
 
-\setbeamerfont{title}{series=\sffamily, size=\Large}
+\setbeamerfont{title}{series=\sffamily, size=\LARGE}
 \setbeamerfont{subtitle}{series=\sansc, size=\large}
 \setbeamerfont{author}{series=\sffamily, size=\normalsize}
 \setbeamerfont{date}{series=\sffamily, size=\normalsize}
-\setbeamerfont{institution}{series=\sffamily, size=\normalsize}
+\setbeamerfont{institute}{series=\sffamily, size=\normalsize}
 \setbeamerfont{frametitle}{series=\sansc, size=\large}
 \setbeamerfont{section title}{series=\sansc, size=\Large}
 
@@ -156,36 +157,8 @@
 \setbeamercolor{normal text}{bg=bgcolor, fg=fgcolor}
 \setbeamercolor{frametitle}{bg=bgcolor, fg=fgcolor}
 
-
-% Link color setup
-\hypersetup{
-            colorlinks,
-            breaklinks,
-            linkcolor=fgcolor,
-            urlcolor=bluelinkcolor,
-            citecolor=fgcolor,
-            filecolor=fgcolor
-    }
-\renewcommand*{\UrlFont}{\ttfamily}
-
 % PGF grid style
 \pgfplotsset{grid style={dashed,fgcolor}}
-
-%=====================================================================
-%=========================== bibliography ============================
-
-% Bibliography settings
-\if@biblatex
-    \RequirePackage[backend=biber,
-                    style=my-style,
-                    natbib,
-                    maxcitenames=1,
-                    maxbibnames=999]{biblatex}
-\fi
-
-\renewcommand*{\citesetup}{\scriptsize}
-\setbeamertemplate{bibliography item}{}
-
 
 %===============================================================================
 %=================================== footnotes =================================
@@ -214,12 +187,13 @@
 %==================================== lists ====================================
 
 % \RequirePackage{enumitem}
-\setbeamerfont{enumerate item}{family = \nfwc}
+% \setbeamerfont{enumerate item}{family = \nfwc}
 
 
 %===============================================================================
 %==================================== linguex ==================================
 
+\RequirePackage{etoolbox}
 % Linguex stuff
 \RequirePackage{linguex} % define here to avoid a clash
 \renewcommand{\eachwordone}{\textsf}
@@ -249,11 +223,17 @@
 \ex.}
 
 % Change the numbering font for linguex examples
-\renewcommand{\ExLBr}{\nfws}
-\renewcommand{\ExRBr}{\nfws}
+\renewcommand{\ExLBr}{\nfwc}
+\renewcommand{\ExRBr}{\nfwc}
 
-%=====================================================================
-%============================= metadata ==============================
+\renewcommand{\theExLBr}{\nfwc}
+\renewcommand{\theExRBr}{\nfwc}
+
+% Spacing between sub examples
+\patchcmd{\a}{\itemsep\z@}{\itemsep.66\baselineskip}{}{}
+
+%===============================================================================
+%=============================== metadata ======================================
 
 \def\@pdfauthor{\relax}
 \newcommand{\pdfauthor}[1]{\gdef\@pdfauthor{#1}}
@@ -269,6 +249,42 @@
 %===============================================================================
 %=================================== standout ==================================
 
-
 \setbeamerfont{standout}{size=\Large, series=\upshape}
 
+
+%=====================================================================
+%=========================== bibliography ============================
+
+% Hyperref setup
+\RequirePackage{hyperref}
+\hypersetup{
+            colorlinks,
+            breaklinks,
+            linkcolor=fgcolor,
+            urlcolor=bluelinkcolor,
+            citecolor=fgcolor,
+            filecolor=fgcolor
+    }
+
+\def\UrlFont{\tt}
+
+% Bibliography settings
+\if@biblatex
+    \RequirePackage[backend=biber,
+                    style=practical,
+                    natbib,
+                    maxcitenames=1,
+                    maxbibnames=999]{biblatex}
+\fi
+
+% Remove the ugly picture before each bib entry
+\setbeamertemplate{bibliography item}{}
+
+% Spacing between bib entries
+\setlength\bibitemsep{0.5\baselineskip}
+
+% Set size of citation text
+\renewcommand*{\citesetup}{\scriptsize}
+
+% Set size of bib text
+\renewcommand*{\bibfont}{\tiny}

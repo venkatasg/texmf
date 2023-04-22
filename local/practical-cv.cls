@@ -49,7 +49,7 @@
 
 % Page margins
 \RequirePackage{geometry}
-\geometry{top=1.4in, bottom=1.4in, left=1.25in, right=1.25in}
+\geometry{top=1.25in, bottom=1.5in, left=1.25in, right=1.25in}
 
 %===============================================================================
 %==================================== base =====================================
@@ -201,8 +201,8 @@
 
 \RequirePackage{xcolor}
 \definecolor{color0}{HTML}{000000} % black color
-\definecolor{color1}{HTML}{D73A49} % github red
-\definecolor{color2}{HTML}{0366D6} % wikipedia blue
+\definecolor{color1}{HTML}{D83A49} % my red
+\definecolor{color2}{HTML}{0366D6} % my blue
 
 %===============================================================================
 %================================ new commands =================================

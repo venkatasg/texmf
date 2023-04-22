@@ -61,8 +61,8 @@
 % Pretty tables
 \RequirePackage{booktabs}
 
-% Removes indentation at beginning of paragraphs
-\RequirePackage{parskip}
+% Removes indentation at beginning of paragraphs. Space between paragraphs is 80% of font size, and at least 50% point size at end of paragraph
+\RequirePackage[skip=0.8em, parfill=0.5em]{parskip}
 
 % microtype handles punctuation at the right margin.
 \RequirePackage[final,protrusion={true,compatibility}, expansion=true]{microtype}
@@ -91,11 +91,12 @@
 
 % Oldstyle tabular numbers inside tabular environment
 \AtBeginEnvironment{tabular}{\addfontfeatures{Numbers={Uppercase, Monospaced}}\small}
+\AtBeginEnvironment{tikzpicture}{\addfontfeatures{Numbers={Uppercase, Monospaced}}\small}
 \renewcommand{\theequation}{ {\addfontfeatures{Numbers={Uppercase, Monospaced}}\small\arabic{equation}}}
 
-% Set linespacing to 1.1 times the point size
+% Set linespacing to 1.2 times the point size
 \RequirePackage{setspace}
-\setstretch{1.1}
+\setstretch{1.2}
 
 % Strong widow and orphan control - avoid any widows and orphans
 \clubpenalty10000
@@ -104,26 +105,43 @@
 % French Spacing - single spacing between sentences
 \frenchspacing
 
-%=====================================================================
-%=================== Bibliography, color & links =====================
+%===============================================================================
+%============================= Bibliography ====================================
 
 % Handles line breaks within urls
 \RequirePackage[hyphens]{url}
 \def\UrlFont{\tt}
-% DOI command
-\newcommand{\doi}[1]{\url{https://doi.org/#1}}
 
 % Bibliography settings
 \if@biblatex
     \RequirePackage[backend=biber,
-                    style=my-style,
+                    style=practical,
                     natbib,
                     maxcitenames=1,
                     maxbibnames=999]{biblatex}
 \fi
 
+\setlength\bibitemsep{0.5\baselineskip}
+
+%===============================================================================
+%=========================== Color & links =====================================
 % color
 \RequirePackage[table]{xcolor}
+
+% Tol colors
+\definecolor{TolIndigo}{HTML}{332288}
+\definecolor{TolCyan}{HTML}{88CCEE}
+\definecolor{TolTeal}{HTML}{44AA99}
+\definecolor{TolGreen}{HTML}{117733}
+\definecolor{TolOlive}{HTML}{999933}
+\definecolor{TolSand}{HTML}{DDCC77}
+\definecolor{TolRose}{HTML}{CC6677}
+\definecolor{TolWine}{HTML}{882255}
+\definecolor{TolPurple}{HTML}{AA4499}
+\definecolor{TolPaleGrey}{HTML}{DDDDDD}
+
+% Alert color
+\definecolor{MokaRed}{HTML}{A52A2A}
 
 % Colors for links
 \definecolor{bluelinkcolor}{HTML}{0366D6}
@@ -141,7 +159,8 @@
     plainpages=false,
     pdfpagelabels,
     bookmarks=false,
-    pdfstartview=FitH
+    pdfstartview=FitH,
+    backref
 }
 
 %=====================================================================
@@ -192,15 +211,15 @@
 \titlespacing*{\subsection}{0pt}{1\baselineskip}{1\baselineskip}
 \titlespacing*{\subsubsection}{0pt}{0.8\baselineskip}{0.6\baselineskip}
 
-%=====================================================================
-%============================ footnotes ==============================
+%===============================================================================
+%================================= footnotes ===================================
 
 \renewcommand{\@makefntext}[1]{%
   \noindent \hbox to \z@{\hss{\textsuperscript{\@thefnmark}} \hfil}#1
 }
 
-%=====================================================================
-%============================= Captions ==============================
+%===============================================================================
+%=================================== Captions ==================================
 
 %% Modify caption labels
 \RequirePackage{caption}
@@ -208,8 +227,8 @@
 \captionsetup{font=small, format=plain, labelformat=lc, labelsep=quad}
 \captionsetup[subfigure]{font=small, format=plain, labelformat=lc, labelsep=quad}
 
-%=====================================================================
-%=========================== useful macros ===========================
+%===============================================================================
+%=================================== useful macros =============================
 
 \newcommand\blfootnote[1]{%
   \begingroup
@@ -218,21 +237,38 @@
   \endgroup
 }
 
+\newcommand\alert[1]{\textcolor{MokaRed}{#1}}
+
 %===============================================================================
 %================================= list settings ===============================
 
-%% Modify list
+%% Modify list spacing
 \RequirePackage{enumitem}
 \setlist{noitemsep}
 \setlist{nosep}
+\setlist{itemsep=0.25\baselineskip,topsep=0.25\baselineskip}
+
 \setlist[1]{labelindent=\parindent} % < Usually a good idea
 %% Have to remove the bold and indent labels at the edge, text will still be
 %% aligned at \parindent
-\setlist[description]{font=\normalfont\rmsc, labelindent=0pt}
+\setlist[description]{font=\normalfont\rmsc\bfseries, labelindent=0pt}
 
 \RequirePackage{linguex}%
-\renewcommand{\firstrefdash}{}%
-\AtBeginDocument{\settowidth{\Exlabelwidth}{(110)}}
+\renewcommand{\firstrefdash}{}
+
+% Spacing between subexamples
+\newlength{\SubItemSkip}
+\setlength{\SubItemSkip}{.5\baselineskip}
+\patchcmd{\a}{\itemsep\z@}{\itemsep\SubItemSkip}{}{}
+
+\AtBeginDocument{
+\setlength{\Exlabelsep}{1.5em}
+\setlength{\Extopsep}{.25\baselineskip}
+\setlength{\SubSubExleftmargin}{1.5em}
+\setlength{\SubExleftmargin}{1.5em}
+\setlength{\Exindent}{0pt}
+\setlength{\Exlabelwidth}{1em}
+}
 
 %===============================================================================
 %==================================== TOC ======================================
