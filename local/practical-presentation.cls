@@ -30,6 +30,7 @@
 \RequirePackage{caption}
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=newest}
+\RequirePackage{appendixnumberbeamer}
 
 %===============================================================================
 %============================= metropolis theme ================================
@@ -70,12 +71,9 @@
 \definecolor{TolPaleGrey}{HTML}{DDDDDD}
 
 
-% venkatasg.me colors
-\definecolor{MyLBlue}{HTML}{79B8FF}
-\definecolor{MyDBlue}{HTML}{0366D6}
-\definecolor{MokaDark}{HTML}{A52A2A}
-\definecolor{MokaLight}{HTML}{F94354}
-
+% My colors
+\definecolor{KaroBlue}{HTML}{0366D6}
+\definecolor{MokaRed}{HTML}{D73A49}
 
 % Set width of progress bar and separator
 \setlength{\metropolis@titleseparator@linewidth}{1pt}
@@ -95,15 +93,21 @@
 \RequirePackage{amsmath}
 \RequirePackage{unicode-math}
 
-%Now choose between dark and light themes, dark themes need a very thin font for contrast between regular text and bold font, but not so for the light theme
+% Set theme colors
+\setbeamercolor{alerted text}{fg=MokaRed}
+\setbeamercolor{progress bar}{fg=MokaRed}
+\colorlet{bluelinkcolor}{KaroBlue}
+\AtBeginEnvironment{frame}{
+    \ifbeamer@plainframe
+        \setbeamercolor{alerted text}{fg=MokaRed}
+        \colorlet{bluelinkcolor}{KaroBlue}
+    \fi
+}
 
+%Now choose between dark and light themes, dark themes need a very thin font for contrast between regular text and bold font, but not so for the light theme
 \DeclareOption{light} {
     \colorlet{fgcolor}{darkgreyfg}
     \colorlet{bgcolor}{palegreybg}
-    \colorlet{bluelinkcolor}{MyDBlue}
-    \setbeamercolor{alerted text}{fg=MokaDark}
-    \setbeamercolor{progress bar}{fg=MokaDark}
-    \AtBeginEnvironment{frame}{\ifbeamer@plainframe\setbeamercolor{alerted text}{fg=MokaLight}\fi}
     \setmainfont{Concourse 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \setsansfont{Concourse 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
@@ -113,10 +117,6 @@
 \DeclareOption{dark} {
     \colorlet{fgcolor}{palegreyfg}
     \colorlet{bgcolor}{darkgreybg}
-    \colorlet{bluelinkcolor}{MyLBlue}
-    \setbeamercolor{alerted text}{fg=MokaLight}
-    \setbeamercolor{progress bar}{fg=MokaLight}
-    \AtBeginEnvironment{frame}{\ifbeamer@plainframe\setbeamercolor{alerted text}{fg=MokaDark}\fi}
     \setmainfont{Concourse 2}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \setsansfont{Concourse 2}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps, Numbers={Uppercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
@@ -125,7 +125,7 @@
 
 % IPA, monospace, and math fonts
 \newfontfamily{\ipa}{Charis SIL}
-\setmonofont[Scale=MatchLowercase]{Triplicate A Code}
+\setmonofont[Scale=1]{Triplicate A Code}
 \setmathfont[Path=/Users/venkat/Library/Fonts/, Extension=.otf,Scale=MatchLowercase,Ligatures=TeX, BoldFont=XCharter-Bold,
     ItalicFont=XCharter-Italic, Numbers={Uppercase,Monospaced}]{XCharter-Roman}
 
@@ -287,4 +287,7 @@
 \renewcommand*{\citesetup}{\scriptsize}
 
 % Set size of bib text
-\renewcommand*{\bibfont}{\tiny}
+\renewcommand*{\bibfont}{\small}
+
+% Reset bibliography entry title to non-bold
+\setbeamerfont{bibliography entry title}{size=\normalsize, series=\upshape}
