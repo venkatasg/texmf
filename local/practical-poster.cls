@@ -17,7 +17,7 @@
 \RequirePackage{xcolor}
 \RequirePackage{graphicx}
 \RequirePackage{csquotes}
-\RequirePackage[font=normalsize,labelfont=bf]{caption}
+\RequirePackage[font=normalsize,labelformat=empty]{caption}
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=newest}
 \RequirePackage{setspace}

@@ -87,7 +87,7 @@
   \hypersetup{
     breaklinks,
     colorlinks    = true,
-    allcolors     = color2,
+    allcolors     = KaroBlue,
     baseurl       = https://,
     pdfborder     = 0 0 0,
     pdfpagemode   = \pdfpagemode,
@@ -200,9 +200,8 @@
 %=================================== colors ====================================
 
 \RequirePackage{xcolor}
-\definecolor{color0}{HTML}{000000} % black color
-\definecolor{color1}{HTML}{D83A49} % my red
-\definecolor{color2}{HTML}{0366D6} % my blue
+\definecolor{MokaRed}{HTML}{D73A49} % my red
+\definecolor{KaroBlue}{HTML}{0366D6} % my blue
 
 %===============================================================================
 %================================ new commands =================================
@@ -272,7 +271,7 @@
 \renewcommand*{\socialsfont}{\small\sffamily}
 
 % styles
-\renewcommand*{\namestyle}[1]{{\namefont\textcolor{color1}{#1}}}
+\renewcommand*{\namestyle}[1]{{\namefont\textcolor{MokaRed}{#1}}}
 \renewcommand*{\titlestyle}[1]{{\titlefont{#1}}}
 \renewcommand*{\socialsstyle}[1]{{\socialsfont{#1}}}
 
@@ -334,7 +333,7 @@
 
 % styles
 \renewcommand*{\sectionstyle}[1]{{
-  \sectionfont\textcolor{color1}{#1}
+  \sectionfont\textcolor{MokaRed}{#1}
 }}
 
 \renewcommand*{\subsectionstyle}[1]{{
@@ -373,7 +372,7 @@
 }
 
 % Line before section title
-\newcommand*{\sectionrule}{\par\nobreak\leavevmode{\color{color1}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
+\newcommand*{\sectionrule}{\par\nobreak\leavevmode{\color{MokaRed}\leaders\hbox{\rule{1pt}{0.4pt}}\hfill\kern0pt}}
 
 \renewcommand*{\cvitem}[3][.25em]{
   \ifthenelse{\equal{#2}{}}{
@@ -406,7 +405,7 @@
 %===============================================================================
 %=============================== bibliography ==================================
 
-\RequirePackage[style=my-style,
+\RequirePackage[style=practical,
                 backend=biber,
                 sorting=none,
                 maxbibnames=6,

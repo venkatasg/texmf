@@ -7,7 +7,7 @@
 %%%% https://twitter.com/mikemorrison
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{betterposter}[2019/04/04 Better Poster latex template v1.0]
+\ProvidesClass{practical-landscape-poster}[2019/04/04 Better Poster latex template v1.0]
 
 %% "article" as the base class
 \LoadClass{article}
@@ -25,10 +25,20 @@
 %% Remove default margins
 \geometry{margin=0in}
 
+%% AMS packages
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{amssymb}
+
+\RequirePackage{pgfplots}
+
 %% Font
-\RequirePackage{cmbright}
-\RequirePackage[default]{lato}
-\RequirePackage[T1]{fontenc}
+\RequirePackage{unicode-math}
+\setmainfont{Heliotrope 4}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+\setsansfont{Heliotrope 4}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+\newfontfamily{\sansc}{Heliotrope 4 Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+\newfontfamily{\sancs}{Heliotrope 4 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
+\setmonofont[Scale=MatchLowercase]{Triplicate A Code}
 
 %% Small separation on enumerate and itemize
 \RequirePackage{enumitem}
@@ -37,27 +47,48 @@
 \setitemize{noitemsep}
 \setlength{\parindent}{0pt}
 
-%% Colours
+%===============================================================================
+%============================== colors =========================================
 \RequirePackage{xcolor}
-\definecolor{imperialblue}{RGB}{0,62,116}
-\definecolor{empirical}{RGB}{0,77,64}
-\definecolor{theory}{RGB}{26,35,126}
-\definecolor{methods}{RGB}{140,22,22}
-\definecolor{intervention}{RGB}{255,213,79}
+\definecolor{burntorange}{HTML}{bf5700}
+\definecolor{paleorange}{HTML}{fff1e3}
+\definecolor{bluelinkcolor}{HTML}{0366D6}
+
+\definecolor{TolDarkPurple}{HTML}{332288}
+\definecolor{TolDarkBlue}{HTML}{6699CC}
+\definecolor{TolLightBlue}{HTML}{88CCEE}
+\definecolor{TolLightGreen}{HTML}{44AA99}
+\definecolor{TolDarkGreen}{HTML}{117733}
+\definecolor{TolDarkBrown}{HTML}{999933}
+\definecolor{TolLightBrown}{HTML}{DDCC77}
+\definecolor{TolDarkRed}{HTML}{661100}
+\definecolor{TolLightRed}{HTML}{CC6677}
+\definecolor{TolLightPink}{HTML}{AA4466}
+\definecolor{TolDarkPink}{HTML}{882255}
+\definecolor{TolLightPurple}{HTML}{AA4499}
+
+\pgfplotscreateplotcyclelist{mbarplot cycle}{%
+  {draw=TolDarkBlue,    fill=TolDarkBlue!70},
+  {draw=TolLightBrown,  fill=TolLightBrown!70},
+  {draw=TolLightGreen,  fill=TolLightGreen!70},
+  {draw=TolDarkPink,    fill=TolDarkPink!70},
+  {draw=TolDarkPurple,  fill=TolDarkPurple!70},
+  {draw=TolDarkRed,     fill=TolDarkRed!70},
+  {draw=TolDarkBrown,   fill=TolDarkBrown!70},
+  {draw=TolLightRed,    fill=TolLightRed!70},
+  {draw=TolLightPink,   fill=TolLightPink!70},
+  {draw=TolLightPurple, fill=TolLightPurple!70},
+  {draw=TolLightBlue,   fill=TolLightBlue!70},
+  {draw=TolDarkGreen,   fill=TolDarkGreen!70},
+}
 
 \newcommand{\columnbackgroundcolor}{white}
 \newcommand{\columnfontcolor}{black}
-\newcommand{\maincolumnbackgroundcolor}{imperialblue}
+\newcommand{\maincolumnbackgroundcolor}{burntorange}
 \newcommand{\maincolumnfontcolor}{white}
 
 %% Graphics
 \RequirePackage{graphicx}
-
-%% AMS packages
-\RequirePackage{amsmath}
-\RequirePackage{amsfonts}
-\RequirePackage{amssymb}
-
 
 
 %%%% SIZE COMMANDS
@@ -111,7 +142,21 @@
 \setlength{\maincolumnmarginvertical}{0.07\paperheight}
 \setlength{\maincolumnmarginhorizontal}{0.07\paperheight}
 
+%===============================================================================
+%============================== hypersetup =====================================
 
+% Hyperref setup
+\RequirePackage{hyperref}
+\hypersetup{
+            colorlinks,
+            breaklinks,
+            linkcolor=black,
+            urlcolor=white,
+            citecolor=black,
+            filecolor=black
+    }
+
+\def\UrlFont{\tt}
 
 %%%% TEMPLATE COMMANDS
 
@@ -166,33 +211,9 @@
 
 \vspace{1em}
 }
-\vfill	
-\begin{minipage}[t][0.25\textheight][b]{\textwidth}
+\vfill
+\fontsizetitle	
 #2
-\end{minipage}
-}
-
-%% QR code
-\newcommand{\qrcode}[3]{
-\begin{minipage}[c]{0.30\textwidth}
-\includegraphics[width=\textwidth]{#1}
-\end{minipage}%
-\begin{minipage}[c]{0.12\textwidth}
-\hfill
-\includegraphics[height=0.85\textwidth]{#2}
-\end{minipage}%
-\begin{minipage}[c]{0.50\textwidth}
-#3
-\end{minipage}%
-}
-
-%% Compact QR code
-\newcommand{\compactqrcode}[2]{
-\begin{minipage}[t]{0.3\textwidth}
-\includegraphics[width=\textwidth]{#1}
-
-#2
-\end{minipage}%
 }
 
 %% Section command

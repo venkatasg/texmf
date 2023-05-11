@@ -119,9 +119,8 @@
                     natbib,
                     maxcitenames=1,
                     maxbibnames=999]{biblatex}
+    \setlength\bibitemsep{0.5\baselineskip}
 \fi
-
-\setlength\bibitemsep{0.5\baselineskip}
 
 %===============================================================================
 %=========================== Color & links =====================================
