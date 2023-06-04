@@ -32,18 +32,17 @@
 \RequirePackage{booktabs}
 \RequirePackage{graphicx}
 \RequirePackage{csquotes}
-\RequirePackage[font=normalsize,labelformat=empty]{caption}
+\RequirePackage[font=normalsize,labelfont={sc, Large}]{caption}
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=newest}
 \RequirePackage{setspace}
-\setstretch{1.2}
-% \RequirePackage{parskip}
+\RequirePackage{parskip}
 \RequirePackage{tcolorbox}
 \RequirePackage{titlesec}
 \RequirePackage{linguex}
 \RequirePackage{multicol} 
 \columnsep=0.02\textwidth
-\columnseprule=2pt
+\columnseprule=0pt
 
 %% Font
 \RequirePackage{unicode-math}
@@ -80,21 +79,6 @@
 \definecolor{TolPurple}{HTML}{AA4499}
 \definecolor{TolPaleGrey}{HTML}{DDDDDD}
 
-\pgfplotscreateplotcyclelist{mbarplot cycle}{%
-  {draw=TolDarkBlue,    fill=TolDarkBlue!70},
-  {draw=TolLightBrown,  fill=TolLightBrown!70},
-  {draw=TolLightGreen,  fill=TolLightGreen!70},
-  {draw=TolDarkPink,    fill=TolDarkPink!70},
-  {draw=TolDarkPurple,  fill=TolDarkPurple!70},
-  {draw=TolDarkRed,     fill=TolDarkRed!70},
-  {draw=TolDarkBrown,   fill=TolDarkBrown!70},
-  {draw=TolLightRed,    fill=TolLightRed!70},
-  {draw=TolLightPink,   fill=TolLightPink!70},
-  {draw=TolLightPurple, fill=TolLightPurple!70},
-  {draw=TolLightBlue,   fill=TolLightBlue!70},
-  {draw=TolDarkGreen,   fill=TolDarkGreen!70},
-}
-
 \newcommand{\rowbackgroundcolor}{white}
 \newcommand{\rowfontcolor}{black}
 \newcommand{\mainfindingbackgroundcolor}{burntorange}
@@ -114,8 +98,9 @@
 %%%% SIZING OPTIONS
 
 \newcommand{\fontsizestandard}{\fontsize{32.00}{50.50} \selectfont}
+% \newcommand{\fontsizestandard}{\fontsize{40.00}{55.00} \selectfont}
 \newcommand{\fontsizemain}{\fontsize{100.00}{150.00} \selectfont}
-\newcommand{\fontsizetitle}{\fontsize{80.00}{120.00} \selectfont}
+\newcommand{\fontsizetitle}{\fontsize{90.00}{140.00} \selectfont}
 \newcommand{\fontsizeauthor}{\fontsize{48.00}{68.00} \selectfont}
 \newcommand{\fontsizesection}{\fontsize{48.00}{68.00} \selectfont}
 
@@ -143,11 +128,17 @@
 
 \def\UrlFont{\tt}
 
+
+\DeclareCaptionLabelFormat{sansc-plain}{\fontsizestandard\sansc#1 #2} 
+\DeclareCaptionLabelSeparator{bigcolon}{\fontsizestandard: }
+\captionsetup{labelformat=sansc-plain,labelsep=bigcolon}
+
 %%%% TEMPLATE COMMANDS
 
 %% Section command
-\titleformat{\section}{\raggedright\sc\sansc\fontsizesection\bfseries}{}{0pt}{}
+\titleformat{\section}{\raggedright\sansc\fontsizesection\bfseries}{}{0pt}{}
 \titlespacing{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip}
+\titleformat*{\paragraph}{\raggedright\fontsizestandard\bfseries}
 
 % Institution command
 \def\@affiliation{\relax}
@@ -166,8 +157,9 @@
 \newcommand\makepostertitle{
     \centering
     \begin{minipage}[t]{\textwidth}
-        {\raggedright\fontsizetitle\bfseries\par\@title}
-        \vspace{0.5\baselineskip}
+        \vspace{3\baselineskip}
+        {\noindent\raggedright\fontsizetitle\bfseries\par\@title}
+        \vspace{2\baselineskip}
         {\fontsizeauthor\par\color{darkgrey}\@author}
         \@affiliation
     \end{minipage}
@@ -190,19 +182,19 @@
 
 % Begin \middlebox command
 \newcommand{\middlebox}[1]{
-    \fontsizestandard\noindent\colorbox{\rowbackgroundcolor}{
-        \noindent\hrulefill\par
-        \noindent\makebox[\textwidth][c]{%
+    \colorbox{\rowbackgroundcolor}{
+        \makebox[\textwidth]{
             \begin{minipage}{0.95\textwidth}
-                \vspace{2em}
                 \makepostertitle
                 \vfill{
-                
-                    \fontsizestandard\color{\rowfontcolor}
+                    \setstretch{1.1}
+                    \raggedright
+                    \fontsizestandard
+                    \color{\rowfontcolor}
                     #1
                     
                 }
-                \vspace{2em}
+                \vspace{\baselineskip}
             
             \end{minipage}
         }
@@ -214,22 +206,15 @@
 
 % Begin \bottombox command
 \newcommand{\bottombox}[1]{
-    \vfill
-    \noindent\colorbox{\rowbackgroundcolor}{
+    \begin{minipage}[t][0.8\bottomboxheight]{\pagewidth}
         \centering
-        \begin{minipage}[t][\bottomboxheight]{\pagewidth}
-            \centering
-            \begin{minipage}{0.79\textwidth}    
-                \vfill{
-                    \fontsizesection\color{\rowfontcolor}
-                    #1
-                }
-            \end{minipage}
-            \begin{minipage}{0.2\linewidth}
-                \centering  
-                \includegraphics[width=0.9\textwidth]{\@logo}
-            \end{minipage}
+        \begin{minipage}{0.79\textwidth}    
+            \fontsizesection#1
         \end{minipage}
-    }
+        \begin{minipage}{0.2\linewidth}
+            \centering  
+            \includegraphics[width=0.9\textwidth]{\@logo}
+        \end{minipage}
+    \end{minipage}
 } 
 

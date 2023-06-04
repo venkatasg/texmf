@@ -49,7 +49,7 @@
 
 % Page margins
 \RequirePackage{geometry}
-\geometry{top=1.25in, bottom=1.5in, left=1.25in, right=1.25in}
+\geometry{top=1.1in, bottom=1.5in, left=1.25in, right=1.25in}
 
 %===============================================================================
 %==================================== base =====================================

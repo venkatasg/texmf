@@ -275,19 +275,18 @@
                     natbib,
                     maxcitenames=1,
                     maxbibnames=999]{biblatex}
+    % Remove the ugly picture before each bib entry
+    \setbeamertemplate{bibliography item}{}
+    
+    % Spacing between bib entries
+    \setlength\bibitemsep{0.5\baselineskip}
+    
+    % Set size of citation text
+    \renewcommand*{\citesetup}{\scriptsize}
+    
+    % Set size of bib text
+    \renewcommand*{\bibfont}{\small}
+    
+    % Reset bibliography entry title to non-bold
+    \setbeamerfont{bibliography entry title}{size=\normalsize, series=\upshape}
 \fi
-
-% Remove the ugly picture before each bib entry
-\setbeamertemplate{bibliography item}{}
-
-% Spacing between bib entries
-\setlength\bibitemsep{0.5\baselineskip}
-
-% Set size of citation text
-\renewcommand*{\citesetup}{\scriptsize}
-
-% Set size of bib text
-\renewcommand*{\bibfont}{\small}
-
-% Reset bibliography entry title to non-bold
-\setbeamerfont{bibliography entry title}{size=\normalsize, series=\upshape}
