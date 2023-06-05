@@ -41,7 +41,7 @@
 \RequirePackage{titlesec}
 \RequirePackage{linguex}
 \RequirePackage{multicol} 
-\columnsep=0.02\textwidth
+\columnsep=0.03\textwidth
 \columnseprule=0pt
 
 %% Font
@@ -97,8 +97,7 @@
 
 %%%% SIZING OPTIONS
 
-\newcommand{\fontsizestandard}{\fontsize{32.00}{50.50} \selectfont}
-% \newcommand{\fontsizestandard}{\fontsize{40.00}{55.00} \selectfont}
+\newcommand{\fontsizestandard}{\fontsize{38.00}{48.00} \selectfont}
 \newcommand{\fontsizemain}{\fontsize{100.00}{150.00} \selectfont}
 \newcommand{\fontsizetitle}{\fontsize{90.00}{140.00} \selectfont}
 \newcommand{\fontsizeauthor}{\fontsize{48.00}{68.00} \selectfont}
@@ -199,21 +198,21 @@
             \end{minipage}
         }
     }
-    \hbox{\color{burntorange}\rule{\pagewidth}{0.5em}}
+    \hbox{\color{burntorange}\rule{\pagewidth}{2mm}}
 }
 % End \middlebox command
 
 
 % Begin \bottombox command
 \newcommand{\bottombox}[1]{
-    \begin{minipage}[t][0.8\bottomboxheight]{\pagewidth}
+    \begin{minipage}[t][0.6\bottomboxheight]{\pagewidth}
         \centering
         \begin{minipage}{0.79\textwidth}    
-            \fontsizesection#1
+            \fontsizestandard\quad#1
         \end{minipage}
         \begin{minipage}{0.2\linewidth}
             \centering  
-            \includegraphics[width=0.9\textwidth]{\@logo}
+            \includegraphics[width=0.7\textwidth]{\@logo}
         \end{minipage}
     \end{minipage}
 } 
