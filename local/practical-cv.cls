@@ -49,7 +49,7 @@
 
 % Page margins
 \RequirePackage{geometry}
-\geometry{top=1.1in, bottom=1.5in, left=1.25in, right=1.25in}
+\geometry{top=1in, bottom=1.2in, left=1.25in, right=1.25in}
 
 %===============================================================================
 %==================================== base =====================================
@@ -367,7 +367,7 @@
 \RenewDocumentCommand{\subsection}{sm}{%
   \par\addvspace{0.5\baselineskip}
   \phantomsection{}
-  \strut\subsectionstyle{#2}
+  \subsectionstyle{#2}
   \par\nobreak\addvspace{0.25\baselineskip}\@afterheading
 }
 
