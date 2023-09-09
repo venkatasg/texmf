@@ -94,9 +94,9 @@
 \AtBeginEnvironment{tikzpicture}{\addfontfeatures{Numbers={Uppercase, Monospaced}}\small}
 \renewcommand{\theequation}{ {\addfontfeatures{Numbers={Uppercase, Monospaced}}\small\arabic{equation}}}
 
-% Set linespacing to 1.2 times the point size
+% Set linespacing to 1.1 times the point size, this sets baseline skip to almost exactly 136% which is what Matthew Butterick used in his example
 \RequirePackage{setspace}
-\setstretch{1.2}
+\setstretch{1.1}
 
 % Strong widow and orphan control - avoid any widows and orphans
 \clubpenalty10000
