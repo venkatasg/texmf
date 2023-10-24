@@ -44,7 +44,7 @@
 \newlength{\alphabet}
 \settowidth{\alphabet}{\normalfont abcdefghijklmnopqrstuvwxyz}
 % Set text to lower than it 
-\geometry{top=1.25in, bottom=1.5in, textwidth=2.5\alphabet}
+\geometry{top=1in, bottom=1.25in, textwidth=2.7\alphabet}
 
 %===============================================================================
 %============================== required packages ==============================
@@ -115,10 +115,14 @@
 % Bibliography settings
 \if@biblatex
     \RequirePackage[backend=biber,
-                    style=practical,
+                    style=numeric,
                     natbib,
                     maxcitenames=1,
-                    maxbibnames=999]{biblatex}
+                	maxbibnames=999,
+                	sorting=none,
+                	url=false,
+                	doi=false,
+                	eprint=false]{biblatex}
     \setlength\bibitemsep{0.5\baselineskip}
 \fi
 
@@ -139,12 +143,11 @@
 \definecolor{TolPurple}{HTML}{AA4499}
 \definecolor{TolPaleGrey}{HTML}{DDDDDD}
 
-% Alert color
+% Custom Red
 \definecolor{MokaRed}{HTML}{A52A2A}
 
-% Colors for links
-\definecolor{bluelinkcolor}{HTML}{0366D6}
-\definecolor{graylinkcolor}{HTML}{5A5A5A}
+% Custom Blue
+\definecolor{AmmaBlue}{HTML}{0366D6}
 
 % Hyperref setup
 \RequirePackage{hyperref}
@@ -152,9 +155,9 @@
     colorlinks,
     breaklinks,
     linkcolor=black,
-    urlcolor=bluelinkcolor,
-    citecolor=graylinkcolor,
-    filecolor=graylinkcolor,
+    urlcolor=AmmaBlue,
+    citecolor=AmmaBlue,
+    filecolor=AmmaBlue,
     plainpages=false,
     pdfpagelabels,
     bookmarks=false,
@@ -188,11 +191,11 @@
         \liningfont
         \raggedright
         {\LARGE\bfseries\@title}
-        \vskip\baselineskip
+        \vskip0.5\baselineskip
         \@author\@@par
         \@alttitle\@@par
         \@date
-        \vskip\baselineskip
+        \vskip0.5\baselineskip
    }
 }
 
@@ -206,7 +209,7 @@
 \titleformat{\subsubsection}{\normalsize\bfseries\liningfont}{\thesubsubsection}{.6em}{}{\itshape}
 \titleformat{\paragraph}[runin]{\bfseries}{\liningfont\theparagraph}{0.4em}{\liningfont}
 
-\titlespacing*{\section}{0pt}{2\baselineskip}{1\baselineskip}
+\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
 \titlespacing*{\subsection}{0pt}{1\baselineskip}{1\baselineskip}
 \titlespacing*{\subsubsection}{0pt}{0.8\baselineskip}{0.6\baselineskip}
 
