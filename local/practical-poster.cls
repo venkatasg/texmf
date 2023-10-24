@@ -1,3 +1,4 @@
+% Practical poster template based on
 %%%% Better Poster latex template v1.0 (2019/04/04)
 %%%% GNU General Public License v3.0
 %%%% Rafael Bailo
@@ -7,7 +8,7 @@
 %%%% https://twitter.com/mikemorrison
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{practical-portrait-poster}[2019/04/04 Better Poster latex template v1.0]
+\ProvidesClass{practical-poster}[2019/04/04 Better Poster latex template v1.0]
 
 %% "article" as the base class
 \LoadClass{article}
