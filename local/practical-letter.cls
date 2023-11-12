@@ -161,7 +161,7 @@
 
 \newcommand*\senderbox{
     \begin{textblock*}{47mm}(19mm,15.5mm) %Placed to have same left margin as right, and a little above top margin to account for the spacing above text in this box I can't seem to remove
-        \sansc\color{color1!80}
+        \sansc\color{MokaRed!80}
         {\sancs\bfseries Venkata S\\Govindarajan}\par
         \vspace{\baselineskip}
         {\fromaddress}\par
@@ -177,25 +177,11 @@
 % color
 \RequirePackage[table]{xcolor}
 
-% Tol colors
-\definecolor{TolIndigo}{HTML}{332288}
-\definecolor{TolCyan}{HTML}{88CCEE}
-\definecolor{TolTeal}{HTML}{44AA99}
-\definecolor{TolGreen}{HTML}{117733}
-\definecolor{TolOlive}{HTML}{999933}
-\definecolor{TolSand}{HTML}{DDCC77}
-\definecolor{TolRose}{HTML}{CC6677}
-\definecolor{TolWine}{HTML}{882255}
-\definecolor{TolPurple}{HTML}{AA4499}
-\definecolor{TolPaleGrey}{HTML}{DDDDDD}
-
-% Alert color
-\definecolor{MokaRed}{HTML}{A52A2A}
 % Lighter version of red for sender
-\definecolor{color1}{HTML}{D83A49} % my red
+\definecolor{MokaRed}{HTML}{D83A49} % my red
 
 % Colors for links
-\definecolor{bluelinkcolor}{HTML}{0366D6}
+\definecolor{AmmaBlue}{HTML}{0366D6}
 
 % Hyperref setup
 \RequirePackage{hyperref}
@@ -203,9 +189,9 @@
     colorlinks,
     breaklinks,
     linkcolor=black,
-    urlcolor=bluelinkcolor,
-    citecolor=bluelinkcolor,
-    filecolor=bluelinkcolor,
+    urlcolor=AmmaBlue,
+    citecolor=AmmaBlue,
+    filecolor=AmmaBlue,
     plainpages=true,
     pdfpagelabels,
     bookmarks=false,
