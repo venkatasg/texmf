@@ -77,7 +77,6 @@
 %=================================== commands ==================================
 
 \newcommand*\name[1]{\def\fromname{#1}}
-\newcommand*\signature[1]{\def\fromsig{#1}}
 \newcommand*\address[1]{\def\fromaddress{#1}}
 \newcommand*\location[1]{\def\fromlocation{#1}}
 \newcommand*\phone[1]{\def\phonenum{#1}}
@@ -147,21 +146,12 @@
 % Closing
 \newcommand\closing[1]{
     \vspace{\baselineskip}
-    \ifthenelse{\equal{\fromsig}{}}{
-        \parbox{0.5\textwidth}{
-            \raggedright
-            \ignorespaces #1\\[3\baselineskip]
-            \fromname\strut
-        }
-    }
-    {
-        \parbox{0.5\textwidth}{
-            \raggedright
-            \ignorespaces #1\\[\baselineskip]
-            \hspace*{-2mm}\includegraphics[width=0.35\textwidth]{\fromsig}\\
-            \fromname\strut
-        }
-    }
+	\parbox{0.5\textwidth}{
+		\raggedright
+		\ignorespaces #1\\[\baselineskip]
+		\hspace*{-2mm}\includegraphics[width=0.35\textwidth]{signature.png}\\
+		\fromname\strut
+	}
     \par
 }
 
