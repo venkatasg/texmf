@@ -76,7 +76,6 @@
 %===============================================================================
 %=================================== commands ==================================
 
-\newcommand*\name[1]{\def\fromname{#1}}
 \newcommand*\address[1]{\def\fromaddress{#1}}
 \newcommand*\location[1]{\def\fromlocation{#1}}
 \newcommand*\phone[1]{\def\phonenum{#1}}
@@ -150,7 +149,7 @@
 		\raggedright
 		\ignorespaces #1\\[\baselineskip]
 		\hspace*{-2mm}\includegraphics[width=0.35\textwidth]{signature.png}\\
-		\fromname\strut
+		Venkata S Govindarajan\strut
 	}
     \par
 }
@@ -163,7 +162,7 @@
 \newcommand*\senderbox{
     \begin{textblock*}{47mm}(19mm,15.5mm) %Placed to have same left margin as right, and a little above top margin to account for the spacing above text in this box I can't seem to remove
         \sansc\color{color1!80}
-        {\sancs\bfseries\fromname}\par
+        {\sancs\bfseries Venkata S\\Govindarajan}\par
         \vspace{\baselineskip}
         {\fromaddress}\par
         \vspace{\baselineskip}
