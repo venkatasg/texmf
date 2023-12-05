@@ -105,13 +105,20 @@
 %================================== typography =================================
 
 \RequirePackage{unicode-math}
-\setmainfont{Equity A}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
-\setsansfont{Concourse 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+\setmainfont{Equity A}[
+    Numbers={Lowercase,Proportional}, 
+    Contextuals=Alternate,
+    ]
+\setsansfont{Concourse 3}[
+    Numbers={Lowercase,Proportional}, 
+    Contextuals=Alternate,
+    ]
 
-\newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}]
-\newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}]
-\newfontfamily{\sancs}{Concourse 3 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
-\newfontfamily{\rmcs}{Equity A Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
+\newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps, LetterSpace=5, Numbers={Lowercase,Proportional}]
+\newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps, LetterSpace=5, Numbers={Lowercase,Proportional}]
+\newfontfamily{\sancs}{Concourse 3 Caps}[Letters=Uppercase, LetterSpace=5, Numbers={Uppercase,Proportional}]
+\newfontfamily{\rmcs}{Equity A Caps}[Letters=Uppercase, LetterSpace=5, Numbers={Uppercase,Proportional}]
+
 
 % Oldstyle tabular numbers inside tabular environment
 \AtBeginEnvironment{tabular}{\addfontfeatures{Numbers={Uppercase, Monospaced}}\small}

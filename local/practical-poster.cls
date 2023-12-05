@@ -41,6 +41,7 @@
 \RequirePackage{tcolorbox}
 \RequirePackage{titlesec}
 \RequirePackage{linguex}
+\RequirePackage{ragged2e}
 \RequirePackage{multicol} 
 \columnsep=0.03\textwidth
 \columnseprule=0pt
@@ -94,13 +95,14 @@
 %% Poster lengths
 \newlength{\mainfindingheight}
 \newlength{\bottomboxheight}
+\newlength{\middleboxheight}
 \newlength{\marginvertical}
 
 %%%% SIZING OPTIONS
 
 \newcommand{\fontsizestandard}{\fontsize{38.00}{48.00} \selectfont}
 \newcommand{\fontsizemain}{\fontsize{100.00}{150.00} \selectfont}
-\newcommand{\fontsizetitle}{\fontsize{90.00}{140.00} \selectfont}
+\newcommand{\fontsizetitle}{\fontsize{80.00}{130.00} \selectfont}
 \newcommand{\fontsizeauthor}{\fontsize{48.00}{68.00} \selectfont}
 \newcommand{\fontsizesection}{\fontsize{48.00}{68.00} \selectfont}
 
@@ -110,6 +112,7 @@
 %% Default values for lengths
 \setlength{\mainfindingheight}{0.35\paperheight}
 \setlength{\bottomboxheight}{0.05\paperheight}
+\setlength{\middleboxheight}{0.57\paperheight}
 \setlength{\marginvertical}{0.07\paperwidth}
 
 %===============================================================================
@@ -170,7 +173,7 @@
 %% Main row command
 \newcommand{\mainfinding}[1]{
     \noindent\colorbox{\mainfindingbackgroundcolor}{
-        \begin{minipage}[c][\mainfindingheight][c]{\textwidth}
+        \begin{minipage}[c][\mainfindingheight]{\textwidth}
             \centering
             \fontsizemain\color{\mainfindingfontcolor} 
             \begin{tabular}{p{0.95\textwidth}}
@@ -182,31 +185,25 @@
 
 % Begin \middlebox command
 \newcommand{\middlebox}[1]{
-    \colorbox{\rowbackgroundcolor}{
-        \makebox[\textwidth]{
-            \begin{minipage}{0.95\textwidth}
-                \makepostertitle
-                \vfill{
-                    \setstretch{1.1}
-                    \raggedright
-                    \fontsizestandard
-                    \color{\rowfontcolor}
-                    #1
-                    
-                }
-                \vspace{\baselineskip}
-            
-            \end{minipage}
-        }
-    }
-    \hbox{\color{burntorange}\rule{\pagewidth}{2mm}}
+	\noindent\makebox[\textwidth][c]{
+		\begin{minipage}[t][\middleboxheight]{0.95\textwidth}    
+			\centering          
+			\makepostertitle
+			\setstretch{1.1}
+			\fontsizestandard
+			\color{\rowfontcolor}
+			#1     
+		\end{minipage}	
+	}
 }
 % End \middlebox command
 
 
 % Begin \bottombox command
 \newcommand{\bottombox}[1]{
-    \begin{minipage}[t][0.6\bottomboxheight]{\pagewidth}
+    \begin{minipage}[b][\bottomboxheight]{\textwidth}
+    	\hbox{\color{burntorange}\rule{\pagewidth}{2mm}}
+		\vspace{2\baselineskip}
         \centering
         \begin{minipage}{0.79\textwidth}    
             \fontsizestandard\quad#1
