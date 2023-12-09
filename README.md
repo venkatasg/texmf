@@ -9,4 +9,6 @@ Currently, I have the following templates:
 - **Practical Poster**
 - **Practical Letter**
 
-These use Butterick's fonts through LuaLaTeX &mdash; you should replace them with fonts of your choice if you don't have those installed.
+These use [Matthew Butterick's fonts](https://mbtype.com) and are compiled with [LuaTeX](http://www.luatex.org).
+
+You can see documents using the report and letter template on [my academic job application materials repository](https://github.com/venkatasg/academic-job-apps). For documents using the poster and presentation template, see [the links on a list of my papers on my website](https://venkatasg.net/papers).
