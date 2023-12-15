@@ -270,16 +270,20 @@
 
 % Bibliography settings
 \if@biblatex
-    \RequirePackage[backend=biber,
-                    style=practical,
-                    natbib,
-                    maxcitenames=1,
-                    maxbibnames=999]{biblatex}
-    % Remove the ugly picture before each bib entry
-    \setbeamertemplate{bibliography item}{}
+   % Bibliography settings
+   \RequirePackage[backend=biber,
+                   style=authoryear,
+                   natbib,
+                   maxcitenames=1,
+                   maxbibnames=999,
+                   sorting=none,
+                   url=false,
+                   doi=false,
+                   eprint=false]{biblatex}
     
-    % Spacing between bib entries
     \setlength\bibitemsep{0.5\baselineskip}
+    
+    \setbeamertemplate{bibliography item}{}
     
     % Set size of citation text
     \renewcommand*{\citesetup}{\scriptsize}
