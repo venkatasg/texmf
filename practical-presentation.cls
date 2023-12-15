@@ -72,7 +72,7 @@
 
 
 % My colors
-\definecolor{KaroBlue}{HTML}{0366D6}
+\definecolor{AmmaBlue}{HTML}{0366D6}
 \definecolor{MokaRed}{HTML}{D73A49}
 
 % Set width of progress bar and separator
@@ -96,11 +96,11 @@
 % Set theme colors
 \setbeamercolor{alerted text}{fg=MokaRed}
 \setbeamercolor{progress bar}{fg=MokaRed}
-\colorlet{bluelinkcolor}{KaroBlue}
+\colorlet{bluelinkcolor}{AmmaBlue}
 \AtBeginEnvironment{frame}{
     \ifbeamer@plainframe
         \setbeamercolor{alerted text}{fg=MokaRed}
-        \colorlet{bluelinkcolor}{KaroBlue}
+        \colorlet{bluelinkcolor}{AmmaBlue}
     \fi
 }
 
@@ -261,7 +261,7 @@
             colorlinks,
             breaklinks,
             linkcolor=fgcolor,
-            urlcolor=bluelinkcolor,
+            urlcolor=AmmaBlue,
             citecolor=fgcolor,
             filecolor=fgcolor
     }
