@@ -31,7 +31,7 @@
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=newest}
 \RequirePackage{appendixnumberbeamer}
-
+\RequirePackage{setspace}
 %===============================================================================
 %============================= metropolis theme ================================
 
@@ -96,11 +96,9 @@
 % Set theme colors
 \setbeamercolor{alerted text}{fg=MokaRed}
 \setbeamercolor{progress bar}{fg=MokaRed}
-\colorlet{bluelinkcolor}{AmmaBlue}
 \AtBeginEnvironment{frame}{
     \ifbeamer@plainframe
         \setbeamercolor{alerted text}{fg=MokaRed}
-        \colorlet{bluelinkcolor}{AmmaBlue}
     \fi
 }
 
@@ -123,24 +121,32 @@
     \newfontfamily{\sancs}{Concourse 2 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
     }
 
-% IPA, monospace, and math fonts
+% IPA, monospace, serif and math fonts
 \newfontfamily{\ipa}{Charis SIL}
 \setmonofont[Scale=1]{Triplicate A Code}
-\setmathfont[Path=/Users/venkat/Library/Fonts/, Extension=.otf,Scale=MatchLowercase,Ligatures=TeX, BoldFont=XCharter-Bold,
-    ItalicFont=XCharter-Italic, Numbers={Uppercase,Monospaced}]{XCharter-Roman}
+\setfontfamily{\rmfamily}[Numbers={Lowercase,Proportional}, Contextuals=Alternate]{Century Supra A}
+\setmathfont[Path=/Users/venkat/Library/Fonts/, Extension=.otf,Scale=MatchLowercase,Ligatures=TeX, Numbers={Uppercase,Monospaced}]{FiraMath-Regular}
 
 % Fancy Numbering fonts
 \newfontfamily{\nfwc}{Concourse T3 Index}
-\newfontfamily{\nfws}{Concourse T3 Index}[StylisticSet = 1]
 \newfontfamily{\nfbc}{Concourse T3 Index}[StylisticSet = 2]
-\newfontfamily{\nfbs}{Concourse T3 Index}[StylisticSet = 3]
 
 % Oldstyle tabular numbers inside tabular environment
 \AtBeginEnvironment{tabular}{\addfontfeatures{Numbers={Uppercase, Monospaced}}}
+\AtBeginEnvironment{tikzpicture}{\addfontfeatures{Numbers={Uppercase, Monospaced}}\small}
 \renewcommand{\theequation}{ {\addfontfeatures{Numbers={Uppercase, Monospaced}}\arabic{equation}}}
+
+% Set linespacing to 1.1 times the point size, this sets baseline skip to almost exactly 136% which is what Matthew Butterick used in his example
+% \RequirePackage{setspace}
+\setstretch{1.1}
+
+% Strong widow and orphan control - avoid any widows and orphans
+\clubpenalty10000
+\widowpenalty10000
 
 % French Spacing - single spacing between sentences
 \frenchspacing
+
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
 \ProcessOptions\relax
@@ -159,6 +165,13 @@
 
 % PGF grid style
 \pgfplotsset{grid style={dashed,fgcolor}}
+
+%===============================================================================
+%====================================== toc ====================================
+
+\setbeamertemplate{section in toc}{
+    {\nfwc\inserttocsectionnumber} \inserttocsection\par
+}
 
 %===============================================================================
 %=================================== footnotes =================================
@@ -186,8 +199,7 @@
 %===============================================================================
 %==================================== lists ====================================
 
-% \RequirePackage{enumitem}
-% \setbeamerfont{enumerate item}{family = \nfwc}
+\setbeamerfont{enumerate item}{family = \nfwc}
 
 
 %===============================================================================

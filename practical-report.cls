@@ -78,10 +78,7 @@
 \RequirePackage{unicode-math}
 
 % Set main serif fonts
-\setmainfont{Equity A}[
-    Numbers={Lowercase,Proportional}, 
-    Contextuals=Alternate,
-    ]
+\setmainfont[Numbers={Lowercase,Proportional}, Contextuals=Alternate]{Equity A}
 \newcommand\liningfont{\addfontfeatures{Numbers={Uppercase, Proportional}}}
 \newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps, LetterSpace=5, Numbers={Lowercase,Proportional}]
 \newfontfamily{\rmcs}{Equity A Caps}[Letters=Uppercase, LetterSpace=5, Numbers={Uppercase,Proportional}]
