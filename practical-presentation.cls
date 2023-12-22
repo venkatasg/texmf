@@ -241,20 +241,6 @@
 
 % Spacing between sub examples
 \patchcmd{\a}{\itemsep\z@}{\itemsep.66\baselineskip}{}{}
-
-%===============================================================================
-%=============================== metadata ======================================
-
-\def\@pdfauthor{\relax}
-\newcommand{\pdfauthor}[1]{\gdef\@pdfauthor{#1}}
-\def\@pdftitle{\relax}
-\newcommand{\pdftitle}[1]{\gdef\@pdftitle{#1}}
-\def\@pdfkeywords{\relax}
-\newcommand{\pdfkeywords}[1]{\gdef\@pdfkeywords{#1}}
-
-\hypersetup{pdfauthor=\@pdfauthor,
-            pdftitle=\@pdftitle,
-            pdfkeywords=\@pdfkeywords}
             
 %===============================================================================
 %=================================== figures ==================================
@@ -319,3 +305,12 @@
     
     \addbibresource{references.bib}
 \fi
+
+%===============================================================================
+%=============================== metadata ======================================
+
+\hypersetup{
+    pdfauthor={Venkat},
+    pdfcreator={Venkat},
+    pdftitle=\@title,
+}
