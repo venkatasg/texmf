@@ -19,19 +19,18 @@
 \LoadClass{beamer}
 
 %===============================================================================
-%========================= required packages ===================================
+%======================= base required packages ================================
 
 \RequirePackage[english]{babel}
 \RequirePackage{booktabs}
 \RequirePackage{xspace}
+\RequirePackage{setspace}
 \RequirePackage{xcolor}
-\RequirePackage{graphicx}
 \RequirePackage{csquotes}
-\RequirePackage{caption}
 \RequirePackage{pgfplots}
 \pgfplotsset{compat=newest}
 \RequirePackage{appendixnumberbeamer}
-\RequirePackage{setspace}
+
 %===============================================================================
 %============================= metropolis theme ================================
 
@@ -75,6 +74,15 @@
 \definecolor{AmmaBlue}{HTML}{0366D6}
 \definecolor{MokaRed}{HTML}{D73A49}
 
+% Set theme colors
+\setbeamercolor{alerted text}{fg=MokaRed}
+\setbeamercolor{progress bar}{fg=MokaRed}
+\AtBeginEnvironment{frame}{
+    \ifbeamer@plainframe
+        \setbeamercolor{alerted text}{fg=MokaRed}
+    \fi
+}
+
 % Set width of progress bar and separator
 \setlength{\metropolis@titleseparator@linewidth}{1pt}
 \setlength{\metropolis@progressonsectionpage@linewidth}{1pt}
@@ -93,14 +101,6 @@
 \RequirePackage{amsmath}
 \RequirePackage{unicode-math}
 
-% Set theme colors
-\setbeamercolor{alerted text}{fg=MokaRed}
-\setbeamercolor{progress bar}{fg=MokaRed}
-\AtBeginEnvironment{frame}{
-    \ifbeamer@plainframe
-        \setbeamercolor{alerted text}{fg=MokaRed}
-    \fi
-}
 
 %Now choose between dark and light themes, dark themes need a very thin font for contrast between regular text and bold font, but not so for the light theme
 \DeclareOption{light} {
@@ -125,6 +125,8 @@
 \newfontfamily{\ipa}{Charis SIL}
 \setmonofont[Scale=1]{Triplicate A Code}
 \setfontfamily{\rmfamily}[Numbers={Lowercase,Proportional}, Contextuals=Alternate]{Century Supra A}
+\newfontfamily{\rmsc}{Century Supra A Caps}[Letters=UppercaseSmallCaps, LetterSpace=5, Numbers={Lowercase,Proportional}]
+\newfontfamily{\rmcs}{Century Supra A Caps}[Letters=Uppercase, LetterSpace=5, Numbers={Uppercase,Proportional}]
 \setmathfont[Path=/Users/venkat/Library/Fonts/, Extension=.otf,Scale=MatchLowercase,Ligatures=TeX, Numbers={Uppercase,Monospaced}]{FiraMath-Regular}
 
 % Fancy Numbering fonts
@@ -137,7 +139,6 @@
 \renewcommand{\theequation}{ {\addfontfeatures{Numbers={Uppercase, Monospaced}}\arabic{equation}}}
 
 % Set linespacing to 1.1 times the point size, this sets baseline skip to almost exactly 136% which is what Matthew Butterick used in his example
-% \RequirePackage{setspace}
 \setstretch{1.1}
 
 % Strong widow and orphan control - avoid any widows and orphans
@@ -146,7 +147,6 @@
 
 % French Spacing - single spacing between sentences
 \frenchspacing
-
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{beamer}}
 \ProcessOptions\relax
@@ -158,8 +158,6 @@
 \setbeamerfont{institute}{series=\sffamily, size=\normalsize}
 \setbeamerfont{frametitle}{series=\sansc, size=\large}
 \setbeamerfont{section title}{series=\sansc, size=\Large}
-
-% Dark mode
 \setbeamercolor{normal text}{bg=bgcolor, fg=fgcolor}
 \setbeamercolor{frametitle}{bg=bgcolor, fg=fgcolor}
 
@@ -257,6 +255,19 @@
 \hypersetup{pdfauthor=\@pdfauthor,
             pdftitle=\@pdftitle,
             pdfkeywords=\@pdfkeywords}
+            
+%===============================================================================
+%=================================== figures ==================================
+
+\RequirePackage{graphicx}
+\graphicspath{{figures/}}
+
+%===============================================================================
+%=================================== caption ==================================
+
+\RequirePackage{caption,subcaption}
+\captionsetup{labelformat=empty}
+
 
 %===============================================================================
 %=================================== standout ==================================
@@ -305,4 +316,6 @@
     
     % Reset bibliography entry title to non-bold
     \setbeamerfont{bibliography entry title}{size=\normalsize, series=\upshape}
+    
+    \addbibresource{references.bib}
 \fi
