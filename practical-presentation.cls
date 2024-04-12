@@ -106,8 +106,8 @@
 \DeclareOption{light} {
     \colorlet{fgcolor}{darkgreyfg}
     \colorlet{bgcolor}{palegreybg}
-    \setmainfont{Concourse 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
-    \setsansfont{Concourse 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \setmainfont{Concourse 3}[Numbers={Uppercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \setsansfont{Concourse 3}[Numbers={Uppercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \newfontfamily{\sansc}{Concourse 3 Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \newfontfamily{\sancs}{Concourse 3 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
     }
@@ -115,18 +115,18 @@
 \DeclareOption{dark} {
     \colorlet{fgcolor}{palegreyfg}
     \colorlet{bgcolor}{darkgreybg}
-    \setmainfont{Concourse 2}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
-    \setsansfont{Concourse 2}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
-    \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps, Numbers={Uppercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \setmainfont{Concourse 2}[Numbers={Uppercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \setsansfont{Concourse 2}[Numbers={Uppercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+    \newfontfamily{\sansc}{Concourse 2 Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
     \newfontfamily{\sancs}{Concourse 2 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
     }
 
 % IPA, monospace, serif and math fonts
 \newfontfamily{\ipa}{Charis SIL}
-\setmonofont[Scale=1]{Triplicate A Code}
-\setfontfamily{\rmfamily}[Numbers={Lowercase,Proportional}, Contextuals=Alternate]{Century Supra A}
-\newfontfamily{\rmsc}{Century Supra A Caps}[Letters=UppercaseSmallCaps, LetterSpace=5, Numbers={Lowercase,Proportional}]
-\newfontfamily{\rmcs}{Century Supra A Caps}[Letters=Uppercase, LetterSpace=5, Numbers={Uppercase,Proportional}]
+\setmonofont[Scale=0.9]{Triplicate A Code}
+\setfontfamily{\rmfamily}[Numbers={Lowercase,Proportional}, Contextuals=Alternate]{Equity A}
+\newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps, LetterSpace=5, Numbers={Lowercase,Proportional}]
+\newfontfamily{\rmcs}{Equity A Caps}[Letters=Uppercase, LetterSpace=5, Numbers={Uppercase,Proportional}]
 \setmathfont[Path=/Users/venkat/Library/Fonts/, Extension=.otf,Scale=MatchLowercase,Ligatures=TeX, Numbers={Uppercase,Monospaced}]{FiraMath-Regular}
 
 % Fancy Numbering fonts
@@ -160,9 +160,34 @@
 \setbeamerfont{section title}{series=\sansc, size=\Large}
 \setbeamercolor{normal text}{bg=bgcolor, fg=fgcolor}
 \setbeamercolor{frametitle}{bg=bgcolor, fg=fgcolor}
+\setbeamercolor{footnote}{fg=fgcolor, bg=bgcolor}
 
 % PGF grid style
 \pgfplotsset{grid style={dashed,fgcolor}}
+
+%===============================================================================
+%=================================== footnotes =================================
+
+\setbeamertemplate{footline}{\vspace{6.7pt}}
+\setbeamertemplate{logo}{
+	\usebeamercolor[fg]{footline}
+	\usebeamerfont{page number in head/foot}\vspace{-7pt}
+	\usebeamertemplate*{frame numbering}\hspace{5pt}
+}
+
+\renewcommand\footnotemargin{\parindent}
+
+\renewcommand{\@makefntext}[1]{%
+	\noindent \hbox to \z@{\hss{\textsuperscript{\@thefnmark}} \hfil}#1
+}
+
+% Add footnote without a superscript
+\newcommand\blfootnote[1]{%
+ \begingroup
+ \renewcommand\thefootnote{}\footnote{#1}%
+ \addtocounter{footnote}{-1}%
+ \endgroup
+}
 
 %===============================================================================
 %====================================== toc ====================================
@@ -172,33 +197,9 @@
 }
 
 %===============================================================================
-%=================================== footnotes =================================
-
-\setbeamertemplate{footline}{\vspace{6.7pt}}
-\setbeamertemplate{logo}{
-    \usebeamercolor[fg]{footline}
-    \usebeamerfont{page number in head/foot}\vspace{-7pt}
-    \usebeamertemplate*{frame numbering}\hspace{5pt}
-}
-
-\renewcommand\footnotemargin{\parindent}
-
-\renewcommand{\@makefntext}[1]{%
-  \noindent \hbox to \z@{\hss{\textsuperscript{\@thefnmark}} \hfil}#1
-}
-
-% Add footnote without a superscript
-\newcommand\blfootnote[1]{%
-  \begingroup
-  \renewcommand\thefootnote{}\footnote{#1}%
-  \addtocounter{footnote}{-1}%
-  \endgroup
-}
-%===============================================================================
 %==================================== lists ====================================
 
 \setbeamerfont{enumerate item}{family = \nfwc}
-
 
 %===============================================================================
 %==================================== linguex ==================================
@@ -242,27 +243,21 @@
 % Spacing between sub examples
 \patchcmd{\a}{\itemsep\z@}{\itemsep.66\baselineskip}{}{}
             
-%===============================================================================
-%=================================== figures ==================================
+%=================================== figures ===================================
 
-\RequirePackage{graphicx}
 \graphicspath{{figures/}}
 
-%===============================================================================
-%=================================== caption ==================================
+%=================================== caption ====================================
 
 \RequirePackage{caption,subcaption}
-\captionsetup{labelformat=empty}
+\captionsetup{labelformat=empty, justification=centering}
 
 
-%===============================================================================
-%=================================== standout ==================================
+%================================ standout =====================================
 
 \setbeamerfont{standout}{size=\Large, series=\upshape}
 
-
-%=====================================================================
-%=========================== bibliography ============================
+%============================== bibliography ===================================
 
 % Hyperref setup
 \RequirePackage{hyperref}
@@ -295,10 +290,10 @@
     \setbeamertemplate{bibliography item}{}
     
     % Set size of citation text
-    \renewcommand*{\citesetup}{\scriptsize}
+    \renewcommand*{\citesetup}{\normalsize}
     
     % Set size of bib text
-    \renewcommand*{\bibfont}{\small}
+    \renewcommand*{\bibfont}{\tiny}
     
     % Reset bibliography entry title to non-bold
     \setbeamerfont{bibliography entry title}{size=\normalsize, series=\upshape}

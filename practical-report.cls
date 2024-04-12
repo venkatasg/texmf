@@ -90,9 +90,9 @@
     ItalicFont=XCharter-Italic, Numbers={Uppercase,Monospaced}]{XCharter-Roman}
 
 % Oldstyle tabular numbers inside tabular environment
-\AtBeginEnvironment{tabular}{\addfontfeatures{Numbers={Uppercase, Monospaced}}\small}
-\AtBeginEnvironment{tikzpicture}{\addfontfeatures{Numbers={Uppercase, Monospaced}}\small}
-\renewcommand{\theequation}{ {\addfontfeatures{Numbers={Uppercase, Monospaced}}\small\arabic{equation}}}
+\AtBeginEnvironment{tabular}{\addfontfeatures{Numbers={Uppercase, Monospaced}}}
+\AtBeginEnvironment{tikzpicture}{\addfontfeatures{Numbers={Uppercase, Monospaced}}}
+\renewcommand{\theequation}{ {\addfontfeatures{Numbers={Uppercase, Monospaced}}\arabic{equation}}}
 
 % Set linespacing to 1.1 times the point size, this sets baseline skip to almost exactly 136% which is what Matthew Butterick used in his example
 \RequirePackage{setspace}
@@ -226,8 +226,8 @@
 %% Modify caption labels
 \RequirePackage{caption}
 \DeclareCaptionLabelFormat{lc}{\rmsc{#1}~{#2}}
-\captionsetup{font=small, format=plain, labelformat=lc, labelsep=quad}
-\captionsetup[subfigure]{font=small, format=plain, labelformat=lc, labelsep=quad}
+\captionsetup{format=plain, labelformat=lc, labelsep=quad, justification=centering}
+\captionsetup[subfigure]{format=plain, labelformat=lc, labelsep=quad}
 
 %===============================================================================
 %=================================== useful macros =============================
