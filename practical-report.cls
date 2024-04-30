@@ -86,8 +86,7 @@
 % IPA, monospace, and math fonts
 \newfontfamily{\ipa}{Charis SIL}
 \setmonofont[Scale=MatchLowercase]{Triplicate A Code}
-\setmathfont[Path=/Users/venkat/Library/Fonts/, Extension=.otf,Scale=MatchLowercase,Ligatures=TeX, BoldFont=XCharter-Bold,
-    ItalicFont=XCharter-Italic, Numbers={Uppercase,Monospaced}]{XCharter-Roman}
+\setmathfont[Path=/Users/venkat/Library/Fonts/, Extension=.otf, Ligatures=TeX, BoldFont=XCharter-Math-Bold, ItalicFont=XCharter-Italic]{XCharter-Math}
 
 % Oldstyle tabular numbers inside tabular environment
 \AtBeginEnvironment{tabular}{\addfontfeatures{Numbers={Uppercase, Monospaced}}}
