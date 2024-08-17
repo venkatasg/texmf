@@ -206,7 +206,7 @@
 \titleformat{\section}{\Large\bfseries\liningfont}{\thesection}{1em}{}
 \titleformat{\subsection}{\large\bfseries\liningfont}{\thesubsection}{.8em}{}
 \titleformat{\subsubsection}{\normalsize\bfseries\liningfont}{\thesubsubsection}{.6em}{}{\itshape}
-\titleformat{\paragraph}[runin]{\bfseries}{\liningfont\theparagraph}{0.4em}{\liningfont}
+\titleformat{\paragraph}[runin]{\bfseries}{\liningfont\theparagraph}{0.6em}{\liningfont}
 
 \titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
 \titlespacing*{\subsection}{0pt}{1\baselineskip}{1\baselineskip}
