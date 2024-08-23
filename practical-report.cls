@@ -130,18 +130,6 @@
 % color
 \RequirePackage[table]{xcolor}
 
-% Tol colors
-\definecolor{TolIndigo}{HTML}{332288}
-\definecolor{TolCyan}{HTML}{88CCEE}
-\definecolor{TolTeal}{HTML}{44AA99}
-\definecolor{TolGreen}{HTML}{117733}
-\definecolor{TolOlive}{HTML}{999933}
-\definecolor{TolSand}{HTML}{DDCC77}
-\definecolor{TolRose}{HTML}{CC6677}
-\definecolor{TolWine}{HTML}{882255}
-\definecolor{TolPurple}{HTML}{AA4499}
-\definecolor{TolPaleGrey}{HTML}{DDDDDD}
-
 % Custom Red
 \definecolor{MokaRed}{HTML}{A52A2A}
 
@@ -205,7 +193,7 @@
 
 \titleformat{\section}{\Large\bfseries\liningfont}{\thesection}{1em}{}
 \titleformat{\subsection}{\large\bfseries\liningfont}{\thesubsection}{.8em}{}
-\titleformat{\subsubsection}{\normalsize\bfseries\liningfont}{\thesubsubsection}{.6em}{}{\itshape}
+\titleformat{\subsubsection}{\normalsize\bfseries\rmsc}{\thesubsubsection}{.6em}{}{\itshape}
 \titleformat{\paragraph}[runin]{\bfseries}{\liningfont\theparagraph}{0.6em}{\liningfont}
 
 \titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
@@ -252,7 +240,7 @@
 \setlist[1]{labelindent=\parindent} % < Usually a good idea
 %% Have to remove the bold and indent labels at the edge, text will still be
 %% aligned at \parindent
-\setlist[description]{font=\normalfont\rmsc\bfseries, labelindent=0pt}
+\setlist[description]{font=\normalfont\bfseries, labelindent=0pt}
 
 \RequirePackage{linguex}%
 \renewcommand{\firstrefdash}{}
