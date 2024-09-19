@@ -24,7 +24,6 @@
 \RequirePackage[english]{babel}
 \RequirePackage{booktabs}
 \RequirePackage{xspace}
-\RequirePackage{setspace}
 \RequirePackage{xcolor}
 \RequirePackage{csquotes}
 \RequirePackage{pgfplots}
@@ -32,18 +31,17 @@
 \RequirePackage{appendixnumberbeamer}
 
 %===============================================================================
-%============================= metropolis theme ================================
+%============================= moloch theme ================================
 
 % Beamer setup
 \usetheme[progressbar=frametitle,
           sectionpage=progressbar,
-          numbering=counter,
           titleformat=allsmallcaps,
           titleformat title=regular,
           titleformat subtitle=allsmallcaps,
           titleformat section=allsmallcaps,
           titleformat frame=allsmallcaps,
-          block=fill]{metropolis}
+          block=fill]{moloch}
 
 % Define custom colors
 \definecolor{palegreyfg}{HTML}{e9e9e9}
@@ -51,7 +49,7 @@
 \definecolor{darkgreyfg}{HTML}{404040}
 \definecolor{darkgreybg}{HTML}{222222}
 
-% These are the default colors for Metropolis from Tol Colors
+% These are the default colors for moloch from Tol Colors
 \definecolor{mDarkBrown}{HTML}{604c38}
 \definecolor{mDarkTeal}{HTML}{23373b}
 \definecolor{mLightBrown}{HTML}{EB811B}
@@ -76,6 +74,7 @@
 
 % Set theme colors
 \setbeamercolor{alerted text}{fg=MokaRed}
+\setbeamercolor{example text}{fg=mLightGreen}
 \setbeamercolor{progress bar}{fg=MokaRed}
 \AtBeginEnvironment{frame}{
     \ifbeamer@plainframe
@@ -84,9 +83,9 @@
 }
 
 % Set width of progress bar and separator
-\setlength{\metropolis@titleseparator@linewidth}{1pt}
-\setlength{\metropolis@progressonsectionpage@linewidth}{1pt}
-\setlength{\metropolis@progressinheadfoot@linewidth}{1pt}
+\setlength{\moloch@titleseparator@linewidth}{1pt}
+\setlength{\moloch@progressonsectionpage@linewidth}{1pt}
+\setlength{\moloch@progressinheadfoot@linewidth}{1pt}
 
 %===============================================================================
 %================================== typography =================================
@@ -139,7 +138,7 @@
 \renewcommand{\theequation}{ {\addfontfeatures{Numbers={Uppercase, Monospaced}}\arabic{equation}}}
 
 % Set linespacing to 1.1 times the point size, this sets baseline skip to almost exactly 136% which is what Matthew Butterick used in his example
-\setstretch{1.1}
+% \setstretch{1.1}
 
 % Strong widow and orphan control - avoid any widows and orphans
 \clubpenalty10000
@@ -171,8 +170,8 @@
 \setbeamertemplate{footline}{\vspace{6.7pt}}
 \setbeamertemplate{logo}{
 	\usebeamercolor[fg]{footline}
-	\usebeamerfont{page number in head/foot}\vspace{-7pt}
-	\usebeamertemplate*{frame numbering}\hspace{5pt}
+	% \usebeamerfont{page number in head/foot}\vspace{-7pt}
+	% \usebeamertemplate*{frame numbering}\hspace{5pt}
 }
 
 \renewcommand\footnotemargin{\parindent}
@@ -187,6 +186,10 @@
  \renewcommand\thefootnote{}\footnote{#1}%
  \addtocounter{footnote}{-1}%
  \endgroup
+}
+
+\newcommand\blfootcite[1]{%
+ \blfootnote{\cite{#1}}
 }
 
 %===============================================================================
@@ -290,10 +293,10 @@
     \setbeamertemplate{bibliography item}{}
     
     % Set size of citation text
-    \renewcommand*{\citesetup}{\normalsize}
+    \renewcommand*{\citesetup}{\footnotesize}
     
     % Set size of bib text
-    \renewcommand*{\bibfont}{\tiny}
+    \renewcommand*{\bibfont}{\normalsize}
     
     % Reset bibliography entry title to non-bold
     \setbeamerfont{bibliography entry title}{size=\normalsize, series=\upshape}
