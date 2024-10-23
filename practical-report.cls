@@ -123,6 +123,7 @@
                 	doi=false,
                 	eprint=false]{biblatex}
     \setlength\bibitemsep{0.5\baselineskip}
+    \addbibresource{references.bib}
 \fi
 
 %===============================================================================
@@ -146,10 +147,7 @@
     citecolor=AmmaBlue,
     filecolor=AmmaBlue,
     plainpages=false,
-    pdfpagelabels,
-    bookmarks=false,
     pdfstartview=FitH,
-    backref
 }
 
 %=====================================================================

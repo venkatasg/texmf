@@ -43,15 +43,16 @@
 \RequirePackage{linguex}
 \RequirePackage{ragged2e}
 \RequirePackage{multicol} 
+\RequirePackage{ragged2e}
 \columnsep=0.03\textwidth
 \columnseprule=0pt
 
 %% Font
 \RequirePackage{unicode-math}
 \setmainfont{Heliotrope 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
-\setsansfont{Heliotrope 4}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
-\newfontfamily{\sansc}{Heliotrope 4 Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
-\newfontfamily{\sancs}{Heliotrope 4 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
+\setsansfont{Heliotrope 3}[Numbers={Lowercase,Proportional}, Contextuals=Alternate, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+\newfontfamily{\smallcaps}{Heliotrope 4 Caps}[Letters=UppercaseSmallCaps, Numbers={Lowercase,Proportional}, SmallCapsFeatures={LetterSpace=3, Renderer=Basic}]
+\newfontfamily{\allcaps}{Heliotrope 4 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
 \setmonofont[Scale=MatchLowercase]{Triplicate A Code}
 
 %% Small separation on enumerate and itemize
@@ -68,6 +69,7 @@
 \definecolor{paleorange}{HTML}{fff1e3}
 \definecolor{bluelinkcolor}{HTML}{0366D6}
 \definecolor{darkgrey}{HTML}{404040}
+\definecolor{ithacablue}{HTML}{003c71}
 
 % Tol colors
 \definecolor{TolIndigo}{HTML}{332288}
@@ -100,6 +102,7 @@
 
 %%%% SIZING OPTIONS
 
+\newcommand{\fontsizesmall}{\fontsize{28.00}{30.00} \selectfont}
 \newcommand{\fontsizestandard}{\fontsize{38.00}{48.00} \selectfont}
 \newcommand{\fontsizemain}{\fontsize{100.00}{150.00} \selectfont}
 \newcommand{\fontsizetitle}{\fontsize{80.00}{130.00} \selectfont}
@@ -110,9 +113,9 @@
 \ProcessOptions\relax
 
 %% Default values for lengths
-\setlength{\mainfindingheight}{0.35\paperheight}
+\setlength{\mainfindingheight}{0.4\paperheight}
 \setlength{\bottomboxheight}{0.05\paperheight}
-\setlength{\middleboxheight}{0.57\paperheight}
+\setlength{\middleboxheight}{0.52\paperheight}
 \setlength{\marginvertical}{0.07\paperwidth}
 
 %===============================================================================
@@ -132,14 +135,14 @@
 \def\UrlFont{\tt}
 
 
-\DeclareCaptionLabelFormat{sansc-plain}{\fontsizestandard\sansc#1 #2} 
+\DeclareCaptionLabelFormat{smallcaps-plain}{\fontsizestandard\smallcaps#1 #2} 
 \DeclareCaptionLabelSeparator{bigcolon}{\fontsizestandard: }
-\captionsetup{labelformat=sansc-plain,labelsep=bigcolon}
+\captionsetup{labelformat=smallcaps-plain,labelsep=bigcolon}
 
 %%%% TEMPLATE COMMANDS
 
 %% Section command
-\titleformat{\section}{\raggedright\sansc\fontsizesection\bfseries}{}{0pt}{}
+\titleformat{\section}{\raggedright\smallcaps\fontsizesection\bfseries}{}{0pt}{}
 \titlespacing{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip}
 \titleformat*{\paragraph}{\raggedright\fontsizestandard\bfseries}
 
@@ -164,7 +167,8 @@
         {\noindent\raggedright\fontsizetitle\bfseries\par\@title}
         \vspace{2\baselineskip}
         {\fontsizeauthor\par\color{darkgrey}\@author}
-        \@affiliation
+        \vspace{0.5\baselineskip}
+        {\fontsizestandard\par\color{darkgrey}\@affiliation}
     \end{minipage}
     \vspace{0.5\baselineskip}
 }

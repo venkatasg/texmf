@@ -41,6 +41,7 @@
           titleformat subtitle=allsmallcaps,
           titleformat section=allsmallcaps,
           titleformat frame=allsmallcaps,
+          numbering=counter,
           block=fill]{moloch}
 
 % Define custom colors
@@ -137,9 +138,6 @@
 \AtBeginEnvironment{tikzpicture}{\addfontfeatures{Numbers={Uppercase, Monospaced}}}
 \renewcommand{\theequation}{ {\addfontfeatures{Numbers={Uppercase, Monospaced}}\arabic{equation}}}
 
-% Set linespacing to 1.1 times the point size, this sets baseline skip to almost exactly 136% which is what Matthew Butterick used in his example
-% \setstretch{1.1}
-
 % Strong widow and orphan control - avoid any widows and orphans
 \clubpenalty10000
 \widowpenalty10000
@@ -168,11 +166,6 @@
 %=================================== footnotes =================================
 
 \setbeamertemplate{footline}{\vspace{6.7pt}}
-\setbeamertemplate{logo}{
-	\usebeamercolor[fg]{footline}
-	% \usebeamerfont{page number in head/foot}\vspace{-7pt}
-	% \usebeamertemplate*{frame numbering}\hspace{5pt}
-}
 
 \renewcommand\footnotemargin{\parindent}
 
