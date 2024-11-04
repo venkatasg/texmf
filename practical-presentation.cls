@@ -38,17 +38,20 @@
           sectionpage=progressbar,
           titleformat=allsmallcaps,
           titleformat title=regular,
-          titleformat subtitle=allsmallcaps,
+          titleformat subtitle=regular,
           titleformat section=allsmallcaps,
           titleformat frame=allsmallcaps,
-          numbering=counter,
           block=fill]{moloch}
-
 % Define custom colors
 \definecolor{palegreyfg}{HTML}{e9e9e9}
 \definecolor{palegreybg}{HTML}{fcfcfc}
 \definecolor{darkgreyfg}{HTML}{404040}
 \definecolor{darkgreybg}{HTML}{222222}
+
+% More custom colors
+\definecolor{burntorange}{HTML}{bf5700}
+\definecolor{paleorange}{HTML}{fff1e3}
+\definecolor{ithacablue}{HTML}{003c71}
 
 % These are the default colors for moloch from Tol Colors
 \definecolor{mDarkBrown}{HTML}{604c38}
@@ -149,7 +152,7 @@
 \ProcessOptions\relax
 
 \setbeamerfont{title}{series=\sffamily, size=\LARGE}
-\setbeamerfont{subtitle}{series=\sansc, size=\large}
+\setbeamerfont{subtitle}{series=\sffamily, size=\large}
 \setbeamerfont{author}{series=\sffamily, size=\normalsize}
 \setbeamerfont{date}{series=\sffamily, size=\normalsize}
 \setbeamerfont{institute}{series=\sffamily, size=\normalsize}
@@ -165,9 +168,9 @@
 %===============================================================================
 %=================================== footnotes =================================
 
-\setbeamertemplate{footline}{\vspace{6.7pt}}
+%\setbeamertemplate{footline}{\vspace{6.7pt}}
 
-\renewcommand\footnotemargin{\parindent}
+%\renewcommand\footnotemargin{\parindent}
 
 \renewcommand{\@makefntext}[1]{%
 	\noindent \hbox to \z@{\hss{\textsuperscript{\@thefnmark}} \hfil}#1
@@ -191,7 +194,7 @@
 \setbeamertemplate{section in toc}{
     {\nfwc\inserttocsectionnumber} \inserttocsection\par
 }
-
+\setbeamertemplate{page number in head/foot}[framenumber]
 %===============================================================================
 %==================================== lists ====================================
 

@@ -55,6 +55,10 @@
 \newfontfamily{\allcaps}{Heliotrope 4 Caps}[Letters=Uppercase, Numbers={Uppercase,Proportional}]
 \setmonofont[Scale=MatchLowercase]{Triplicate A Code}
 
+% Fancy Numbering fonts
+\newfontfamily{\nfwc}{Concourse T3 Index}
+\newfontfamily{\nfbc}{Concourse T3 Index}[StylisticSet = 2]
+
 %% Small separation on enumerate and itemize
 \RequirePackage{enumitem}
 \setlist{nolistsep}
@@ -207,7 +211,7 @@
 \newcommand{\bottombox}[1]{
     \begin{minipage}[b][\bottomboxheight]{\textwidth}
     	\hbox{\color{burntorange}\rule{\pagewidth}{2mm}}
-		\vspace{2\baselineskip}
+		\vspace{\baselineskip}
         \centering
         \begin{minipage}{0.79\textwidth}    
             \fontsizestandard\quad#1
