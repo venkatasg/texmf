@@ -76,6 +76,8 @@
 %===============================================================================
 %=================================== commands ==================================
 
+\newcommand*\name[1]{\def\fromname{#1}}
+\newcommand*\signature[1]{\def\fromsig{#1}}
 \newcommand*\address[1]{\def\fromaddress{#1}}
 \newcommand*\location[1]{\def\fromlocation{#1}}
 \newcommand*\phone[1]{\def\phonenum{#1}}
@@ -152,12 +154,21 @@
 % Closing
 \newcommand\closing[1]{
     \vspace{\baselineskip}
-	\parbox{0.5\textwidth}{
-		\raggedright
-		\ignorespaces #1\\[\baselineskip]
-		\hspace*{-2mm}\includegraphics[width=0.35\textwidth]{signature.png}\\
-		Venkata S Govindarajan\strut
-	}
+    \ifthenelse{\equal{\fromsig}{}}{
+        \parbox{0.5\textwidth}{
+            \raggedright
+            \ignorespaces #1\\[3\baselineskip]
+            \fromname\strut
+        }
+    }
+    {
+        \parbox{0.5\textwidth}{
+            \raggedright
+            \ignorespaces #1\\[\baselineskip]
+            \hspace*{-2mm}\includegraphics[width=0.35\textwidth]{\fromsig}\\
+            \fromname\strut
+        }
+    }
     \par
 }
 
@@ -169,7 +180,7 @@
 \newcommand*\senderbox{
     \begin{textblock*}{47mm}(19mm,15.5mm) %Placed to have same left margin as right, and a little above top margin to account for the spacing above text in this box I can't seem to remove
         \sansc\color{MokaRed!80}
-        {\sancs\bfseries Venkata S\\Govindarajan}\par
+        {\sancs\bfseries\fromname}\par
         \vspace{\baselineskip}
         {\fromaddress}\par
         \vspace{\baselineskip}

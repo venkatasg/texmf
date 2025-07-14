@@ -27,12 +27,17 @@
 
 % biblatex option
 \newif\if@biblatex
-
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
-
-% define biblatex option
 \DeclareOption{biblatex}{\@biblatextrue}
 
+% linguex option
+\newif\if@linguex
+\DeclareOption{linguex}{\@linguextrue}
+
+% wide text with low margins
+\newif\if@wide
+\DeclareOption{wide}{\@widetrue}
+
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
 \LoadClass[11pt,oneside]{article}
 
@@ -40,12 +45,15 @@
 %=================================== page setup ================================
 
 \RequirePackage{geometry}
-% Set textwidth to 2.5 times length of alphabet approx. 77 characters
+ % Set textwidth to 2.5 times length of alphabet approx. 77 characters
 \newlength{\alphabet}
 \settowidth{\alphabet}{\normalfont abcdefghijklmnopqrstuvwxyz}
-% Set text to lower than it 
-\geometry{top=1in, bottom=1.25in, textwidth=2.7\alphabet}
 
+\if@wide
+    \geometry{top=0.5in, bottom=0.75in, textwidth=3.5\alphabet}
+\else
+    \geometry{top=1in, bottom=1.25in, textwidth=2.7\alphabet}
+\fi
 %===============================================================================
 %============================== required packages ==============================
 
@@ -240,22 +248,24 @@
 %% aligned at \parindent
 \setlist[description]{font=\normalfont\bfseries, labelindent=0pt}
 
-\RequirePackage{linguex}%
-\renewcommand{\firstrefdash}{}
-
-% Spacing between subexamples
-\newlength{\SubItemSkip}
-\setlength{\SubItemSkip}{.5\baselineskip}
-\patchcmd{\a}{\itemsep\z@}{\itemsep\SubItemSkip}{}{}
-
-\AtBeginDocument{
-\setlength{\Exlabelsep}{1.5em}
-\setlength{\Extopsep}{.25\baselineskip}
-\setlength{\SubSubExleftmargin}{1.5em}
-\setlength{\SubExleftmargin}{1.5em}
-\setlength{\Exindent}{0pt}
-\setlength{\Exlabelwidth}{1em}
-}
+\if@linguex
+    \RequirePackage{linguex}%
+    \renewcommand{\firstrefdash}{}
+    
+    % Spacing between subexamples
+    \newlength{\SubItemSkip}
+    \setlength{\SubItemSkip}{.5\baselineskip}
+    \patchcmd{\a}{\itemsep\z@}{\itemsep\SubItemSkip}{}{}
+    
+    \AtBeginDocument{
+    \setlength{\Exlabelsep}{1.5em}
+    \setlength{\Extopsep}{.25\baselineskip}
+    \setlength{\SubSubExleftmargin}{1.5em}
+    \setlength{\SubExleftmargin}{1.5em}
+    \setlength{\Exindent}{0pt}
+    \setlength{\Exlabelwidth}{1em}
+    }
+\fi
 
 %===============================================================================
 %==================================== TOC ======================================
