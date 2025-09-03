@@ -133,6 +133,9 @@
 % French Spacing - single spacing between sentences
 \frenchspacing
 
+% icons for social sites
+\RequirePackage{fontawesome5}
+
 %===============================================================================
 %============================= opening & closing ===============================
 
@@ -184,9 +187,9 @@
         \vspace{\baselineskip}
         {\fromaddress}\par
         \vspace{\baselineskip}
-        {\webaddr}\\
-        {\emailaddr}\\
-        {\phonenum}
+        {{\small\faGlobe}~\webaddr}\\
+        {{\small\faEnvelope[regular]}~\emailaddr}\\
+        {{\small\faPhone*}~\phonenum}
     \end{textblock*}
     \color{black}
 }
