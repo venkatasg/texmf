@@ -77,6 +77,7 @@
 %=================================== commands ==================================
 
 \newcommand*\name[1]{\def\fromname{#1}}
+\newcommand*\letterhead[1]{\def\fromheader{#1}}
 \newcommand*\signature[1]{\def\fromsig{#1}}
 \newcommand*\address[1]{\def\fromaddress{#1}}
 \newcommand*\location[1]{\def\fromlocation{#1}}
@@ -182,6 +183,15 @@
 
 \newcommand*\senderbox{
     \begin{textblock*}{47mm}(19mm,15.5mm) %Placed to have same left margin as right, and a little above top margin to account for the spacing above text in this box I can't seem to remove
+    \ifthenelse{\equal{\fromheader}{}}{
+    }
+    {
+        \parbox{\textwidth}{
+            \raggedright
+            \hspace*{-2.5mm}\includegraphics[width=\textwidth]{\fromheader}\\
+        }
+    }
+    	\par
         \sansc\color{MokaRed!80}
         {\sancs\bfseries\fromname}\par
         \vspace{\baselineskip}
