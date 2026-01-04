@@ -33,9 +33,9 @@
 \newif\if@linguex
 \DeclareOption{linguex}{\@linguextrue}
 
-% wide text with low margins
-\newif\if@wide
-\DeclareOption{wide}{\@widetrue}
+% 1 inch margins all side option
+\newif\if@inch
+\DeclareOption{inch}{\@inchtrue}
 
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
@@ -50,7 +50,7 @@
 \settowidth{\alphabet}{\normalfont abcdefghijklmnopqrstuvwxyz}
 
 \if@wide
-    \geometry{top=0.5in, bottom=0.75in, textwidth=3.5\alphabet}
+    \geometry{top=1in, bottom=1in, left=1in, right=1in}
 \else
     \geometry{top=1in, bottom=1.25in, textwidth=2.7\alphabet}
 \fi
