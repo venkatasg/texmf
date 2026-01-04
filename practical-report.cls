@@ -202,9 +202,16 @@
 \titleformat{\subsubsection}{\normalsize\bfseries\rmsc}{\thesubsubsection}{.6em}{}{\itshape}
 \titleformat{\paragraph}[runin]{\bfseries}{\liningfont\theparagraph}{0.6em}{\liningfont}
 
-\titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
-\titlespacing*{\subsection}{0pt}{1\baselineskip}{1\baselineskip}
-\titlespacing*{\subsubsection}{0pt}{0.8\baselineskip}{0.6\baselineskip}
+\if@inch
+    \titlespacing*{\section}{0pt}{0.5\baselineskip}{0.5\baselineskip}
+    \titlespacing*{\subsection}{0pt}{0.3\baselineskip}{0.3\baselineskip}
+    \titlespacing*{\subsubsection}{0pt}{0.2\baselineskip}{0.2\baselineskip}
+\else
+    \titlespacing*{\section}{0pt}{\baselineskip}{\baselineskip}
+    \titlespacing*{\subsection}{0pt}{0.8\baselineskip}{0.8\baselineskip}
+    \titlespacing*{\subsubsection}{0pt}{0.8\baselineskip}{0.6\baselineskip}
+
+\fi
 
 %===============================================================================
 %================================= footnotes ===================================
