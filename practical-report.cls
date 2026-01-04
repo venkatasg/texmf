@@ -49,7 +49,7 @@
 \newlength{\alphabet}
 \settowidth{\alphabet}{\normalfont abcdefghijklmnopqrstuvwxyz}
 
-\if@wide
+\if@inch
     \geometry{top=1in, bottom=1in, left=1in, right=1in}
 \else
     \geometry{top=1in, bottom=1.25in, textwidth=2.7\alphabet}
