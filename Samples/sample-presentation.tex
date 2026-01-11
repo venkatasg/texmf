@@ -1,0 +1,368 @@
+% Sample document showcasing practical-presentation.cls features
+% Compile with: lualatex sample-presentation.tex
+
+\documentclass[biblatex, light]{practical-presentation}
+% Options demonstrated:
+% - biblatex: enables bibliography support
+% - light: light theme (use 'dark' for dark theme with thinner fonts)
+% Try changing 'light' to 'dark' to see the alternative theme!
+
+\title{Sample Presentation}
+\subtitle{Demonstrating the Practical-Presentation Class}
+\author{Jane Researcher}
+\institute{Department of Example Studies\\University of Samples}
+\date{\today}
+
+% Bibliography
+\addbibresource{references.bib}
+
+\begin{document}
+
+% ================ Title Frame ================
+\begin{frame}
+\maketitle
+\end{frame}
+
+% ================ Table of Contents ================
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+% ================ Section 1 ================
+\section{Typography Features}
+
+\begin{frame}{Font Families and Variants}
+
+The presentation uses \textbf{Concourse 3} (light theme) or \textbf{Concourse 2} (dark theme) as the main sans serif font with several variants:
+
+\begin{itemize}
+\item {\sansc Small Caps} using \texttt{\sansc}
+\item {\sancs All Caps} using \texttt{\sancs}
+\item {\rmfamily Serif text using Equity A} with \texttt{\rmfamily}
+\item {\rmsc Serif Small Caps} using \texttt{\rmsc}
+\item \texttt{Monospace using Triplicate A Code}
+\end{itemize}
+
+Mathematical expressions use FiraMath: $E = mc^2$ and $\int_{0}^{\infty} e^{-x} \, dx = 1$
+
+\end{frame}
+
+\begin{frame}{Special Numbering Fonts}
+
+The class provides fancy circle numbering fonts from Concourse T3 Index:
+
+\begin{itemize}
+\item White circles: {\nfwc 1234567890}
+\item Black circles: {\nfbc 1234567890}
+\end{itemize}
+
+These appear in:
+\begin{enumerate}
+\item Enumerated lists (like this!)
+\item Table of contents numbering
+\item Any place you use the \texttt{\nfwc} or \texttt{\nfbc} commands
+\end{enumerate}
+
+\end{frame}
+
+% ================ Section 2 ================
+\section{Color and Themes}
+
+\begin{frame}{Theme Options}
+
+\textbf{Light Theme} (current):
+\begin{itemize}
+\item Dark grey text on pale grey background
+\item Concourse 3 font (regular weight)
+\item Best for well-lit rooms
+\end{itemize}
+
+\textbf{Dark Theme} (\texttt{dark} option):
+\begin{itemize}
+\item Pale grey text on dark grey background
+\item Concourse 2 font (thinner weight for better contrast)
+\item Best for darkened presentation rooms
+\end{itemize}
+
+\alert{Change the document class option to switch themes!}
+
+\end{frame}
+
+\begin{frame}{Custom Colors}
+
+The class defines several color palettes:
+
+\textbf{Accent Colors:}
+\begin{itemize}
+\item \alert{Alert text in MokaRed}
+\item \href{https://example.com}{Hyperlinks in SkyBlue}
+\item \textcolor{burntorange}{Burnt Orange accent}
+\item \textcolor{ithacablue}{Ithaca Blue accent}
+\end{itemize}
+
+\textbf{Tol Color Scheme:}
+\textcolor{TolIndigo}{Indigo}, \textcolor{TolCyan}{Cyan}, \textcolor{TolTeal}{Teal}, \textcolor{TolGreen}{Green}, \textcolor{TolOlive}{Olive}, \textcolor{TolSand}{Sand}, \textcolor{TolRose}{Rose}, \textcolor{TolWine}{Wine}, \textcolor{TolPurple}{Purple}
+
+\end{frame}
+
+% ================ Section 3 ================
+\section{Beamer Features}
+
+\begin{frame}{Blocks and Environments}
+
+\begin{block}{Standard Block}
+This is a standard block environment with the moloch theme styling and fill option.
+\end{block}
+
+\begin{alertblock}{Alert Block}
+This is an alert block using the MokaRed accent color.
+\end{alertblock}
+
+\begin{exampleblock}{Example Block}
+This is an example block for demonstrations and examples.
+\end{exampleblock}
+
+\end{frame}
+
+\begin{frame}{Lists and Spacing}
+
+\textbf{Itemized Lists:}
+\begin{itemize}
+\item First item with custom spacing
+\item Second item using parskip package
+\item Third item with ragged-right alignment
+\end{itemize}
+
+\textbf{Enumerated Lists:}
+\begin{enumerate}
+\item Lists use fancy circle numbering
+\item From the Concourse T3 Index font
+\item Providing visual distinction
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Progress Bars}
+
+Notice the progress bar features:
+\begin{itemize}
+\item Frame title progress bar (top of each frame)
+\item Section page progress bars
+\item Thin 1pt line width for subtle effect
+\item MokaRed accent color
+\end{itemize}
+
+These are configured in the moloch theme setup with custom line widths.
+
+\end{frame}
+
+% ================ Section 4 ================
+\section{Tables and Figures}
+
+\begin{frame}{Table Example}
+
+Tables automatically use monospaced uppercase numbers:
+
+\begin{table}
+\centering
+\begin{tabular}{lrrr}
+\toprule
+Category & Value 1 & Value 2 & Total \\
+\midrule
+Alpha & 123 & 456 & 579 \\
+Beta & 789 & 234 & 1023 \\
+Gamma & 345 & 678 & 1023 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The \texttt{booktabs} package provides professional table formatting.
+
+\end{frame}
+
+\begin{frame}{Figure Example}
+
+Figures use custom caption formatting (empty label by default):
+
+\begin{figure}
+\centering
+\rule{0.6\textwidth}{0.3\textwidth}
+\caption{Placeholder demonstrating figure layout}
+\end{figure}
+
+Graphics path is preset to \texttt{figures/} directory.
+
+\end{frame}
+
+\begin{frame}{PGFPlots Integration}
+
+The class loads \texttt{pgfplots} for data visualization:
+
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[
+    width=0.7\textwidth,
+    height=0.4\textwidth,
+    xlabel={X axis},
+    ylabel={Y axis},
+    grid=major,
+]
+\addplot[TolIndigo, thick, mark=*] coordinates {
+    (0,0) (1,1) (2,1.5) (3,2) (4,2.3) (5,2.5)
+};
+\addplot[MokaRed, thick, mark=square] coordinates {
+    (0,0) (1,0.5) (2,1.2) (3,2.1) (4,3.2) (5,4.5)
+};
+\end{axis}
+\end{tikzpicture}
+\end{center}
+
+\end{frame}
+
+% ================ Section 5 ================
+\section{Linguistic Examples}
+
+\begin{frame}{Linguex Support}
+
+The \texttt{linguex} package is loaded with custom formatting:
+
+\ex. This is a simple linguistic example.
+
+\ex.
+\a. Multiple subexamples
+\b. With proper spacing
+\c.\label{ex:2c} And fancy numbering
+
+Examples can be labelled and referred back: \ref{ex:2c}
+
+\end{frame}
+
+% ================ Section 6 ================
+\section{Footnotes and Citations}
+
+\begin{frame}[fragile]{Footnote Commands}
+
+Regular footnotes work as expected\footnote{This is a regular footnote with superscript numbering.} with custom formatting.
+
+You can also use blind footnotes without numbers:\blfootnote{This is a blind footnote created with \texttt{\string\blfootnote}.}
+
+When \texttt{biblatex} is enabled, use \texttt{\string\blfootcite} for citation footnotes without markers.
+
+\end{frame}
+
+\begin{frame}[fragile]{Bibliography Support}
+
+When the \texttt{biblatex} option is enabled:
+
+\begin{itemize}
+\item Author-year citation style.
+\item Maximum 1 cite name, truncated with "et al."
+\item Custom bibliography formatting
+\item Footnote-sized citations
+\item Normal-sized bibliography entries
+\item URLs, DOIs, and eprints disabled
+\end{itemize}
+
+Use \texttt{\string\cite}, \texttt{\string\textcite}, \texttt{\string\parencite}, etc. for citations.
+
+Example citations: \citep{Smith:01} and \citet{Mueller:02}.
+
+\end{frame}
+
+% ================ Section 7 ================
+\section{Special Frames}
+
+\begin{frame}[standout]
+Standout Frame
+
+Use \texttt{[standout]} option for emphasis slides with custom background and large upright text.
+\end{frame}
+
+\begin{frame}[plain]
+\centering
+\vspace{2cm}
+{\Huge Plain Frame}
+
+\vspace{1cm}
+Use \texttt{[plain]} option for frames without header, footer, or frame title.
+
+Useful for full-screen images or special layouts.
+\end{frame}
+
+% ================ Section 8 ================
+\section{Advanced Features}
+
+\begin{frame}{Moloch Theme Configuration}
+
+The class uses the moloch beamer theme with:
+
+\begin{itemize}
+\item Progress bar in frame titles
+\item Section pages with progress bars
+\item All small caps title formatting
+\item Regular formatting for title page titles
+\item Block fill styling
+\item Custom MokaRed progress color
+\item 1pt line width for all progress elements
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[fragile]{Appendix Support}
+
+The \texttt{appendixnumberbeamer} package is loaded, so you can add backup slides after:
+
+\begin{verbatim}
+\appendix
+\section{Backup Slides}
+\end{verbatim}
+
+Appendix frames won't affect the frame counter shown to the audience.
+
+\end{frame}
+
+% ================ Summary ================
+\section{Summary}
+
+\begin{frame}[standout]
+
+This sample document demonstrates all the unique features of the \texttt{practical-presentation} class.
+
+Thank You!
+
+Questions?
+\end{frame}
+
+% =============== References ===============
+
+{
+\molochset{numbering=none}
+\section*{references}
+\begin{frame}[noframenumbering]{References}
+\printbibliography[heading=none]
+\end{frame}
+}
+
+% ================ Appendix ================
+\appendix
+
+{
+\molochset{progressbar=none}
+\section{Backup Slides}
+
+\begin{frame}{Additional Information}
+
+This is a backup slide in the appendix. It won't affect the total frame count displayed in the presentation.
+
+\textbf{Additional Resources:}
+\begin{itemize}
+\item Moloch beamer theme documentation
+\item Practical Typography by Matthew Butterick
+\item Paul Tol's color schemes
+\item Linguex package documentation
+\end{itemize}
+
+\end{frame}
+}
+
+\end{document}

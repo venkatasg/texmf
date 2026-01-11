@@ -1,0 +1,163 @@
+% Sample document showcasing practical-report.cls features
+% Compile with: lualatex sample-report.tex
+
+\documentclass[biblatex, linguex, inch]{practical-report}
+% Options demonstrated:
+% - biblatex: enables bibliography support
+% - linguex: enables linguistic examples
+% - inch: 1 inch margins on all sides (comment out to see default 2.7×alphabet width)
+
+% Bibliography
+\addbibresource{references.bib}
+
+% ================ Metadata Commands ================
+\pdfauthor{Jane Researcher}
+\pdftitle{A Comprehensive Sample Report}
+\pdfkeywords{LaTeX, typography, research, sample document}
+
+% ================ Document Information ================
+\title[Project Final Report Spring 2025]{A Comprehensive Sample Report Demonstrating the Practical-Report Class}
+\author{Jane Researcher\\Department of Example Studies\\University of Samples}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\blfootnote{This is a blind footnote (without a number) created using \texttt{\textbackslash blfootnote}. Useful for acknowledgments or funding information.}
+
+\tableofcontents
+
+\section{Introduction}
+
+This sample document demonstrates all the unique features of the \texttt{practical-report} class. The class is designed for research reports and project documentation with careful attention to typography and readability.
+
+\subsection{Typography Features}
+
+The document uses \alert{Equity A} as the main serif font with proportional lowercase numbers by default. When you need lining figures, use the \verb|\liningfont| command: {\liningfont 1234567890}. Notice how numbers in tables and equations automatically use uppercase monospaced numerals.
+
+\subsubsection{Small Caps and Capitalized Text}
+
+This subsubsection heading uses small caps styling. You can also use \verb|\rmsc| for {\rmsc Small Caps Text} and \verb|\rmcs| for {\rmcs All Caps Text} with appropriate letter spacing.
+
+\paragraph{Paragraph-level heading.} This is a run-in paragraph heading that demonstrates the fourth level of sectioning available in this class.
+
+\subsection{Color and Highlighting}
+
+The class defines two custom colors:
+\begin{itemize}
+\item \alert{This text is highlighted in MokaRed} using the \verb|\alert| command
+\item \href{https://example.com}{This is a hyperlink in SkyBlue}
+\end{itemize}
+
+\section{Mathematical Content}
+
+Mathematical expressions use XCharter Math font. Here are some examples with automatically numbered equations:
+
+\begin{equation}
+\int_{-\infty}^{\infty} e^{-x^2} \, dx = \sqrt{\pi}
+\end{equation}
+
+\begin{equation}
+E = mc^2
+\end{equation}
+
+Notice how equation numbers use monospaced lining figures: \theequation
+
+\section{Tables and Figures}
+
+\subsection{Table Example}
+
+Tables automatically use monospaced uppercase numbers for better alignment. The class loads \texttt{booktabs} for professional-looking tables.
+
+\begin{table}[H]
+\centering
+\caption{Sample Data Table with Automatic Number Formatting}
+\begin{tabular}{lrrr}
+\toprule
+Category & Value 1 & Value 2 & Total \\
+\midrule
+Alpha & 123 & 456 & 579 \\
+Beta & 789 & 234 & 1023 \\
+Gamma & 345 & 678 & 1023 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Figure Example}
+
+Figures use custom caption formatting with small caps labels:
+
+\begin{figure}[H]
+\centering
+\rule{0.6\textwidth}{0.4\textwidth}
+\caption{A placeholder figure demonstrating caption formatting}
+\end{figure}
+
+\section{List Formatting}
+
+The class provides custom list spacing using the \texttt{enumitem} package.
+
+\subsection{Enumerated Lists}
+
+\begin{enumerate}
+\item First item with proper spacing
+\item Second item with \texttt{itemsep=0.25\textbackslash baselineskip}
+\item Third item showing vertical rhythm
+\end{enumerate}
+
+\subsection{Description Lists}
+
+\begin{description}
+\item[Bold term] Description lists have bold labels aligned at the left margin
+\item[Another term] The text is properly indented regardless of label width
+\item[Typography] Careful attention to spacing and alignment throughout
+\end{description}
+
+\section{Linguistic Examples}
+
+When the \texttt{linguex} option is enabled, you can create numbered linguistic examples:
+
+\ex. This is a simple linguistic example.
+
+\ex.
+\a. This is a subexample
+\b. With proper formatting
+\c.\label{ex:2c} And appropriate spacing
+
+These can be labelled and referred to later, like \ref{ex:2c}.
+
+\section{Advanced Features}
+
+\subsection{Quotations}
+
+The class loads \texttt{csquotes} for proper quotation handling. Use \verb|\enquote{}| for \enquote{quotations with proper nesting} that automatically adapt to the language settings.
+
+\subsection{Footnotes}
+
+Regular footnotes\footnote{This is a regular footnote with superscript numbering.} work as expected, with custom formatting that aligns the text properly.
+
+\subsection{Microtype Enhancements}
+
+The document uses microtype with protrusion and expansion enabled, providing subtle improvements to text justification and margin alignment, particularly visible with punctuation marks.
+
+\subsection{Spacing Options}
+
+This document was compiled with the \texttt{inch} option, which sets 1-inch margins on all sides and tighter section spacing. To see the default layout (2.7x alphabet width with more generous section spacing), remove the \texttt{inch} option from the document class declaration.
+
+\section{Bibliography Support}
+
+When the \texttt{biblatex} option is enabled, you can use citations. Use \texttt{\string\cite}, \texttt{\string\textcite}, \texttt{\string\parencite}, etc. for citations.
+
+Example citations: \citep{Smith:01} and \citet{Mueller:02}.
+
+ The class configures biblatex with numeric style, maximum citation names set to 1, and urls/dois/eprints disabled for cleaner references.
+
+\section{Conclusion}
+
+This sample document demonstrates all the unique features of the \texttt{practical-report} class.
+
+% Uncomment these lines if you have a references.bib file
+\printbibliography
+
+\end{document}

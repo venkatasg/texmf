@@ -1,0 +1,71 @@
+% Sample document showcasing practical-letter.cls features
+% Compile with: lualatex sample-letter.tex
+
+\documentclass[11pt]{practical-letter}
+
+% ================ Sender Information ================
+\name{Dr. Jane A. Smith}
+\letterhead{letterhead.png} % Optional: Include path to letterhead image
+\signature{signature.png} % Optional: Include path to signature image
+\address{Department of Example Studies\\
+University of Samples\\
+123 Academic Way\\
+Research City, ST 12345}
+\location{Office 456, Main Building}
+\phone{(555)123-4567}
+\email{jane@example.edu}
+\website{janesmith.net}
+
+% ================ Recipient Information ================
+\addressee{Prof. Robert Johnson\\
+Chair, Department of Advanced Studies\\
+Institute of Excellence\\
+789 Scholar Drive\\
+Academic Town, ST 67890}
+
+\subject{Sample Letter Demonstrating the Practical-Letter Class}
+
+% ================ Date ================
+\date{\today}
+
+\begin{document}
+
+% The sender box appears in the top left with contact information
+\senderbox
+
+\opening{Dear Prof. Johnson,}
+
+I am writing to demonstrate all the features of the \texttt{practical-letter} class. This custom letter class provides a professional and typographically refined format for academic and business correspondence.
+
+The letter uses Equity A as the main serif font with proportional lowercase numbers, providing an elegant and readable appearance. The text width is set to 2.3 times the alphabet length, following typographic best practices for optimal line length. Notice the careful attention to spacing with a line stretch of 1.1 and full paragraph spacing between sections.
+
+The class also provides access to special typography commands:
+\begin{itemize}
+\item {\rmsc Small caps text} using the \verb|\rmsc| command
+\item {\rmcs All caps text} using the \verb|\rmcs| command
+\end{itemize}
+
+
+The sender box in the top left corner displays your contact information in an attractive format using:
+\begin{itemize}
+\item Sans serif font (Concourse 3) with small caps for the name
+\item FontAwesome5 icons for phone, email, and website
+\item Custom MokaRed color for visual distinction
+\item Optional letterhead image support
+\end{itemize}
+
+The class includes hyperref support with custom colors. External links like \href{https://www.example.com}{this website} appear in SkyBlue for clear distinction from body text, while maintaining professional appearance.
+
+
+The letter class provides several specialized commands beyond the standard letter environment. The \verb|\subject| command adds a bold subject line after the recipient address, making it easy for recipients to quickly identify the letter's purpose. The \verb|\letterhead| and \verb|\signature| commands allow you to include images for enhanced professionalism.
+
+Strong widow and orphan control ensures no single lines appear at the top or bottom of pages. French spacing provides single spacing between sentences. The ragged-right alignment creates a clean left edge while avoiding hyphenation issues that can plague justified text in narrow columns.
+
+I trust this sample letter adequately demonstrates the capabilities of the practical-letter class for your correspondence needs.
+
+\closing{Sincerely,}
+
+% Enclosures and carbon copy demonstrations
+\encl{Sample Report (5 pages), Conference Program}
+
+\end{document}
