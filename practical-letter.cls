@@ -95,15 +95,6 @@
     \ignorespaces #1\strut}\par
 }
 
-\newcommand*\ps{\par\startbreaks}
-
-\newcommand*\cc[1]{
-  \par\noindent
-  \parbox[t]{\textwidth}{
-    \@hangfrom{\normalfont\ccname: }
-    \ignorespaces #1\strut}\par
-}
-
 %===============================================================================
 %================================== typography =================================
 
@@ -121,6 +112,11 @@
 \newfontfamily{\rmsc}{Equity A Caps}[Letters=UppercaseSmallCaps, LetterSpace=5, Numbers={Lowercase,Proportional}]
 \newfontfamily{\sancs}{Concourse 3 Caps}[Letters=Uppercase, LetterSpace=5, Numbers={Uppercase,Proportional}]
 \newfontfamily{\rmcs}{Equity A Caps}[Letters=Uppercase, LetterSpace=5, Numbers={Uppercase,Proportional}]
+
+% IPA, monospace, and math fonts
+\newfontfamily{\ipa}{Charis SIL}
+\setmonofont[Scale=MatchLowercase]{Triplicate A Code}
+\setmathfont[Path=/Users/venkat/Library/Fonts/, Extension=.otf, Ligatures=TeX, BoldFont=XCharter-Math-Bold, ItalicFont=XCharter-Italic]{XCharter-Math}
 
 
 % Oldstyle tabular numbers inside tabular environment
@@ -147,8 +143,6 @@
   \space\number\day, \number\year}
 
 \newcommand*\opening[1]{
-    \vspace{-2\baselineskip}
-    \pagestyle{empty}
     \@date\par
     \toaddress\par
     {\bfseries\fromsubject\par\nobreak}\par
@@ -169,8 +163,8 @@
         \parbox{0.5\textwidth}{
             \raggedright
             \ignorespaces #1\\[\baselineskip]
-            \hspace*{-2mm}\includegraphics[width=0.35\textwidth]{\fromsig}\\
-            \fromname\strut
+            \includegraphics[width=0.35\textwidth]{\fromsig}\\
+            {\rmsc\fromname\strut}
         }
     }
     \par
@@ -182,13 +176,13 @@
 \RequirePackage[absolute]{textpos}
 
 \newcommand*\senderbox{
-    \begin{textblock*}{47mm}(19mm,15.5mm) %Placed to have same left margin as right, and a little above top margin to account for the spacing above text in this box I can't seem to remove
+    \begin{textblock*}{47mm}(19mm,19mm) %Placed to have same left margin as right, and a little above top margin to account for the spacing above text in this box I can't seem to remove
     \ifthenelse{\equal{\fromheader}{}}{
     }
     {
         \parbox{\textwidth}{
             \raggedright
-            \hspace*{-2.5mm}\includegraphics[width=\textwidth]{\fromheader}\\
+            \includegraphics[width=\textwidth]{\fromheader}\\
         }
     }
     	\par
@@ -212,7 +206,7 @@
 \definecolor{MokaRed}{HTML}{D83A49} % my red
 
 % Colors for links
-\definecolor{AmmaBlue}{HTML}{0366D6}
+\definecolor{SkyBlue}{HTML}{0366D6}
 
 % Hyperref setup
 \RequirePackage{hyperref}
@@ -220,9 +214,9 @@
     colorlinks,
     breaklinks,
     linkcolor=black,
-    urlcolor=AmmaBlue,
-    citecolor=AmmaBlue,
-    filecolor=AmmaBlue,
+    urlcolor=SkyBlue,
+    citecolor=SkyBlue,
+    filecolor=SkyBlue,
     plainpages=true,
     pdfpagelabels,
     bookmarks=false,

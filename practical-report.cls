@@ -131,7 +131,6 @@
                 	doi=false,
                 	eprint=false]{biblatex}
     \setlength\bibitemsep{0.5\baselineskip}
-    \addbibresource{references.bib}
 \fi
 
 %===============================================================================
@@ -143,7 +142,7 @@
 \definecolor{MokaRed}{HTML}{A52A2A}
 
 % Custom Blue
-\definecolor{AmmaBlue}{HTML}{0366D6}
+\definecolor{SkyBlue}{HTML}{0366D6}
 
 % Hyperref setup
 \RequirePackage{hyperref}
@@ -151,9 +150,9 @@
     colorlinks,
     breaklinks,
     linkcolor=black,
-    urlcolor=AmmaBlue,
-    citecolor=AmmaBlue,
-    filecolor=AmmaBlue,
+    urlcolor=SkyBlue,
+    citecolor=SkyBlue,
+    filecolor=SkyBlue,
     plainpages=false,
     pdfstartview=FitH,
 }

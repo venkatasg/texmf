@@ -73,7 +73,7 @@
 
 
 % My colors
-\definecolor{AmmaBlue}{HTML}{0366D6}
+\definecolor{SkyBlue}{HTML}{0366D6}
 \definecolor{MokaRed}{HTML}{D73A49}
 
 % Set theme colors
@@ -236,9 +236,6 @@
 \renewcommand{\ExLBr}{\nfwc}
 \renewcommand{\ExRBr}{\nfwc}
 
-\renewcommand{\theExLBr}{\nfwc}
-\renewcommand{\theExRBr}{\nfwc}
-
 % Spacing between sub examples
 \patchcmd{\a}{\itemsep\z@}{\itemsep.66\baselineskip}{}{}
             
@@ -264,7 +261,7 @@
             colorlinks,
             breaklinks,
             linkcolor=fgcolor,
-            urlcolor=AmmaBlue,
+            urlcolor=SkyBlue,
             citecolor=fgcolor,
             filecolor=fgcolor
     }
@@ -297,7 +294,6 @@
     % Reset bibliography entry title to non-bold
     \setbeamerfont{bibliography entry title}{size=\normalsize, series=\upshape}
     
-    \addbibresource{references.bib}
 \fi
 
 %===============================================================================
