@@ -1,5 +1,5 @@
 .DS_Store
-
+.nova/
 # LaTeX temporary files
 *.aux
 *.log

@@ -52,6 +52,7 @@
 
 % Alignment
 \RequirePackage[document]{ragged2e}
+\justifying
 \raggedbottom
 \onecolumn
 
@@ -73,6 +74,8 @@
 % if then macro
 \RequirePackage{ifthen}
 
+% Page numbering
+\pagenumbering{arabic}
 %===============================================================================
 %=================================== commands ==================================
 
@@ -95,16 +98,22 @@
     \ignorespaces #1\strut}\par
 }
 
+\newcounter{paragraph}
+\newcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+    {\baselineskip}%                          extra space before, on top of \parskip
+    {-1em}%                         negative = run-in heading, 1em gap after
+    {\normalfont\normalsize\bfseries}}
+
 %===============================================================================
 %================================== typography =================================
 
 \RequirePackage{unicode-math}
 \setmainfont{Equity A}[
-    Numbers={Lowercase,Proportional}, 
+    Numbers={Lowercase,Proportional},
     Contextuals=Alternate,
     ]
 \setsansfont{Concourse 3}[
-    Numbers={Lowercase,Proportional}, 
+    Numbers={Lowercase,Proportional},
     Contextuals=Alternate,
     ]
 
@@ -164,7 +173,7 @@
             \raggedright
             \ignorespaces #1\\[\baselineskip]
             \includegraphics[width=0.35\textwidth]{\fromsig}\\
-            {\rmsc\fromname\strut}
+            {\fromname\strut}
         }
     }
     \par
@@ -177,8 +186,7 @@
 
 \newcommand*\senderbox{
     \begin{textblock*}{47mm}(19mm,19mm) %Placed to have same left margin as right, and a little above top margin to account for the spacing above text in this box I can't seem to remove
-    \ifthenelse{\equal{\fromheader}{}}{
-    }
+    \ifthenelse{\equal{\fromheader}{}}{}
     {
         \parbox{\textwidth}{
             \raggedright
@@ -187,11 +195,15 @@
     }
     	\par
         \sansc\color{MokaRed!80}
-        {\sancs\bfseries\fromname}\par
+        {\sancs\bfseries\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\fromname\par}
         \vspace{\baselineskip}
+        \small
         {\fromaddress}\par
         \vspace{\baselineskip}
+        \ifthenelse{\equal{\webaddr}{}}{}
+        {
         {{\small\faGlobe}~\webaddr}\\
+        }
         {{\small\faEnvelope[regular]}~\emailaddr}\\
         {{\small\faPhone*}~\phonenum}
     \end{textblock*}
@@ -218,8 +230,5 @@
     citecolor=SkyBlue,
     filecolor=SkyBlue,
     plainpages=true,
-    pdfpagelabels,
-    bookmarks=false,
     pdfstartview=FitH,
-    backref
 }
